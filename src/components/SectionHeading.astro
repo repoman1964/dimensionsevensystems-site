@@ -1,0 +1,121 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: "left" | "center";
+  as?: "h1" | "h2" | "h3";
+  gradientWord?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  align = "left",
+  as: Tag = "h2",
+  gradientWord,
+} = Astro.props;
+
+function renderTitle(text: string, gradient?: string) {
+  if (!gradient || !text.includes(gradient)) return text;
+  const parts = text.split(gradient);
+  return { before: parts[0], gradient, after: parts.slice(1).join(gradient) };
+}
+
+const titleParts =
+  gradientWord && title.includes(gradientWord)
+    ? {
+        before: title.slice(0, title.indexOf(gradientWord)),
+        gradient: gradientWord,
+        after: title.slice(title.indexOf(gradientWord) + gradientWord.length),
+      }
+    : null;
+---
+
+<div class:list={["section-heading", `section-heading--${align}`]}>
+  {
+    eyebrow && (
+      <p class="section-heading__eyebrow">
+        <span class="dot" aria-hidden="true" />
+        {eyebrow}
+      </p>
+    )
+  }
+  <Tag class="section-heading__title">
+    {
+      titleParts ? (
+        <>
+          {titleParts.before}
+          <span class="text-gradient">{titleParts.gradient}</span>
+          {titleParts.after}
+        </>
+      ) : (
+        title
+      )
+    }
+  </Tag>
+  {
+    description && (
+      <p class="section-heading__desc prose-medium">{description}</p>
+    )
+  }
+  <slot />
+</div>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-heading--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .section-heading--center .section-heading__desc {
+    margin-inline: auto;
+  }
+
+  .section-heading__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 8px rgba(49, 206, 211, 0.5);
+  }
+
+  .section-heading__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+  }
+
+  .section-heading--center .section-heading__title {
+    max-width: 22ch;
+  }
+
+  .section-heading__desc {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    max-width: 40rem;
+  }
+</style>

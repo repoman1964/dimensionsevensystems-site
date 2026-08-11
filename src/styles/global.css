@@ -1,0 +1,250 @@
+/* Dimension Seven Systems — design tokens (user palette) */
+
+:root {
+  /* Surfaces */
+  --color-bg: #0f1419;
+  --color-bg-deep: #0a0e12;
+  --color-bg-elevated: #141b24;
+  --color-surface: #1d293b;
+  --color-surface-raised: #243447;
+  --color-surface-soft: #121820;
+
+  /* Text */
+  --color-text: #ebeef0;
+  --color-text-muted: #9bb2c8;
+  --color-text-faint: #6b8196;
+
+  /* Borders */
+  --color-border: #304a56;
+  --color-border-light: #3d5c6b;
+
+  /* Brand */
+  --color-primary: #4977f7;
+  --color-primary-hover: #389ce8;
+  --color-accent: #31ced3;
+  --color-lime: #8ee83f;
+
+  /* Status */
+  --color-success: #35d488;
+  --color-warning: #f2b93b;
+  --color-error: #ff6868;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(
+    90deg,
+    #4977f7 0%,
+    #389ce8 50%,
+    #31ced3 100%
+  );
+
+  /* Semantic aliases (used by components) */
+  --background: var(--color-bg);
+  --background-deep: var(--color-bg-deep);
+  --surface: var(--color-surface);
+  --surface-raised: var(--color-surface-raised);
+  --surface-soft: var(--color-surface-soft);
+  --surface-elevated: var(--color-bg-elevated);
+
+  --text-primary: var(--color-text);
+  --text-secondary: var(--color-text-muted);
+  --text-muted: var(--color-text-faint);
+
+  --border: var(--color-border);
+  --border-light: var(--color-border-light);
+
+  --blue: var(--color-primary);
+  --blue-bright: var(--color-primary-hover);
+  --cyan: var(--color-accent);
+  --turquoise: var(--color-accent);
+
+  --success: var(--color-success);
+  --warning: var(--color-warning);
+  --danger: var(--color-error);
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: clamp(3rem, 6vw, 5.25rem);
+
+  /* Layout */
+  --container: 1200px;
+  --header-h: 120px;
+  --section-pad-desktop: 104px;
+  --section-pad-mobile: 68px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --transition: 200ms ease;
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+
+  /* Fonts */
+  --font-display: "Roboto Slab", "Roboto Serif", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Breakpoints (reference) */
+  --mobile: 480px;
+  --tablet: 768px;
+  --desktop: 1024px;
+  --wide: 1280px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-block: var(--section-pad-mobile);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--section-pad-desktop);
+  }
+}
+
+.section-inner {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Readable prose width */
+.prose-narrow {
+  max-width: 42rem;
+}
+
+.prose-medium {
+  max-width: 45rem;
+}
+
+/* Visually hidden (a11y) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Placeholder marker for incomplete content */
+.placeholder-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  border: 1px dashed var(--color-border);
+  border-radius: 4px;
+  padding: 0.1em 0.45em;
+  vertical-align: middle;
+}

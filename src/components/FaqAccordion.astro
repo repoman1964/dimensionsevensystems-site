@@ -1,0 +1,135 @@
+---
+import type { FaqItem } from "../data/faqs";
+
+interface Props {
+  items: FaqItem[];
+  id?: string;
+}
+
+const { items, id = "faq" } = Astro.props;
+---
+
+<div class="faq" id={id}>
+  {
+    items.map((item, i) => (
+      <div class="faq__item">
+        <h3 class="faq__heading">
+          <button
+            type="button"
+            class="faq__trigger"
+            id={`${id}-trigger-${i}`}
+            aria-expanded="false"
+            aria-controls={`${id}-panel-${i}`}
+            data-faq-trigger
+            data-analytics="faq_opened"
+            data-analytics-label={item.id}
+          >
+            <span>{item.question}</span>
+            <span class="faq__icon" aria-hidden="true" />
+          </button>
+        </h3>
+        <div
+          id={`${id}-panel-${i}`}
+          class="faq__panel"
+          role="region"
+          aria-labelledby={`${id}-trigger-${i}`}
+          hidden
+          data-faq-panel
+        >
+          <p class="faq__answer">{item.answer}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__heading {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  .faq__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 64px;
+    padding: 1.1rem 0.25rem;
+    text-align: left;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-text);
+    transition: color var(--transition);
+  }
+
+  .faq__trigger:hover {
+    color: var(--color-primary-hover);
+  }
+
+  .faq__icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--color-text-muted);
+    border-radius: 1px;
+    transition: transform var(--transition), background var(--transition);
+  }
+
+  .faq__icon::before {
+    width: 12px;
+    height: 2px;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq__icon::after {
+    width: 2px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq__trigger[aria-expanded="true"] .faq__icon::after {
+    transform: translate(-50%, -50%) scaleY(0);
+  }
+
+  .faq__trigger[aria-expanded="true"] .faq__icon::before {
+    background: var(--color-accent);
+  }
+
+  .faq__panel {
+    padding: 0 0.25rem 1.25rem;
+  }
+
+  .faq__panel[hidden] {
+    display: none;
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    max-width: 42rem;
+  }
+</style>

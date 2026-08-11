@@ -1,0 +1,322 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import GapDiagram from "../components/GapDiagram.astro";
+import ModuleBuilder from "../components/ModuleBuilder.astro";
+import SystemCard from "../components/SystemCard.astro";
+import ProblemCard from "../components/ProblemCard.astro";
+import VideoPanel from "../components/VideoPanel.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import ConversionReviewCta from "../components/ConversionReviewCta.astro";
+import Button from "../components/Button.astro";
+import { featuredSystems, processSteps } from "../data/systems";
+import { problems } from "../data/problems";
+import { faqs } from "../data/faqs";
+---
+
+<BaseLayout
+  title="Conversion Systems"
+  description="[PLACEHOLDER] How Dimension Seven Systems defines, designs, and connects conversion systems — from lead response to custom pipeline infrastructure."
+>
+  <section class="section page-hero">
+    <div class="section-inner page-hero__inner">
+      <SectionHeading
+        eyebrow="Conversion systems"
+        title="The system between demand and the sale"
+        description="[PLACEHOLDER] A conversion system is the connected path that moves opportunities from first signal to a real sales conversation — without the leaks that waste acquisition spend."
+      />
+      <div class="page-hero__actions">
+        <Button href="/conversion-review">Book a Conversion Review</Button>
+        <Button href="#architectures" variant="secondary">See architectures</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner">
+      <SectionHeading
+        eyebrow="Definition"
+        title="What counts as a conversion system"
+        description="[PLACEHOLDER] Not a website alone. Not a CRM alone. Not a sequence alone. The system is how those pieces connect under real operational load."
+      />
+      <div class="def-grid">
+        <article class="def-card">
+          <h3>Includes</h3>
+          <ul>
+            <li>[PLACEHOLDER] Capture that routes</li>
+            <li>[PLACEHOLDER] Response that happens on time</li>
+            <li>[PLACEHOLDER] Follow-up that does not forget</li>
+            <li>[PLACEHOLDER] Booking that sticks</li>
+            <li>[PLACEHOLDER] Visibility into stalls</li>
+          </ul>
+        </article>
+        <article class="def-card def-card--muted">
+          <h3>Is not</h3>
+          <ul>
+            <li>[PLACEHOLDER] Lead generation</li>
+            <li>[PLACEHOLDER] Generic automation packages</li>
+            <li>[PLACEHOLDER] Software for its own sake</li>
+            <li>[PLACEHOLDER] A redesign without process change</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <SectionHeading
+        eyebrow="Journey"
+        title="Where opportunities move — and leak"
+      />
+      <GapDiagram />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner">
+      <SectionHeading
+        eyebrow="Components"
+        title="Available building blocks"
+        description="[PLACEHOLDER] Selected and connected to the leaks that matter."
+      />
+      <ModuleBuilder />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <SectionHeading
+        eyebrow="Problems addressed"
+        title="Leaks we typically repair"
+      />
+      <div class="problems-compact">
+        {problems.map((p) => <ProblemCard problem={{ ...p, size: "compact" }} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="architectures">
+    <div class="section-inner">
+      <SectionHeading
+        eyebrow="Example architectures"
+        title="Starting systems"
+        description="[PLACEHOLDER] Each engagement is scoped after diagnosis. These are common patterns, not fixed packages."
+      />
+      <div class="arch-grid">
+        {featuredSystems.map((s) => <SystemCard system={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <SectionHeading eyebrow="Process" title="How engagement works" />
+      <ol class="engage">
+        {
+          processSteps.map((step) => (
+            <li>
+              <span>{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="engage-options">
+        <h3>Engagement options</h3>
+        <ul>
+          <li>[PLACEHOLDER] Project-based system build</li>
+          <li>[PLACEHOLDER] Focused component delivery</li>
+          <li>[PLACEHOLDER] Ongoing system support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner">
+      <VideoPanel />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner faq-narrow">
+      <SectionHeading eyebrow="FAQ" title="Common questions" />
+      <FaqAccordion items={faqs} id="systems-faq" />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner">
+      <ConversionReviewCta compact />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section--alt {
+    background: var(--color-bg-deep);
+  }
+
+  .page-hero {
+    padding-top: 3rem;
+  }
+
+  .page-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: -1rem;
+  }
+
+  .def-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 700px) {
+    .def-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .def-card {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-bg-elevated);
+  }
+
+  .def-card h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  .def-card--muted h3 {
+    color: var(--color-text-faint);
+  }
+
+  .def-card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .def-card li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding-left: 0.9rem;
+    position: relative;
+  }
+
+  .def-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-primary);
+  }
+
+  .problems-compact {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .problems-compact {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .problems-compact {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .arch-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .arch-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .arch-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .engage {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .engage li {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-bg-elevated);
+  }
+
+  .engage span {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .engage h3 {
+    font-size: var(--text-lg);
+    margin-bottom: 0.4rem;
+  }
+
+  .engage p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .engage-options {
+    padding: 1.5rem;
+    border: 1px dashed var(--color-border);
+    border-radius: 14px;
+  }
+
+  .engage-options h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .engage-options li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .faq-narrow {
+    max-width: 800px;
+  }
+</style>

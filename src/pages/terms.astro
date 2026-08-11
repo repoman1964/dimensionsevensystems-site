@@ -1,0 +1,215 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const toc = [
+  { id: "agreement", label: "Agreement" },
+  { id: "services", label: "Services" },
+  { id: "site", label: "Website use" },
+  { id: "ip", label: "Intellectual property" },
+  { id: "disclaimers", label: "Disclaimers" },
+  { id: "liability", label: "Limitation of liability" },
+  { id: "contact", label: "Contact" },
+];
+---
+
+<BaseLayout
+  title="Terms and Conditions"
+  description={`Terms and Conditions for ${site.name}. Placeholder legal content — replace before production launch.`}
+>
+  <div class="legal">
+    <aside class="legal__toc" aria-label="Table of contents">
+      <p class="legal__toc-title">On this page</p>
+      <nav>
+        <ul>
+          {
+            toc.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
+    <article class="legal__content">
+      <p class="legal__eyebrow">Legal</p>
+      <h1>Terms and Conditions</h1>
+      <p class="legal__updated">Last updated: {site.legal.termsUpdated}</p>
+      <p class="legal__banner">
+        [PLACEHOLDER] This is scaffold legal copy for layout only. Have counsel
+        review and replace before launch.
+      </p>
+
+      <section id="agreement">
+        <h2>Agreement</h2>
+        <p>
+          [PLACEHOLDER] By accessing {site.url} or engaging {site.name}, you
+          agree to these terms. If you do not agree, do not use the site or services.
+        </p>
+      </section>
+
+      <section id="services">
+        <h2>Services</h2>
+        <p>
+          [PLACEHOLDER] Conversion systems, consulting, software components, and
+          related work are scoped in separate statements of work or agreements.
+          Website descriptions are informational and not a binding offer.
+        </p>
+      </section>
+
+      <section id="site">
+        <h2>Website use</h2>
+        <p>
+          [PLACEHOLDER] You may not misuse the site, attempt unauthorized access,
+          or use content for unlawful purposes. We may update or discontinue site
+          features at any time.
+        </p>
+      </section>
+
+      <section id="ip">
+        <h2>Intellectual property</h2>
+        <p>
+          [PLACEHOLDER] Site content, branding, and D7 products (including
+          DailyDialz and JobbPulse materials) remain the property of {site.name}
+          or its licensors unless otherwise agreed in writing.
+        </p>
+      </section>
+
+      <section id="disclaimers">
+        <h2>Disclaimers</h2>
+        <p>
+          [PLACEHOLDER] The site is provided “as is.” We do not guarantee specific
+          business results. Placeholder metrics and case structures on the site
+          are not performance promises.
+        </p>
+      </section>
+
+      <section id="liability">
+        <h2>Limitation of liability</h2>
+        <p>
+          [PLACEHOLDER] To the fullest extent permitted by law, {site.name} is
+          not liable for indirect, incidental, or consequential damages arising
+          from site use. Service liability is governed by the applicable client
+          agreement.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          [PLACEHOLDER] Questions:
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal {
+    display: grid;
+    gap: 2rem;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding: 3rem 24px 5rem;
+  }
+
+  @media (min-width: 900px) {
+    .legal {
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .legal__toc {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .legal__toc {
+      display: block;
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+    }
+  }
+
+  .legal__toc-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__toc ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .legal__toc a {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .legal__toc a:hover {
+    color: var(--color-text);
+  }
+
+  .legal__content {
+    max-width: 42rem;
+  }
+
+  .legal__eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__content h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__updated {
+    font-size: var(--text-sm);
+    color: var(--color-text-faint);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal__banner {
+    padding: 0.85rem 1rem;
+    border: 1px dashed var(--color-warning);
+    border-radius: 10px;
+    background: rgba(242, 185, 59, 0.08);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin-bottom: 2rem;
+    line-height: 1.55;
+  }
+
+  .legal__content section {
+    margin-bottom: 2rem;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+
+  .legal__content h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__content p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .legal__content a {
+    color: var(--color-primary-hover);
+  }
+</style>

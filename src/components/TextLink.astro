@@ -1,0 +1,46 @@
+---
+interface Props {
+  href: string;
+  external?: boolean;
+  event?: string;
+  class?: string;
+}
+
+const {
+  href,
+  external = false,
+  event,
+  class: className = "",
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={["text-link", className]}
+  data-analytics={event}
+  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+  <slot />
+  <span class="text-link__arrow" aria-hidden="true">{external ? "↗" : "→"}</span>
+</a>
+
+<style>
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary-hover);
+    transition: color var(--transition), gap var(--transition);
+  }
+
+  .text-link:hover {
+    color: var(--color-accent);
+    gap: 0.5rem;
+  }
+
+  .text-link__arrow {
+    transition: transform var(--transition);
+  }
+</style>

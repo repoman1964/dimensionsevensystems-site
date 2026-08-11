@@ -1,0 +1,35 @@
+Dimension Seven Systems — brand palette (source of truth)
+
+background: linear-gradient(
+  90deg,
+  #4977F7 0%,
+  #389CE8 50%,
+  #31CED3 100%
+);
+
+:root {
+  --color-bg: #0f1419;
+  --color-bg-elevated: #141b24;
+  --color-surface: #1d293b;
+  --color-border: #304a56;
+
+  --color-text: #ebeef0;
+  --color-text-muted: #9bb2c8;
+
+  --color-primary: #4977f7;
+  --color-primary-hover: #389ce8;
+  --color-accent: #31ced3;
+
+  --color-success: #35d488;
+  --color-warning: #f2b93b;
+  --color-error: #ff6868;
+
+  --gradient-brand: linear-gradient(
+    90deg,
+    #4977f7,
+    #389ce8,
+    #31ced3
+  );
+}
+
+Implemented in: src/styles/global.css

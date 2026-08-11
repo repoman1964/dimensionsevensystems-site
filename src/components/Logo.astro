@@ -1,0 +1,52 @@
+---
+interface Props {
+  variant?: "header" | "footer";
+  class?: string;
+}
+
+const { variant = "header", class: className = "" } = Astro.props;
+---
+
+<img
+  class:list={["logo", `logo--${variant}`, className]}
+  src="/brand/logo.png"
+  alt="Dimension Seven Systems"
+  width="1536"
+  height="1024"
+  loading="eager"
+  decoding="async"
+/>
+
+<style>
+  .logo {
+    display: block;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .logo--header {
+    height: 96px;
+    width: auto;
+    max-width: min(440px, 70vw);
+  }
+
+  .logo--footer {
+    height: 112px;
+    width: auto;
+    max-width: min(520px, 85vw);
+  }
+
+  @media (min-width: 768px) {
+    .logo--header {
+      height: 104px;
+      max-width: 480px;
+    }
+
+    .logo--footer {
+      height: 128px;
+      max-width: 560px;
+    }
+  }
+</style>

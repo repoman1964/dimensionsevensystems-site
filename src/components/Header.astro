@@ -1,0 +1,293 @@
+---
+import { mainNav, primaryCta } from "../data/navigation";
+import { site } from "../data/site";
+import Button from "./Button.astro";
+import Logo from "./Logo.astro";
+
+interface Props {
+  minimal?: boolean;
+}
+
+const { minimal = false } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<header class:list={["site-header", minimal && "site-header--minimal"]} data-header>
+  <div class="site-header__inner container">
+    <a href="/" class="site-header__brand" aria-label={`${site.name} home`}>
+      <Logo variant="header" />
+    </a>
+
+    {
+      !minimal && (
+        <nav class="site-header__nav" aria-label="Primary">
+          <ul class="site-header__links">
+            {mainNav.map((item) => {
+              const active =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href);
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={["site-header__link", active && "is-active"]}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      )
+    }
+
+    <div class="site-header__actions">
+      {
+        !minimal && (
+          <Button
+            href={primaryCta.href}
+            event={primaryCta.event}
+            class="site-header__cta"
+          >
+            {primaryCta.label}
+          </Button>
+        )
+      }
+      {
+        !minimal && (
+          <button
+            type="button"
+            class="site-header__menu-btn"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Open menu"
+          >
+            <span class="site-header__menu-icon" aria-hidden="true" />
+          </button>
+        )
+      }
+    </div>
+  </div>
+
+  {
+    !minimal && (
+      <div
+        id="mobile-nav"
+        class="mobile-nav"
+        data-mobile-nav
+        hidden
+      >
+        <nav aria-label="Mobile">
+          <ul class="mobile-nav__links">
+            {mainNav.map((item) => (
+              <li>
+                <a href={item.href} class="mobile-nav__link" data-menu-close>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <Button href={primaryCta.href} event={primaryCta.event} fullWidth>
+                {primaryCta.label}
+              </Button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    )
+  }
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    background: rgba(15, 20, 25, 0.82);
+    border-bottom: 1px solid transparent;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      backdrop-filter var(--transition);
+  }
+
+  .site-header.is-scrolled {
+    background: rgba(15, 20, 25, 0.92);
+    border-bottom-color: var(--color-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .site-header--minimal {
+    border-bottom-color: var(--color-border);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  .site-header__brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex-shrink: 0;
+    line-height: 0;
+  }
+
+  .site-header__nav {
+    display: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__nav {
+      display: flex;
+    }
+  }
+
+  .site-header__links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .site-header__link {
+    padding: 0.5rem 0.85rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    border-radius: 8px;
+    transition: color var(--transition), background var(--transition);
+  }
+
+  .site-header__link:hover,
+  .site-header__link.is-active {
+    color: var(--color-text);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__cta {
+      display: inline-flex;
+    }
+
+    .site-header__menu-btn {
+      display: none;
+    }
+  }
+
+  .site-header__menu-btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-elevated);
+  }
+
+  .site-header__menu-icon,
+  .site-header__menu-icon::before,
+  .site-header__menu-icon::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 1px;
+    position: relative;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+
+  .site-header__menu-icon::before,
+  .site-header__menu-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .site-header__menu-icon::before {
+    top: -6px;
+  }
+
+  .site-header__menu-icon::after {
+    top: 6px;
+  }
+
+  .site-header.is-menu-open .site-header__menu-icon {
+    background: transparent;
+  }
+
+  .site-header.is-menu-open .site-header__menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .site-header.is-menu-open .site-header__menu-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: rgba(15, 20, 25, 0.98);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 1.5rem 1.5rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-nav[hidden] {
+    display: none;
+  }
+
+  .mobile-nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  .mobile-nav__link {
+    display: block;
+    padding: 0.9rem 0.5rem;
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    min-height: 44px;
+  }
+
+  .mobile-nav__link:hover {
+    color: var(--color-text);
+  }
+
+  .mobile-nav__links li:last-child {
+    margin-top: 0.75rem;
+    border: none;
+  }
+</style>

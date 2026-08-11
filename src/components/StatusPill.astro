@@ -1,0 +1,61 @@
+---
+interface Props {
+  variant?: "default" | "success" | "warning" | "error" | "info" | "accent";
+  class?: string;
+}
+
+const { variant = "default", class: className = "" } = Astro.props;
+---
+
+<span class:list={["status-pill", `status-pill--${variant}`, className]}>
+  <slot />
+</span>
+
+<style>
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border);
+    background: rgba(15, 20, 25, 0.5);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .status-pill--success {
+    border-color: rgba(53, 212, 136, 0.35);
+    color: var(--color-success);
+    background: rgba(53, 212, 136, 0.08);
+  }
+
+  .status-pill--warning {
+    border-color: rgba(242, 185, 59, 0.35);
+    color: var(--color-warning);
+    background: rgba(242, 185, 59, 0.08);
+  }
+
+  .status-pill--error {
+    border-color: rgba(255, 104, 104, 0.35);
+    color: var(--color-error);
+    background: rgba(255, 104, 104, 0.08);
+  }
+
+  .status-pill--info {
+    border-color: rgba(73, 119, 247, 0.4);
+    color: var(--color-primary);
+    background: rgba(73, 119, 247, 0.1);
+  }
+
+  .status-pill--accent {
+    border-color: rgba(49, 206, 211, 0.35);
+    color: var(--color-accent);
+    background: rgba(49, 206, 211, 0.08);
+  }
+</style>

@@ -1,0 +1,446 @@
+---
+/** Hero visual: believable Conversion System Monitor interface */
+---
+
+<div class="monitor" role="img" aria-label="Conversion System Monitor interface showing lead stages, a leak warning, and recovered opportunities">
+  <div class="monitor__window">
+    <div class="monitor__titlebar">
+      <div class="monitor__lights" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="monitor__title">d7 · conversion system monitor</span>
+      <span class="monitor__live">
+        <span class="monitor__live-dot" aria-hidden="true"></span>
+        live
+      </span>
+    </div>
+    <div class="monitor__body">
+      <div class="monitor__header-row">
+        <div>
+          <p class="monitor__label">SYSTEM HEALTH</p>
+          <p class="monitor__metric">
+            <span data-count-up data-target="74">74</span><span class="unit">%</span>
+          </p>
+        </div>
+        <div class="monitor__pills">
+          <span class="pill pill--ok">capture</span>
+          <span class="pill pill--warn">response</span>
+          <span class="pill pill--err">follow-up</span>
+          <span class="pill pill--ok">booking</span>
+        </div>
+      </div>
+
+      <div class="monitor__stages">
+        <div class="stage">
+          <span class="stage__dot stage__dot--ok"></span>
+          <span class="stage__name">Leads in</span>
+          <span class="stage__val">128</span>
+        </div>
+        <div class="stage-line" aria-hidden="true"></div>
+        <div class="stage">
+          <span class="stage__dot stage__dot--ok"></span>
+          <span class="stage__name">Captured</span>
+          <span class="stage__val">112</span>
+        </div>
+        <div class="stage-line" aria-hidden="true"></div>
+        <div class="stage">
+          <span class="stage__dot stage__dot--warn"></span>
+          <span class="stage__name">Contacted</span>
+          <span class="stage__val">67</span>
+        </div>
+        <div class="stage-line stage-line--leak" aria-hidden="true"></div>
+        <div class="stage stage--leak">
+          <span class="stage__dot stage__dot--err pulse"></span>
+          <span class="stage__name">Follow-up</span>
+          <span class="stage__val">21</span>
+        </div>
+        <div class="stage-line" aria-hidden="true"></div>
+        <div class="stage">
+          <span class="stage__dot stage__dot--ok"></span>
+          <span class="stage__name">Booked</span>
+          <span class="stage__val">14</span>
+        </div>
+        <div class="stage-line" aria-hidden="true"></div>
+        <div class="stage">
+          <span class="stage__dot stage__dot--accent"></span>
+          <span class="stage__name">Conversations</span>
+          <span class="stage__val">11</span>
+        </div>
+      </div>
+
+      <div class="monitor__alerts">
+        <div class="alert alert--err">
+          <span class="alert__tag">LEAK</span>
+          <span>Missed follow-up · 18 opportunities idle</span>
+        </div>
+        <div class="alert alert--ok">
+          <span class="alert__tag">RECOVERED</span>
+          <span>Callback sequence restored · 6 re-engaged</span>
+        </div>
+      </div>
+
+      <div class="monitor__footer">
+        <div class="feed">
+          <p class="monitor__label">LIVE FEED</p>
+          <ul>
+            <li><span class="t">00:12</span> Lead captured · web form</li>
+            <li><span class="t">00:09</span> Contact attempt · SMS</li>
+            <li class="dim"><span class="t">00:04</span> No follow-up scheduled</li>
+            <li><span class="t">00:01</span> Booking confirmed · calendar</li>
+          </ul>
+        </div>
+        <div class="lost">
+          <p class="monitor__label">AT RISK</p>
+          <p class="lost__num">18</p>
+          <p class="lost__sub">lost if unrepaired</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .monitor {
+    width: 100%;
+    max-width: 540px;
+    margin-inline: auto;
+  }
+
+  .monitor__window {
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-bg-elevated);
+    box-shadow:
+      0 0 0 1px rgba(73, 119, 247, 0.06),
+      0 30px 60px rgba(0, 0, 0, 0.4),
+      0 0 80px rgba(73, 119, 247, 0.06);
+    overflow: hidden;
+  }
+
+  .monitor__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(15, 20, 25, 0.65);
+  }
+
+  .monitor__lights {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .monitor__lights span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ff5f57;
+  }
+
+  .monitor__lights span:nth-child(2) {
+    background: #febc2e;
+  }
+
+  .monitor__lights span:nth-child(3) {
+    background: #28c840;
+  }
+
+  .monitor__title {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+  }
+
+  .monitor__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--color-success);
+  }
+
+  .monitor__live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 8px rgba(53, 212, 136, 0.7);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  .monitor__body {
+    padding: 1.1rem 1.15rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .monitor__header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .monitor__label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin: 0 0 0.25rem;
+  }
+
+  .monitor__metric {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    margin: 0;
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .monitor__metric .unit {
+    font-size: 1rem;
+    margin-left: 0.1rem;
+  }
+
+  .monitor__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: flex-end;
+  }
+
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+  }
+
+  .pill--ok {
+    border-color: rgba(53, 212, 136, 0.35);
+    color: var(--color-success);
+  }
+
+  .pill--warn {
+    border-color: rgba(242, 185, 59, 0.35);
+    color: var(--color-warning);
+  }
+
+  .pill--err {
+    border-color: rgba(255, 104, 104, 0.35);
+    color: var(--color-error);
+  }
+
+  .monitor__stages {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 3.6rem;
+    text-align: center;
+  }
+
+  .stage__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+  }
+
+  .stage__dot--ok {
+    background: var(--color-success);
+  }
+
+  .stage__dot--warn {
+    background: var(--color-warning);
+  }
+
+  .stage__dot--err {
+    background: var(--color-error);
+  }
+
+  .stage__dot--accent {
+    background: var(--color-accent);
+  }
+
+  .stage__dot.pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .stage__name {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--color-text-faint);
+  }
+
+  .stage__val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .stage--leak .stage__name,
+  .stage--leak .stage__val {
+    color: var(--color-error);
+  }
+
+  .stage-line {
+    flex: 1;
+    min-width: 8px;
+    height: 1px;
+    background: var(--color-border);
+    margin-bottom: 1.4rem;
+  }
+
+  .stage-line--leak {
+    background: linear-gradient(90deg, var(--color-warning), var(--color-error));
+    height: 2px;
+  }
+
+  .monitor__alerts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .alert {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .alert--err {
+    border-color: rgba(255, 104, 104, 0.3);
+    background: rgba(255, 104, 104, 0.06);
+  }
+
+  .alert--ok {
+    border-color: rgba(53, 212, 136, 0.3);
+    background: rgba(53, 212, 136, 0.06);
+  }
+
+  .alert__tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .alert--err .alert__tag {
+    color: var(--color-error);
+  }
+
+  .alert--ok .alert__tag {
+    color: var(--color-success);
+  }
+
+  .monitor__footer {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr;
+    gap: 0.75rem;
+  }
+
+  .feed,
+  .lost {
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: rgba(15, 20, 25, 0.45);
+  }
+
+  .feed ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.4rem;
+  }
+
+  .feed li {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+  }
+
+  .feed li.dim {
+    color: var(--color-error);
+    opacity: 0.9;
+  }
+
+  .feed .t {
+    color: var(--color-text-faint);
+    margin-right: 0.35rem;
+  }
+
+  .lost {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .lost__num {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-warning);
+    margin: 0.2rem 0;
+  }
+
+  .lost__sub {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin: 0;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(0.92);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse,
+    .monitor__live-dot {
+      animation: none;
+    }
+  }
+</style>

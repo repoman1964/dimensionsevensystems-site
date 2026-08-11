@@ -1,0 +1,454 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import FormField from "../components/FormField.astro";
+import Button from "../components/Button.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import { conversionReviewFaqs } from "../data/faqs";
+import { site } from "../data/site";
+
+/** Set ?campaign=1 or use /conversion-review with minimal chrome via prop if needed later */
+const campaign = Astro.url.searchParams.get("campaign") === "1";
+---
+
+<BaseLayout
+  title="Conversion Review"
+  description="[PLACEHOLDER] Book a Conversion Review with Dimension Seven Systems — diagnose leaks and outline a practical system."
+  minimalHeader={campaign}
+>
+  <section class="section review-hero">
+    <div class="section-inner review-hero__grid">
+      <div>
+        <SectionHeading
+          eyebrow="Conversion Review"
+          title="[PLACEHOLDER] A focused look at where your opportunities leak"
+          description="[PLACEHOLDER] We examine how leads and pipeline opportunities move today, identify high-cost stalls, and outline what a practical conversion system would include."
+        />
+        <ul class="review-points">
+          <li>
+            <strong>Who it is for</strong>
+            <span>[PLACEHOLDER] Businesses already generating some leads, calls, or pipeline activity.</span>
+          </li>
+          <li>
+            <strong>What D7 examines</strong>
+            <span>[PLACEHOLDER] Capture, response speed, follow-up, booking, handoffs, and tooling.</span>
+          </li>
+          <li>
+            <strong>What you receive</strong>
+            <span>[PLACEHOLDER] Leak map, priorities, system outline, and clear next steps.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="review-form-card" id="qualify">
+        <h2 class="review-form-card__title">Request a Conversion Review</h2>
+        <p class="review-form-card__sub">
+          [PLACEHOLDER] Short qualification form. Submissions are emailed to the D7 inbox.
+        </p>
+        <form
+          class="review-form"
+          method="POST"
+          action="/api/conversion-review"
+          data-review-form
+          data-analytics-form="conversion_review"
+          novalidate
+        >
+          <FormField
+            label="Name"
+            name="name"
+            required
+            autocomplete="name"
+            placeholder="Your name"
+          />
+          <FormField
+            label="Work email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="you@company.com"
+          />
+          <FormField
+            label="Company"
+            name="company"
+            required
+            autocomplete="organization"
+            placeholder="Company name"
+          />
+          <FormField
+            label="Website or primary lead source"
+            name="source"
+            placeholder="URL or description"
+          />
+          <FormField
+            label="Rough monthly lead / opportunity volume"
+            name="volume"
+            type="select"
+            required
+            options={[
+              { value: "under-20", label: "Under 20" },
+              { value: "20-100", label: "20–100" },
+              { value: "100-500", label: "100–500" },
+              { value: "500-plus", label: "500+" },
+              { value: "unsure", label: "Not sure" },
+            ]}
+          />
+          <FormField
+            label="Where do you suspect the biggest leak?"
+            name="leak"
+            type="textarea"
+            rows={3}
+            placeholder="[PLACEHOLDER] Optional context — response time, no-shows, old CRM leads, etc."
+          />
+          <FormField
+            label="Phone (optional)"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="+1 …"
+          />
+          <p class="review-form__privacy">
+            By submitting, you agree we may contact you about this request.
+            See our <a href="/privacy">Privacy Policy</a>.
+          </p>
+          <div class="review-form__status" data-form-status role="status" aria-live="polite" hidden></div>
+          <Button type="submit" fullWidth event="conversion_review_submitted">
+            Submit request
+          </Button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner calendar-block">
+      <SectionHeading
+        eyebrow="Calendar"
+        title="Prefer to pick a time?"
+        description="[PLACEHOLDER] Calendly embed. Replace the URL in site config when your booking link is ready."
+      />
+      <div class="calendar-embed">
+        <div class="calendar-embed__ph">
+          <p>Calendly embed placeholder</p>
+          <p class="mono">{site.calendlyUrl}</p>
+          <a
+            class="calendar-link"
+            href={site.calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics="calendar_booking_started"
+          >
+            Open scheduling page ↗
+          </a>
+        </div>
+        <!--
+          When ready, replace placeholder with:
+          <iframe src={site.calendlyUrl} title="Schedule Conversion Review" ...></iframe>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner expectations">
+      <SectionHeading eyebrow="Expectations" title="What happens next" />
+      <ol>
+        <li>[PLACEHOLDER] We review your form (or calendar booking).</li>
+        <li>[PLACEHOLDER] If it is a fit, we confirm a review session.</li>
+        <li>[PLACEHOLDER] You leave with a clear map of leaks and options — not a high-pressure pitch.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner faq-narrow">
+      <SectionHeading eyebrow="FAQ" title="Review questions" />
+      <FaqAccordion items={conversionReviewFaqs} id="review-faq" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner privacy-note">
+      <p>
+        <strong>Privacy</strong>
+        [PLACEHOLDER] We use your details only to respond to this request and related conversion-system conversations. No sold lists. No spam sequences from this form.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-review-form]");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const status = form.querySelector<HTMLElement>("[data-form-status]");
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+      // Clear prior errors
+      form.querySelectorAll<HTMLElement>("[data-error-for]").forEach((el) => {
+        el.hidden = true;
+        el.textContent = "";
+      });
+
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const company = String(data.get("company") || "").trim();
+      const volume = String(data.get("volume") || "").trim();
+
+      let valid = true;
+      const setError = (field: string, msg: string) => {
+        const el = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+        if (el) {
+          el.textContent = msg;
+          el.hidden = false;
+        }
+        valid = false;
+      };
+
+      if (!name) setError("name", "Name is required.");
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError("email", "A valid work email is required.");
+      }
+      if (!company) setError("company", "Company is required.");
+      if (!volume) setError("volume", "Please select a volume range.");
+
+      if (!valid) return;
+
+      if (btn) btn.disabled = true;
+      if (status) {
+        status.hidden = false;
+        status.textContent = "Sending…";
+        status.className = "review-form__status";
+      }
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: data,
+        });
+        const json = (await res.json().catch(() => ({}))) as {
+          ok?: boolean;
+          message?: string;
+        };
+
+        if (!res.ok || !json.ok) {
+          throw new Error(json.message || "Something went wrong. Please email us directly.");
+        }
+
+        if (status) {
+          status.textContent =
+            json.message ||
+            "Request received. We will follow up by email shortly.";
+          status.className = "review-form__status is-success";
+        }
+        form.reset();
+
+        const w = window as Window & { d7Analytics?: unknown[] };
+        w.d7Analytics = w.d7Analytics || [];
+        w.d7Analytics.push({ event: "conversion_review_submitted" });
+      } catch (err) {
+        if (status) {
+          status.textContent =
+            err instanceof Error
+              ? err.message
+              : `Could not send. Email ${"hello@dimensionsevensystems.com"} instead.`;
+          status.className = "review-form__status is-error";
+        }
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .section--alt {
+    background: var(--color-bg-deep);
+  }
+
+  .review-hero {
+    padding-top: 3rem;
+  }
+
+  .review-hero__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .review-hero__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .review-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: -0.5rem;
+  }
+
+  .review-points li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-bg-elevated);
+  }
+
+  .review-points strong {
+    font-size: var(--text-sm);
+  }
+
+  .review-points span {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .review-form-card {
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-card) + 2px);
+    background: linear-gradient(
+      180deg,
+      rgba(29, 41, 59, 0.95),
+      rgba(20, 27, 36, 0.98)
+    );
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+  }
+
+  .review-form-card__title {
+    font-size: var(--text-xl);
+    margin-bottom: 0.4rem;
+  }
+
+  .review-form-card__sub {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .review-form__privacy {
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    line-height: 1.5;
+  }
+
+  .review-form__privacy a {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+
+  .review-form__status {
+    font-size: var(--text-sm);
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    background: rgba(73, 119, 247, 0.1);
+    border: 1px solid rgba(73, 119, 247, 0.3);
+    color: var(--color-text-muted);
+  }
+
+  .review-form__status.is-success {
+    background: rgba(53, 212, 136, 0.1);
+    border-color: rgba(53, 212, 136, 0.35);
+    color: var(--color-success);
+  }
+
+  .review-form__status.is-error {
+    background: rgba(255, 104, 104, 0.1);
+    border-color: rgba(255, 104, 104, 0.35);
+    color: var(--color-error);
+  }
+
+  .calendar-block {
+    max-width: 800px;
+  }
+
+  .calendar-embed {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--color-bg-elevated);
+  }
+
+  .calendar-embed__ph {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .calendar-embed__ph .mono {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    word-break: break-all;
+  }
+
+  .calendar-link {
+    color: var(--color-primary-hover);
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .calendar-link:hover {
+    color: var(--color-accent);
+  }
+
+  .expectations {
+    max-width: 640px;
+  }
+
+  .expectations ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .expectations li {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    padding-left: 0.35rem;
+  }
+
+  .faq-narrow {
+    max-width: 720px;
+  }
+
+  .privacy-note {
+    max-width: 640px;
+  }
+
+  .privacy-note p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-bg-elevated);
+  }
+</style>

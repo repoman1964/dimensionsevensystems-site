@@ -1,0 +1,290 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import VideoPanel from "../components/VideoPanel.astro";
+import ConversionReviewCta from "../components/ConversionReviewCta.astro";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="About"
+  description="[PLACEHOLDER] About Dimension Seven Systems — conversion philosophy, what we do, and what we do not do."
+>
+  <section class="section page-hero">
+    <div class="section-inner about-hero">
+      <div class="about-hero__copy">
+        <SectionHeading
+          eyebrow="About D7"
+          title="Founder-led. Systems-first."
+          description="[PLACEHOLDER] Dimension Seven Systems exists to close the gap between generating attention and converting it into real sales opportunities."
+        />
+        <p class="about-hero__founder">
+          <span class="ph-avatar" aria-hidden="true">[Photo]</span>
+          <span>
+            <strong>{site.founder.name}</strong>
+            <span class="role">{site.founder.role}</span>
+          </span>
+        </p>
+        <Button href="/conversion-review">Book a Conversion Review</Button>
+      </div>
+      <div class="about-hero__panel" aria-hidden="true">
+        <div class="about-hero__frame">
+          <span>[Founder portrait placeholder]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner prose-block">
+      <SectionHeading eyebrow="Origin" title="Why Dimension Seven exists" />
+      <div class="prose">
+        <p>
+          [PLACEHOLDER] Origin story — the practical frustration of watching
+          businesses pay for leads and traffic while conversations, follow-up,
+          and booking quietly fail.
+        </p>
+        <p>
+          [PLACEHOLDER] D7 was built to operate in that middle layer: diagnose
+          the leaks, build the missing pieces, connect them into a system that
+          actually runs day to day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner prose-block">
+      <SectionHeading
+        eyebrow="Philosophy"
+        title="Find a real problem. Build the simplest system that solves it."
+      />
+      <div class="prose">
+        <p>
+          [PLACEHOLDER] No bloated tech. No automation theater. Tools and
+          workflows only earn a place when they create more conversations,
+          appointments, or closes.
+        </p>
+      </div>
+      <ul class="principles">
+        <li>
+          <strong>Leak first</strong>
+          <span>[PLACEHOLDER] Start from where value is lost, not from a preferred tool.</span>
+        </li>
+        <li>
+          <strong>Minimum viable system</strong>
+          <span>[PLACEHOLDER] Ship the smallest connected set that changes outcomes.</span>
+        </li>
+        <li>
+          <strong>Operational honesty</strong>
+          <span>[PLACEHOLDER] Systems fail without ownership and daily execution.</span>
+        </li>
+        <li>
+          <strong>Components, not brands</strong>
+          <span>[PLACEHOLDER] Websites, AI, and automation are pieces — conversion is the product.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner">
+      <div class="does-grid">
+        <div>
+          <SectionHeading eyebrow="Scope" title="What D7 does" />
+          <ul class="check-list">
+            <li>[PLACEHOLDER] Diagnose conversion leaks</li>
+            <li>[PLACEHOLDER] Build conversion pages and capture</li>
+            <li>[PLACEHOLDER] Design follow-up and booking systems</li>
+            <li>[PLACEHOLDER] Connect CRM and pipeline infrastructure</li>
+            <li>[PLACEHOLDER] Ship custom tools when needed (e.g. DailyDialz, JobbPulse)</li>
+          </ul>
+        </div>
+        <div>
+          <SectionHeading eyebrow="Boundaries" title="What D7 does not do" />
+          <ul class="check-list check-list--not">
+            <li>[PLACEHOLDER] Sell mass lead lists</li>
+            <li>[PLACEHOLDER] Run generic ad-only retainers as the core offer</li>
+            <li>[PLACEHOLDER] Promise results without process change</li>
+            <li>[PLACEHOLDER] Install software without a conversion purpose</li>
+            <li>[PLACEHOLDER] Compete as a cheap brochure-site shop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <VideoPanel
+        heading="[PLACEHOLDER] A direct note from the founder"
+        description={site.founder.bio}
+      />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section-inner">
+      <ConversionReviewCta compact />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section--alt {
+    background: var(--color-bg-deep);
+  }
+
+  .page-hero {
+    padding-top: 3rem;
+  }
+
+  .about-hero {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .about-hero {
+      grid-template-columns: 1.2fr 0.9fr;
+    }
+  }
+
+  .about-hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .about-hero__copy :global(.section-heading) {
+    margin-bottom: 0;
+  }
+
+  .about-hero__founder {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  .ph-avatar {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px dashed var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-text-faint);
+  }
+
+  .about-hero__founder strong {
+    display: block;
+    font-size: var(--text-sm);
+  }
+
+  .about-hero__founder .role {
+    font-size: var(--text-sm);
+    color: var(--color-text-faint);
+  }
+
+  .about-hero__frame {
+    aspect-ratio: 4 / 5;
+    max-width: 360px;
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background:
+      radial-gradient(ellipse at 40% 30%, rgba(73, 119, 247, 0.12), transparent 60%),
+      var(--color-bg-elevated);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .prose-block {
+    max-width: 720px;
+  }
+
+  .prose p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .principles {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1.5rem;
+  }
+
+  .principles li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-bg-elevated);
+  }
+
+  .principles strong {
+    font-size: var(--text-sm);
+  }
+
+  .principles span {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .does-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 800px) {
+    .does-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .check-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .check-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-success);
+  }
+
+  .check-list--not li::before {
+    background: var(--color-error);
+  }
+</style>

@@ -1,0 +1,809 @@
+Dimension Seven Systems Website Build Instructions
+
+Build a polished, responsive marketing website for Dimension Seven Systems.
+
+The site should feel technical and credible, but still accessible to a business owner. Use the attached screenshot as the visual reference for color, typography, spacing, cards, buttons and overall atmosphere.
+
+Do not copy the screenshot’s branding or content. Adapt its visual system to Dimension Seven Systems.
+
+1. Business Positioning
+
+Dimension Seven Systems builds conversion systems.
+
+D7 operates between lead generation and the final sale. It helps businesses convert more of the leads, traffic and opportunities they already have.
+
+D7 is not positioned as:
+
+A lead-generation agency
+An AI agency
+An automation agency
+A generic web design company
+A CRM reseller
+
+The site should present D7 as the company that identifies conversion leaks then builds and connects the components needed to fix them.
+
+The main visitor journey is:
+
+Recognize the leaks → Understand the system → See how D7 works → Review proof → Book a Conversion Review
+
+Copy is not the focus yet. Use clean placeholders where final copy is unavailable. Do not use generic agency filler such as “elevate your brand” or “unlock your potential.”
+
+2. Visual Direction
+
+Match the visual language of the screenshot:
+
+Dark, nearly black background
+White display headings
+Muted blue-gray body copy
+Bright blue primary accent
+Cyan and turquoise secondary accents
+Thin blue-gray borders
+Dark elevated cards
+Soft glows used sparingly
+Large, confident typography
+Generous whitespace
+Product-interface visuals
+Slight technical or systems-oriented feel
+Minimal animation
+
+The website should look custom-built. Avoid the usual SaaS template appearance with excessive gradients, floating blobs or dozens of identical cards.
+
+3. Color System
+
+Use the following palette based on the screenshot:
+
+:root {
+  --background: #0d141a;
+  --background-deep: #091016;
+  --surface: #131d27;
+  --surface-raised: #1b2838;
+  --surface-soft: #101a23;
+
+  --text-primary: #f7f7f4;
+  --text-secondary: #9eb7d4;
+  --text-muted: #71849a;
+
+  --border: #2a3b4f;
+  --border-light: #36516f;
+
+  --blue: #3f7df4;
+  --blue-bright: #4c81ff;
+  --cyan: #28b8dc;
+  --turquoise: #28d4c3;
+  --lime: #8ee83f;
+
+  --success: #4ddd91;
+  --warning: #e8b83f;
+  --danger: #ff6b6b;
+}
+
+Primary gradient:
+
+background: linear-gradient(
+  90deg,
+  #3f7df4 0%,
+  #28b8dc 55%,
+  #28d4c3 100%
+);
+
+Use this gradient for:
+
+Selected words in the hero heading
+Small interface accents
+Occasional section markers
+Very subtle background glows
+
+Do not use gradient-filled cards or large gradient backgrounds.
+
+Use lime only as a small secondary signal, not the dominant brand color.
+
+4. Typography
+
+The screenshot appears to use three complementary type styles. Since the exact font files cannot be extracted from an image, use these close matches:
+
+Display headings
+
+Use Roboto Slab, weight 700 or 800.
+
+Fallback:
+
+font-family: "Roboto Slab", "Roboto Serif", Georgia, serif;
+
+This should be used for:
+
+Hero headline
+Major section headings
+Strong numeric statements
+Important card headings
+Body and interface text
+
+Use Inter, weights 400 through 700.
+
+font-family: "Inter", system-ui, sans-serif;
+
+Use Inter for:
+
+Navigation
+Paragraphs
+Buttons
+Form labels
+Cards
+Footer content
+Technical labels
+
+Use IBM Plex Mono, weight 400 or 500.
+
+font-family: "IBM Plex Mono", monospace;
+
+Use it sparingly for:
+
+Eyebrows
+System labels
+Diagram annotations
+Step numbers
+Status indicators
+Small badges
+
+Load the fonts through Google Fonts or self-hosted font files.
+
+Suggested type scale:
+
+--text-xs: 0.75rem;
+--text-sm: 0.875rem;
+--text-base: 1rem;
+--text-lg: 1.125rem;
+--text-xl: 1.25rem;
+--text-2xl: 1.75rem;
+--text-3xl: 2.25rem;
+--text-4xl: 3rem;
+--text-5xl: clamp(3rem, 6vw, 5.25rem);
+
+Hero headings should have a tight line height between 0.98 and 1.08.
+
+Body text should use a line height between 1.6 and 1.75.
+
+5. Global Layout
+
+Use a centered content container:
+
+max-width: 1200px;
+margin-inline: auto;
+padding-inline: 24px;
+
+Desktop section spacing:
+
+padding-block: 104px;
+
+Mobile section spacing:
+
+padding-block: 68px;
+
+Keep most readable text between 600px and 720px wide.
+
+Use asymmetric layouts where helpful. Alternate between text-heavy and visual-heavy sides as the visitor moves down the page.
+
+6. Header
+
+Create a sticky header with:
+
+D7 logo mark
+“Dimension Seven Systems” wordmark
+Home
+Conversion Systems
+Our Work
+About
+Primary CTA: “Book a Conversion Review”
+Mobile navigation menu
+
+Styling:
+
+Approximately 68px tall
+Nearly black translucent background
+Thin bottom border
+Background blur after scrolling
+Rounded blue CTA
+Muted navigation links that become white on hover
+
+The logo mark can initially be a compact rounded square containing D7, using the blue-to-turquoise gradient.
+
+Do not make the header oversized.
+
+7. Homepage Structure
+Section 1: Hero
+
+Use a two-column layout.
+
+Left side:
+
+Monospaced eyebrow badge
+Large display headline
+One line of the headline in the blue-to-turquoise gradient
+Short supporting paragraph
+Primary CTA
+Secondary CTA
+Three short trust or positioning statements beneath the buttons
+
+Right side:
+
+Create a custom “Conversion System Monitor” interface.
+
+It should visually demonstrate:
+
+Leads entering the system
+Lead capture
+Contact attempts
+Follow-up
+Booking
+Sales conversations
+Lost opportunities
+Conversion rate or system health
+
+This should look like a believable D7 product interface, not a generic illustration.
+
+The interface should include:
+
+Dark elevated panel
+Window-style top bar
+Small colored status lights
+Monospaced labels
+Status pills
+Thin connecting lines
+Conversion stages
+A highlighted leak or warning
+A clear recovered-opportunity state
+
+On desktop, the hero should fill most of the first viewport. On mobile, stack the visual beneath the content.
+
+Section 2: The Gap
+
+Introduce the space between acquiring a lead and closing the sale.
+
+Use a wide systems diagram showing:
+
+Lead Generated → Captured → Contacted → Followed Up → Booked → Sales Conversation → Closed
+
+Show common leaks between stages:
+
+Missed call
+Slow response
+No follow-up
+No-show
+Forgotten lead
+Poor handoff
+
+Leaking stages can use muted red or amber indicators. Repaired stages use turquoise or green.
+
+This section should immediately make it clear where D7 operates.
+
+Section 3: What D7 Fixes
+
+Use an editorial grid rather than eight identical cards.
+
+Problems to represent:
+
+Leads not being contacted
+Slow lead response
+Missed calls
+Weak follow-up
+Low appointment booking
+No-shows
+Old leads going cold
+Poor pipeline visibility
+
+Use a mix of:
+
+One large featured problem card
+Two medium cards
+Several compact rows
+
+Each item needs room for:
+
+Problem title
+Short placeholder description
+Business consequence
+Small status or category label
+Arrow link
+
+Cards should have subtle borders and restrained hover movement.
+
+Section 4: What a Conversion System Contains
+
+Create a modular system-builder visual.
+
+Potential components:
+
+Conversion pages
+Lead capture
+Call handling
+Follow-up sequences
+Appointment booking
+Lead reactivation
+Sales pipelines
+Conversion tracking
+Custom sales tools
+
+Visually communicate that D7 selects and connects only the components the client needs.
+
+Use connected modules, not a basic icon grid.
+
+On mobile, the modules can become a vertical sequence.
+
+Section 5: How D7 Works
+
+Use three large numbered stages:
+
+Find the leaks
+Build the missing pieces
+Connect and improve the system
+
+Each stage should have:
+
+Large monospaced number
+Display heading
+Short placeholder text
+Small technical visual
+Clear connection to the next stage
+
+Add a thin horizontal line connecting the steps on desktop. Convert it to a vertical line on mobile.
+
+Section 6: Founder Video
+
+Create a prominent founder-led section.
+
+Layout:
+
+Large 16:9 video thumbnail
+Founder image or video placeholder
+Play button
+Small label
+Section heading
+Short supporting text
+CTA below or beside it
+
+The founder should feel integrated into the buying experience. This cannot look like a random embedded YouTube video.
+
+Use a dark framed video container with a blue border glow on hover.
+
+Section 7: Featured Conversion Systems
+
+Include cards for:
+
+Lead Response System
+Missed-Call Recovery System
+Appointment Conversion System
+Old-Lead Reactivation System
+Sales Follow-Up System
+Custom Conversion System
+
+Each card should show:
+
+System name
+Problem it addresses
+Simplified input and output
+Three or four included components
+Link or CTA
+
+Use a varied bento-style layout. Avoid six equal cards in one repetitive grid.
+
+Section 8: D7 Products
+
+Create a distinct product-building section.
+
+Initial product:
+
+DailyDialz
+Product logo placeholder
+Screenshot placeholder
+Brief description placeholder
+External product-site link
+
+Leave the component reusable so additional products can be added later.
+
+Make it clear these are D7-owned tools, not the entirety of the D7 service.
+
+Section 9: Who D7 Is For
+
+Include:
+
+Local service businesses
+Real estate professionals
+Sales-driven small businesses
+Founder-led companies
+Businesses already paying for leads or traffic
+
+Use a qualifier-based layout. The section should help the visitor decide whether D7 fits.
+
+Include a contrasting “Probably not for you” panel for businesses that:
+
+Do not yet generate any opportunities
+Want instant results without changing their process
+Only want a cheap website
+Are looking for mass lead lists
+Section 10: Proof and System Examples
+
+Build this section to work before formal case studies exist.
+
+Support these proof formats:
+
+Conversion-system demonstrations
+Before-and-after workflows
+Screenshots
+Client outcomes
+Testimonials
+Mini case studies
+Project cards
+Performance metrics
+
+Create one featured case-study layout and two smaller supporting examples.
+
+Do not invent testimonials, client names or performance results. Use clearly marked placeholders.
+
+Section 11: Why D7
+
+Create a styled comparison table:
+
+Provider	Primary Focus
+Marketing agency	Generate attention and leads
+Website agency	Build a website
+Automation agency	Automate tasks
+CRM consultant	Configure software
+Dimension Seven Systems	Convert existing opportunities
+
+Highlight the D7 row with:
+
+Slightly brighter surface
+Blue left border
+White text
+Small turquoise indicator
+
+Make the table horizontally scrollable on narrow screens.
+
+Section 12: Conversion Review CTA
+
+This should be the strongest conversion section on the page.
+
+Include:
+
+Small eyebrow
+Strong heading placeholder
+What D7 reviews
+What the prospect receives
+Primary booking CTA
+Secondary low-friction option
+Optional calendar preview or review-report mockup
+
+Use a large dark-blue panel with a subtle radial blue glow. Keep text readable and restrained.
+
+Section 13: FAQ
+
+Include accordion items for:
+
+What is a conversion system?
+Does D7 generate leads?
+Can D7 work with an existing CRM?
+Does D7 build websites?
+How long does a project take?
+How is pricing structured?
+Does D7 provide ongoing support?
+What happens during a Conversion Review?
+
+Accordion behavior must be keyboard accessible.
+
+Section 14: Footer
+
+Include:
+
+Logo and short positioning placeholder
+Navigation
+Conversion systems
+D7 products
+Contact link
+Privacy Policy
+Terms
+Social links
+Company name and copyright
+
+Use a visible top border and plenty of spacing.
+
+8. Supporting Pages
+
+Build the following pages using shared components.
+
+Conversion Systems
+
+Include:
+
+Page hero
+Definition of a conversion system
+Conversion journey diagram
+Available components
+Problems addressed
+Example architectures
+D7 process
+Engagement options
+Founder video
+FAQ
+Conversion Review CTA
+Our Work
+
+Include:
+
+Featured case study
+Filterable project or system grid
+Before-and-after workflows
+Demonstrations
+D7 products
+Testimonials area
+CTA
+
+Do not include fake filters if there are not enough projects. The filtering system should be easy to activate later.
+
+About
+
+Include:
+
+Founder-led hero
+D7 origin story
+Conversion philosophy
+What D7 does
+What D7 does not do
+Principles or operating beliefs
+Founder video
+CTA
+
+Keep the design personal and direct. Avoid corporate team-photo styling.
+
+Conversion Review
+
+Build this as a focused landing page.
+
+Include:
+
+Minimal header
+Clear review overview
+Who it is for
+What D7 examines
+What the prospect receives
+Qualification form
+Calendar embed area
+Expectations
+FAQ
+Privacy reassurance
+
+Allow the normal header to be disabled on this page when it is used for outbound campaigns.
+
+Legal Pages
+
+Build reusable long-form layouts for:
+
+Privacy Policy
+Terms and Conditions
+
+Use a narrow reading column, visible update date and sticky table of contents on desktop.
+
+9. Components to Create
+
+Build reusable components for:
+
+Header
+Mobile navigation
+Footer
+Section heading
+Eyebrow badge
+Primary button
+Secondary button
+Text link
+System card
+Problem card
+Product card
+Case-study card
+Video panel
+Status pill
+Metric display
+System diagram
+Comparison table
+FAQ accordion
+Conversion Review CTA
+Form fields
+Empty-state placeholder
+External-link indicator
+
+Avoid duplicating section markup across pages.
+
+10. Button Styling
+
+Primary button:
+
+background: #3f7df4;
+color: #ffffff;
+border-radius: 999px;
+padding: 14px 22px;
+font-weight: 700;
+box-shadow: 0 12px 30px rgba(63, 125, 244, 0.22);
+
+Hover:
+
+Slightly brighter blue
+Move up by 1px
+Increase glow slightly
+
+Secondary button:
+
+background: transparent;
+color: #f7f7f4;
+border: 1px solid #2a3b4f;
+border-radius: 999px;
+
+Do not use dramatic scale effects.
+
+11. Card Styling
+
+Base card:
+
+background: linear-gradient(
+  180deg,
+  rgba(27, 40, 56, 0.9),
+  rgba(19, 29, 39, 0.9)
+);
+border: 1px solid #2a3b4f;
+border-radius: 16px;
+
+Hover state:
+
+Border changes to #36516f
+Translate upward by 2px
+Very subtle blue shadow
+Transition between 180ms and 240ms
+
+Cards should not all use the same height or layout.
+
+12. Motion
+
+Use motion to explain the system, not decorate the page.
+
+Allowed:
+
+Slow status pulse
+Lines illuminating as a lead moves through the system
+Cards entering with subtle opacity and vertical movement
+Count-up metrics when visible
+Accordion transitions
+Button hover feedback
+Small diagram-state changes
+
+Avoid:
+
+Parallax
+Constant floating
+Rotating objects
+Large animated gradients
+Aggressive cursor effects
+Long entrance animations
+
+Respect prefers-reduced-motion.
+
+13. Responsive Behavior
+
+Required breakpoints:
+
+--mobile: 480px;
+--tablet: 768px;
+--desktop: 1024px;
+--wide: 1280px;
+
+Requirements:
+
+No horizontal page overflow
+Minimum 44px tap targets
+Mobile body text of at least 16px
+Hero becomes one column below tablet width
+Navigation becomes a menu button
+Diagrams remain readable on narrow screens
+Tables scroll inside their own container
+Buttons can stack at small widths
+Cards collapse without losing hierarchy
+Video maintains a 16:9 ratio
+Forms use one column on mobile
+14. Accessibility
+
+Meet WCAG 2.2 AA where practical.
+
+Include:
+
+Semantic landmarks
+Logical heading structure
+Visible keyboard focus
+Accurate button and link elements
+Alt text support
+Form labels
+Accessible validation messages
+Keyboard-operable menus and accordions
+Sufficient color contrast
+Reduced-motion handling
+No important information conveyed by color alone
+15. Technical Requirements
+
+Use the project’s existing framework if one is already configured. If starting from scratch, Astro or Next.js is acceptable.
+
+Requirements:
+
+Component-based architecture
+Clean content model
+No unnecessary client-side JavaScript
+Optimized local images
+Lazy-load below-the-fold media
+Responsive image sources
+SVG icons
+SEO metadata per page
+Open Graph metadata
+Sitemap
+Robots file
+Canonical URLs
+Structured data for the organization
+Accessible forms
+Analytics-ready event hooks
+Calendar embed placeholder
+Video embed placeholder
+No lorem ipsum in production-visible sections
+
+Target:
+
+Lighthouse Performance: 90+
+Accessibility: 95+
+Best Practices: 95+
+SEO: 95+
+16. Analytics Events
+
+Prepare event hooks for:
+
+header_cta_clicked
+hero_primary_cta_clicked
+hero_secondary_cta_clicked
+system_card_opened
+product_link_clicked
+founder_video_started
+case_study_opened
+conversion_review_started
+conversion_review_submitted
+calendar_booking_started
+faq_opened
+
+Do not install an analytics provider unless one is already selected.
+
+17. Content Management
+
+Keep all placeholder content separate from component code.
+
+Use structured data files or collections for:
+
+Navigation
+Conversion problems
+System components
+Featured systems
+Products
+Case studies
+Testimonials
+FAQs
+Footer links
+
+The final copy should be replaceable without editing layout components.
+
+18. Quality Standard
+
+Before considering the build complete:
+
+Verify every breakpoint
+Test all navigation
+Test keyboard behavior
+Test form validation
+Check focus states
+Confirm there is no horizontal overflow
+Run Lighthouse
+Check contrast
+Check reduced motion
+Verify all placeholder content is clearly identified
+Remove fake testimonials and invented performance numbers
+Confirm every CTA has a real destination or a clearly documented placeholder
+Make sure the design still feels intentional with incomplete content
+
+The final result should feel like a company that understands systems, revenue and operational leaks. It should not look like a generic marketing agency or another AI automation startup.

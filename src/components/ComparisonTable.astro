@@ -1,0 +1,106 @@
+---
+import { comparisonRows } from "../data/comparison";
+---
+
+<div class="comparison" role="region" aria-label="Provider comparison" tabindex="0">
+  <table class="comparison__table">
+    <thead>
+      <tr>
+        <th scope="col">Provider</th>
+        <th scope="col">Primary focus</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        comparisonRows.map((row) => (
+          <tr class:list={[row.highlight && "comparison__row--d7"]}>
+            <th scope="row">
+              {row.highlight && (
+                <span class="comparison__indicator" aria-hidden="true" />
+              )}
+              {row.provider}
+            </th>
+            <td>{row.focus}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .comparison {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-bg-elevated);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparison__table {
+    width: 100%;
+    min-width: 480px;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  th,
+  td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  thead th {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    background: rgba(15, 20, 25, 0.5);
+  }
+
+  tbody th {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    color: var(--color-text-muted);
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparison__row--d7 {
+    background: rgba(29, 41, 59, 0.95);
+  }
+
+  .comparison__row--d7 th,
+  .comparison__row--d7 td {
+    color: var(--color-text);
+    font-weight: 600;
+    border-left: none;
+  }
+
+  .comparison__row--d7 th {
+    border-left: 3px solid var(--color-primary);
+    position: relative;
+  }
+
+  .comparison__indicator {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    margin-right: 0.5rem;
+    box-shadow: 0 0 8px rgba(49, 206, 211, 0.6);
+    vertical-align: middle;
+  }
+</style>
