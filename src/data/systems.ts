@@ -96,15 +96,15 @@ export const featuredSystems: ConversionSystem[] = [
 ];
 
 export const systemComponents = [
-  { id: "pages", label: "Conversion pages", description: "[PLACEHOLDER] Pages built to move a prospect to the next step." },
-  { id: "capture", label: "Lead capture", description: "[PLACEHOLDER] Forms, calls, and opt-ins that actually route." },
-  { id: "calls", label: "Call handling", description: "[PLACEHOLDER] Answer, miss, and recover with intent." },
-  { id: "sequences", label: "Follow-up sequences", description: "[PLACEHOLDER] Multi-touch paths that do not forget." },
-  { id: "booking", label: "Appointment booking", description: "[PLACEHOLDER] Friction-light calendar conversion." },
-  { id: "reactivation", label: "Lead reactivation", description: "[PLACEHOLDER] Second chances for dormant demand." },
-  { id: "pipelines", label: "Sales pipelines", description: "[PLACEHOLDER] Stages that match how you actually sell." },
-  { id: "tracking", label: "Conversion tracking", description: "[PLACEHOLDER] Visibility into leaks and recovery." },
-  { id: "tools", label: "Custom sales tools", description: "[PLACEHOLDER] Purpose-built software when needed." },
+  { id: "pages", label: "Conversion pages", description: "Pages built around one job: getting the prospect to take the next step." },
+  { id: "capture", label: "Lead capture", description: "Forms, calls, and opt-ins that make sure an interested prospect actually enters the system." },
+  { id: "calls", label: "Call handling", description: "Answer incoming calls, recover missed ones, and make sure high-intent prospects don't disappear." },
+  { id: "sequences", label: "Follow-up sequences", description: "Calls, texts, and emails that keep working the lead until there's a clear outcome." },
+  { id: "booking", label: "Appointment booking", description: "Make it easy for interested prospects to book, and harder for the appointment to fall apart afterward." },
+  { id: "reactivation", label: "Lead reactivation", description: "Put old leads and forgotten opportunities back into active conversations." },
+  { id: "pipelines", label: "Sales pipelines", description: "Keep every opportunity visible, assigned, and moving toward a clear next step." },
+  { id: "tracking", label: "Conversion tracking", description: "See where opportunities are dropping out, where they're getting stuck, and what needs fixing." },
+  { id: "tools", label: "Custom sales tools", description: "When off-the-shelf tools don't solve the problem, we build the tool that does." },
 ] as const;
 
 export const journeyStages = [
@@ -118,12 +118,12 @@ export const journeyStages = [
 ] as const;
 
 export const journeyLeaks = [
-  { between: ["generated", "captured"], label: "Missed capture", type: "leak" as const },
+  { between: ["generated", "captured"], label: "Missed call / form", type: "leak" as const },
   { between: ["captured", "contacted"], label: "Slow response", type: "leak" as const },
   { between: ["contacted", "followed-up"], label: "No follow-up", type: "leak" as const },
-  { between: ["followed-up", "booked"], label: "No-show risk", type: "warn" as const },
-  { between: ["booked", "conversation"], label: "Forgotten lead", type: "leak" as const },
-  { between: ["conversation", "closed"], label: "Poor handoff", type: "warn" as const },
+  { between: ["followed-up", "booked"], label: "Booking friction", type: "leak" as const },
+  { between: ["booked", "conversation"], label: "No-show", type: "leak" as const },
+  { between: ["conversation", "closed"], label: "Deal lost", type: "leak" as const },
 ];
 
 export const processSteps = [
@@ -131,18 +131,18 @@ export const processSteps = [
     number: "01",
     title: "Find the leaks",
     description:
-      "[PLACEHOLDER] Map how opportunities move from first signal to sale and locate where they stall or disappear.",
+      "We follow what happens from the moment a lead comes in and identify where prospects stall, disappear, or get ignored.",
   },
   {
     number: "02",
-    title: "Build the missing pieces",
+    title: "Build what's missing.",
     description:
-      "[PLACEHOLDER] Design and ship only the pages, tools, and workflows required to close the gap.",
+      "We build the pages, follow-up, booking flows, pipelines, or tools needed to close the gaps.",
   },
   {
     number: "03",
-    title: "Connect and improve the system",
+    title: "Connect the system.",
     description:
-      "[PLACEHOLDER] Wire the components together, measure conversion health, and tighten what still leaks.",
+      "We tie the pieces into your existing sales process so opportunities keep moving instead of falling through the cracks.",
   },
 ] as const;

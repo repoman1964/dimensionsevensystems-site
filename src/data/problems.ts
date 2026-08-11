@@ -2,7 +2,6 @@ export type Problem = {
   id: string;
   title: string;
   description: string;
-  consequence: string;
   category: string;
   featured?: boolean;
   size?: "large" | "medium" | "compact";
@@ -11,74 +10,66 @@ export type Problem = {
 export const problems: Problem[] = [
   {
     id: "not-contacted",
-    title: "[PLACEHOLDER] Leads not being contacted",
+    title: "New leads sit untouched.",
     description:
-      "[PLACEHOLDER] Inbound opportunities sit untouched while competitors respond first.",
-    consequence: "[PLACEHOLDER] Paid traffic and referrals go cold before a human engages.",
+      "Calls, forms, and inquiries come in, but nobody gets to them fast enough. By the time someone responds, the prospect has already moved on.",
     category: "Response",
     featured: true,
     size: "large",
   },
   {
     id: "slow-response",
-    title: "[PLACEHOLDER] Slow lead response",
+    title: "New leads wait too long for a response.",
     description:
-      "[PLACEHOLDER] Minutes turn into hours between inquiry and first contact.",
-    consequence: "[PLACEHOLDER] Conversion probability drops with every delay.",
+      "Minutes turn into hours while the opportunity gets colder. The longer they wait, the harder the sale becomes.",
     category: "Speed",
     size: "medium",
   },
   {
     id: "missed-calls",
-    title: "[PLACEHOLDER] Missed calls",
+    title: "Missed calls never get recovered.",
     description:
-      "[PLACEHOLDER] Ringing phones go unanswered with no structured recovery.",
-    consequence: "[PLACEHOLDER] High-intent callers never hear back.",
+      "The phone rings. Nobody answers. Nobody follows up. A high-intent prospect disappears without another conversation.",
     category: "Calls",
     size: "medium",
   },
   {
     id: "weak-follow-up",
-    title: "[PLACEHOLDER] Weak follow-up",
+    title: "Follow-up stops too soon.",
     description:
-      "[PLACEHOLDER] One attempt, then silence — no sequence, no ownership.",
-    consequence: "[PLACEHOLDER] Warm leads exit the pipeline unnoticed.",
+      "A call or two gets made, a couple of messages go out, then the lead is forgotten. Good opportunities die because nobody keeps the conversation moving.",
     category: "Follow-up",
     size: "compact",
   },
   {
     id: "low-booking",
-    title: "[PLACEHOLDER] Low appointment booking",
+    title: "Interested prospects never book.",
     description:
-      "[PLACEHOLDER] Conversations happen, but calendars stay empty.",
-    consequence: "[PLACEHOLDER] Sales effort never turns into booked time.",
+      "They show interest, but friction, delay, or weak follow-up keeps them off the calendar. Sales opportunities never become sales conversations.",
     category: "Booking",
     size: "compact",
   },
   {
     id: "no-shows",
-    title: "[PLACEHOLDER] No-shows",
+    title: "Booked appointments don't show.",
     description:
-      "[PLACEHOLDER] Appointments are set without reminders or rebooking paths.",
-    consequence: "[PLACEHOLDER] Booked revenue evaporates on the calendar.",
+      "The appointment gets scheduled, but there's no real confirmation, reminder, or recovery process. Your calendar looks full. Your sales team still sits waiting.",
     category: "Attendance",
     size: "compact",
   },
   {
     id: "cold-leads",
-    title: "[PLACEHOLDER] Old leads going cold",
+    title: "Old leads sit untouched.",
     description:
-      "[PLACEHOLDER] Past inquiries and CRM records sit idle with no reactivation.",
-    consequence: "[PLACEHOLDER] Sunk acquisition cost produces zero second chance.",
+      "Past inquiries and old CRM records collect dust instead of getting another chance to convert. You already paid to acquire them. Then you stopped working them.",
     category: "Reactivation",
     size: "compact",
   },
   {
     id: "visibility",
-    title: "[PLACEHOLDER] Poor pipeline visibility",
+    title: "Nobody knows where deals are getting stuck.",
     description:
-      "[PLACEHOLDER] No clear view of where opportunities stall or leak.",
-    consequence: "[PLACEHOLDER] Teams cannot fix what they cannot see.",
+      "Leads come in. Sales come out. Everything between those two points is hard to see. If you can't see where opportunities are being lost, you can't fix it.",
     category: "Visibility",
     size: "compact",
   },

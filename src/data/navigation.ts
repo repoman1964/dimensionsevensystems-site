@@ -6,7 +6,7 @@ export const mainNav = [
 ] as const;
 
 export const primaryCta = {
-  label: "Book a Conversion Review",
+  label: "Talk to D7",
   href: "/conversion-review",
   event: "header_cta_clicked",
 } as const;

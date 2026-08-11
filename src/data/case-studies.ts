@@ -21,11 +21,11 @@ export const caseStudies: CaseStudy[] = [
       "[PLACEHOLDER] Brief overview of the system built and the leak it closed. Replace when real client work is available.",
     problem: "[PLACEHOLDER] Primary conversion problem before D7.",
     approach: "[PLACEHOLDER] Components connected and process changes made.",
-    outcome: "[PLACEHOLDER] Qualitative outcome description — no invented numbers.",
+    outcome: "[PLACEHOLDER] Qualitative outcome description, no invented numbers.",
     metrics: [
-      { label: "Metric A", value: "—" },
-      { label: "Metric B", value: "—" },
-      { label: "Metric C", value: "—" },
+      { label: "Metric A", value: "-" },
+      { label: "Metric B", value: "-" },
+      { label: "Metric C", value: "-" },
     ],
     featured: true,
   },
@@ -38,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
     approach: "[PLACEHOLDER] Approach summary.",
     outcome: "[PLACEHOLDER] Outcome summary.",
     metrics: [
-      { label: "Metric", value: "—" },
+      { label: "Metric", value: "-" },
     ],
   },
   {
@@ -50,7 +50,7 @@ export const caseStudies: CaseStudy[] = [
     approach: "[PLACEHOLDER] Approach summary.",
     outcome: "[PLACEHOLDER] Outcome summary.",
     metrics: [
-      { label: "Metric", value: "—" },
+      { label: "Metric", value: "-" },
     ],
   },
 ];

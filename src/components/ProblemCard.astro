@@ -1,7 +1,6 @@
 ---
 import type { Problem } from "../data/problems";
 import StatusPill from "./StatusPill.astro";
-import TextLink from "./TextLink.astro";
 
 interface Props {
   problem: Problem;
@@ -17,11 +16,6 @@ const size = problem.size ?? "compact";
   </div>
   <h3 class="problem-card__title">{problem.title}</h3>
   <p class="problem-card__desc">{problem.description}</p>
-  <p class="problem-card__consequence">
-    <span class="label">Business impact</span>
-    {problem.consequence}
-  </p>
-  <TextLink href="/conversion-systems">How D7 addresses this</TextLink>
 </article>
 
 <style>
@@ -72,23 +66,5 @@ const size = problem.size ?? "compact";
     font-size: var(--text-sm);
     line-height: 1.6;
     flex: 1;
-  }
-
-  .problem-card__consequence {
-    font-size: var(--text-sm);
-    color: var(--color-text);
-    line-height: 1.5;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .label {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-text-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.25rem;
   }
 </style>

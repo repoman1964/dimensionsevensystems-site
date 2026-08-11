@@ -48,7 +48,7 @@ export const notFitFor = [
     id: "cheap-website",
     title: "Only want a cheap website",
     description:
-      "[PLACEHOLDER] D7 builds conversion infrastructure — not low-cost brochure pages.",
+      "[PLACEHOLDER] D7 builds conversion infrastructure, not low-cost brochure pages.",
   },
   {
     id: "mass-lists",

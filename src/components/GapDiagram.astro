@@ -8,12 +8,10 @@ import { journeyStages, journeyLeaks } from "../data/systems";
       journeyStages.map((stage, i) => (
         <>
           <div class="gap__stage">
-            <span class="gap__num">{String(i + 1).padStart(2, "0")}</span>
             <span class="gap__label">{stage.label}</span>
           </div>
           {i < journeyStages.length - 1 && (
             <div class="gap__connector">
-              <div class="gap__line" aria-hidden="true" />
               {journeyLeaks[i] && (
                 <span
                   class:list={[
@@ -24,30 +22,35 @@ import { journeyStages, journeyLeaks } from "../data/systems";
                   {journeyLeaks[i].label}
                 </span>
               )}
+              <span class="gap__chevron" aria-hidden="true">›</span>
             </div>
           )}
         </>
       ))
     }
   </div>
-  <p class="gap__note">
-    <span class="gap__note-mark" aria-hidden="true"></span>
-    D7 operates across these stages — finding leaks, then building the missing connections.
-  </p>
 </div>
 
 <style>
   .gap {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .gap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
   }
 
   .gap__track {
     display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 1.5rem;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: visible;
+    padding: 1.25rem 0.75rem 1.35rem;
+    gap: 0.25rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-card);
     background: linear-gradient(
@@ -57,88 +60,54 @@ import { journeyStages, journeyLeaks } from "../data/systems";
     );
   }
 
-  @media (min-width: 1024px) {
-    .gap__track {
-      flex-direction: row;
-      align-items: flex-start;
-      overflow-x: auto;
-      padding: 1.75rem 1.25rem 2rem;
-    }
-  }
-
+  /* Labels share a bottom rail with chevrons; text is vertically centered to the chevron */
   .gap__stage {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
-    min-width: 6.5rem;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 1023px) {
-    .gap__stage {
-      flex-direction: row;
-      align-items: center;
-      gap: 0.75rem;
-      min-width: 0;
-      padding: 0.5rem 0;
-    }
-  }
-
-  .gap__num {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-accent);
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 0;
+    flex: 0 1 auto;
   }
 
   .gap__label {
-    font-size: var(--text-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.6rem;
+    font-size: clamp(0.7rem, 1.05vw, 0.875rem);
     font-weight: 600;
     color: var(--color-text);
-    line-height: 1.3;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
   }
 
+  /*
+    Connector stack:
+      [pill]     ← line above
+      [chevron]  ← bottom rail, vertically centered with labels
+  */
   .gap__connector {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .gap__chevron {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex: 1;
-    min-width: 2.5rem;
-    min-height: 2rem;
-  }
-
-  @media (max-width: 1023px) {
-    .gap__connector {
-      min-height: 2.5rem;
-      padding-left: 1.1rem;
-      align-items: flex-start;
-    }
-  }
-
-  .gap__line {
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--color-border-light),
-      var(--color-primary),
-      var(--color-border-light)
-    );
-    opacity: 0.7;
-  }
-
-  @media (max-width: 1023px) {
-    .gap__line {
-      width: 2px;
-      height: 100%;
-      min-height: 1.5rem;
-      background: linear-gradient(
-        180deg,
-        var(--color-border-light),
-        var(--color-primary)
-      );
-    }
+    height: 3.6rem;
+    font-size: 3.6rem;
+    font-weight: 300;
+    line-height: 1;
+    color: #ffffff;
+    opacity: 1;
   }
 
   .gap__leak {
@@ -150,42 +119,17 @@ import { journeyStages, journeyLeaks } from "../data/systems";
     background: rgba(255, 104, 104, 0.1);
     border: 1px solid rgba(255, 104, 104, 0.3);
     border-radius: 999px;
-    padding: 0.15rem 0.45rem;
+    padding: 0.2rem 0.55rem;
+    text-align: center;
+    line-height: 1.25;
     white-space: nowrap;
-    margin-top: 0.4rem;
+    width: max-content;
+    max-width: none;
   }
 
   .gap__leak--warn {
     color: var(--color-warning);
     background: rgba(242, 185, 59, 0.1);
     border-color: rgba(242, 185, 59, 0.3);
-  }
-
-  @media (min-width: 1024px) {
-    .gap__leak {
-      position: absolute;
-      top: 100%;
-      margin-top: 0.5rem;
-    }
-  }
-
-  .gap__note {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    margin: 0;
-    max-width: 40rem;
-  }
-
-  .gap__note-mark {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-accent);
-    margin-top: 0.4em;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px rgba(49, 206, 211, 0.5);
   }
 </style>

@@ -3,13 +3,12 @@
 export const site = {
   name: "Dimension Seven Systems",
   shortName: "D7",
-  tagline:
-    "[PLACEHOLDER] We build the systems between lead generation and the sale.",
+  tagline: "More leads aren't always the answer.",
   description:
     "[PLACEHOLDER] Dimension Seven Systems builds conversion systems that help businesses convert more of the leads and opportunities they already have.",
   url: "https://dimensionsevensystems.com",
   locale: "en_US",
-  email: "hello@dimensionsevensystems.com", // PLACEHOLDER — replace with real inbox
+  email: "hello@dimensionsevensystems.com", // PLACEHOLDER: replace with real inbox
   phone: "", // PLACEHOLDER
   location: "", // PLACEHOLDER
   calendlyUrl: "https://calendly.com/placeholder-d7/conversion-review", // PLACEHOLDER
@@ -24,7 +23,7 @@ export const site = {
   founder: {
     name: "[PLACEHOLDER Founder Name]",
     role: "Founder",
-    bio: "[PLACEHOLDER] Short founder bio for the About and video sections.",
+    bio: "Why good opportunities still get lost after they come in, and how D7 thinks about fixing the gaps without adding unnecessary software, automation, or complexity.",
     videoUrl: "", // PLACEHOLDER
     imageUrl: "", // PLACEHOLDER
   },

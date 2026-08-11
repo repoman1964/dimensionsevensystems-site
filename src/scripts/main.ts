@@ -10,7 +10,7 @@ type AnalyticsPayload = {
 };
 
 function track(payload: AnalyticsPayload) {
-  // Analytics-ready hook — provider not installed yet
+  // Analytics-ready hook; provider not installed yet
   const w = window as Window & { dataLayer?: unknown[]; d7Analytics?: AnalyticsPayload[] };
   w.d7Analytics = w.d7Analytics || [];
   w.d7Analytics.push(payload);

@@ -1,19 +1,15 @@
 ---
-import { site } from "../data/site";
-import Button from "./Button.astro";
-
 interface Props {
   heading?: string;
   description?: string;
   label?: string;
-  showCta?: boolean;
 }
 
 const {
-  heading = "[PLACEHOLDER] Hear how D7 approaches conversion systems",
-  description = site.founder.bio,
-  label = "Founder video",
-  showCta = true,
+  heading = "More leads won't fix a broken sales process.",
+  description =
+    "Why good opportunities still get lost after they come in, and how D7 thinks about fixing the gaps without adding unnecessary software, automation, or complexity.",
+  label = "From the founder",
 } = Astro.props;
 ---
 
@@ -42,11 +38,6 @@ const {
     </p>
     <h2 id="founder-video-heading" class="video-panel__heading">{heading}</h2>
     <p class="video-panel__desc">{description}</p>
-    {
-      showCta && (
-        <Button href="/conversion-review">Book a Conversion Review</Button>
-      )
-    }
   </div>
 </section>
 

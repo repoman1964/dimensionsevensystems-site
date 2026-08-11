@@ -63,19 +63,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   const to = site.email;
-  const subject = `Conversion Review request — ${company}`;
+  const subject = `Conversion Review request, ${company}`;
   const text = [
     `New Conversion Review request`,
     ``,
     `Name: ${name}`,
     `Email: ${email}`,
     `Company: ${company}`,
-    `Source: ${fields.source || "—"}`,
+    `Source: ${fields.source || "-"}`,
     `Volume: ${volume}`,
-    `Phone: ${fields.phone || "—"}`,
+    `Phone: ${fields.phone || "-"}`,
     ``,
     `Suspected leak:`,
-    fields.leak || "—",
+    fields.leak || "-",
   ].join("\n");
 
   /**
@@ -131,7 +131,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       );
     }
   } else {
-    // No provider configured yet — accept submission so UX works in v1
+    // No provider configured yet, accept submission so UX works in v1
     console.info("[conversion-review]", { to: toEmail, subject, text });
   }
 
@@ -140,7 +140,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     message:
       "Request received. We will follow up by email shortly." +
       (!apiKey
-        ? " (Email provider not configured yet — submission logged.)"
+        ? " (Email provider not configured yet, submission logged.)"
         : ""),
   });
 };

@@ -188,16 +188,6 @@ const pathname = Astro.url.pathname;
     display: none;
   }
 
-  @media (min-width: 1024px) {
-    .site-header__cta {
-      display: inline-flex;
-    }
-
-    .site-header__menu-btn {
-      display: none;
-    }
-  }
-
   .site-header__menu-btn {
     display: grid;
     place-items: center;
@@ -206,6 +196,16 @@ const pathname = Astro.url.pathname;
     border-radius: 10px;
     border: 1px solid var(--color-border);
     background: var(--color-bg-elevated);
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__cta {
+      display: inline-flex;
+    }
+
+    .site-header__menu-btn {
+      display: none;
+    }
   }
 
   .site-header__menu-icon,

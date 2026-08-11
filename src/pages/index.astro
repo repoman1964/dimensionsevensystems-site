@@ -42,30 +42,35 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
           Conversion systems
         </Eyebrow>
         <h1 id="hero-heading" class="hero__title">
-          We build the systems between
-          <span class="text-gradient">lead generation and the sale.</span>
+          More leads aren't always the answer.
         </h1>
-        <p class="hero__sub">
-          [PLACEHOLDER] Dimension Seven Systems finds conversion leaks, then builds
-          and connects the components that turn existing leads and opportunities
-          into real sales conversations.
-        </p>
+        <div class="hero__sub">
+          <p>
+            If you're already generating calls, inquiries, appointments, or sales
+            opportunities, the bigger problem may be what happens to them next.
+          </p>
+          <p>
+            Dimension Seven Systems finds the gaps between the lead and the sale,
+            then builds the pages, follow-up, booking flows, pipelines, outreach
+            tools, and custom systems needed to close them.
+          </p>
+        </div>
         <div class="hero__actions">
           <Button href="/conversion-review" event="hero_primary_cta_clicked">
-            Book a Conversion Review
+            Talk to D7
           </Button>
           <Button
             href="/conversion-systems"
             variant="secondary"
             event="hero_secondary_cta_clicked"
           >
-            [PLACEHOLDER secondary CTA]
+            See What We Build
           </Button>
         </div>
         <ul class="hero__trust">
-          <li>Not a lead-gen agency</li>
-          <li>Not automation theater</li>
-          <li>Systems that convert what you already have</li>
+          <li>Built around your existing process</li>
+          <li>Works with the tools you already use</li>
+          <li>Focused on better conversion not just more traffic</li>
         </ul>
       </div>
       <div class="hero__visual">
@@ -79,9 +84,23 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     <div class="section-inner">
       <SectionHeading
         eyebrow="The gap"
-        title="Between acquiring a lead and closing the sale"
-        description="[PLACEHOLDER] Most businesses pay to generate attention — then leak value across capture, contact, follow-up, booking, and handoff. D7 works in that space."
-      />
+        title="You paid for the lead. Then you lost the sale."
+      >
+        <div class="gap-desc">
+          <p>Getting the lead is only the first step.</p>
+          <p>
+            After that, every handoff creates another place for the opportunity to
+            die: a missed call, a slow response, weak follow-up, booking friction,
+            a no-show, or a deal that simply goes cold.
+          </p>
+          <p>
+            <strong>
+              D7 finds those gaps and fixes the parts of the process that are costing
+              you sales.
+            </strong>
+          </p>
+        </div>
+      </SectionHeading>
       <GapDiagram />
     </div>
   </section>
@@ -91,8 +110,8 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     <div class="section-inner">
       <SectionHeading
         eyebrow="What D7 fixes"
-        title="Conversion problems that quietly kill revenue"
-        description="[PLACEHOLDER] An editorial look at the leaks we diagnose and repair — not eight identical feature cards."
+        title="How many of these are costing you sales?"
+        description="If any of these sound familiar, the problem may not be lead generation. It may be what happens after the lead comes in."
       />
       <div class="problems-grid">
         <div class="problems-grid__featured">
@@ -113,8 +132,8 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     <div class="section-inner">
       <SectionHeading
         eyebrow="System components"
-        title="What a conversion system contains"
-        description="[PLACEHOLDER] Modular pieces. Connected only when they solve a real leak."
+        title="What goes into a conversion system"
+        description="A conversion system isn't one piece of software. It's the intentional combination of pages, processes, tools, and follow-up required to fix the gaps in your sales process."
       />
       <ModuleBuilder />
     </div>
@@ -126,7 +145,7 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
       <SectionHeading
         eyebrow="How D7 works"
         title="Find. Build. Connect."
-        description="[PLACEHOLDER] Three stages from diagnosis to a working conversion system."
+        description="We start with the sales process you already have, find where opportunities are getting lost, and fix only what needs fixing."
       />
       <ol class="process">
         {
@@ -142,6 +161,9 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
           ))
         }
       </ol>
+      <p class="process__note">
+        No fixed stack. No unnecessary rebuild. Just what the process needs.
+      </p>
     </div>
   </section>
 
@@ -177,7 +199,7 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     <div class="section-inner">
       <SectionHeading
         eyebrow="D7 products"
-        title="Tools we own — not the whole service"
+        title="Tools we own, not the whole service"
         description="[PLACEHOLDER] Purpose-built products that can sit inside a conversion system. They are components, not a substitute for diagnosing your leaks."
       />
       <div class="products-list">
@@ -230,7 +252,7 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     <div class="section-inner">
       <SectionHeading
         eyebrow="Proof & examples"
-        title="System examples — real case studies coming"
+        title="System examples, real case studies coming"
         description="[PLACEHOLDER] We are pre-revenue. No invented testimonials or metrics. Structure is ready for real work."
       />
       <div class="proof-grid">
@@ -314,7 +336,7 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     font-size: var(--text-5xl);
     line-height: 1.02;
     letter-spacing: -0.03em;
-    max-width: 12ch;
+    max-width: 14ch;
   }
 
   .hero__title .text-gradient {
@@ -322,10 +344,17 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
   }
 
   .hero__sub {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
     color: var(--color-text-muted);
     font-size: var(--text-lg);
     line-height: 1.65;
     max-width: 34rem;
+  }
+
+  .hero__sub p {
+    margin: 0;
   }
 
   .hero__actions {
@@ -358,6 +387,26 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     border-radius: 50%;
     background: var(--color-accent);
     opacity: 0.8;
+  }
+
+  /* Gap section description */
+  .gap-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    max-width: 40rem;
+  }
+
+  .gap-desc p {
+    margin: 0;
+  }
+
+  .gap-desc strong {
+    font-weight: 700;
+    color: var(--color-text);
   }
 
   /* Problems editorial grid */
@@ -471,6 +520,15 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
       opacity: 0.6;
       z-index: 1;
     }
+  }
+
+  .process__note {
+    margin: 1.25rem 0 0;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.55;
   }
 
   /* Systems bento */
