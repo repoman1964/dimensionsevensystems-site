@@ -37,16 +37,28 @@ npm run dev
 ```bash
 npm run build
 npm run preview
-# or
-npx wrangler pages dev
 ```
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers)
 
-1. Connect this repo to Cloudflare Pages (or `wrangler pages deploy`).
-2. Build command: `npm run build`
-3. Output: Astro Cloudflare adapter handles the worker + assets (see `wrangler.jsonc`).
-4. Set env vars if using email delivery (below).
+Locally:
+
+```bash
+npm run deploy
+```
+
+**Workers Builds** (Git integration) — required settings:
+
+| Setting | Value |
+|---------|--------|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+
+`astro build` must run before deploy. It writes the Worker entry under `dist/server/` and static assets under `dist/client/`. Without the build step, Wrangler fails with “entry-point file … was not found”.
+
+Alternatively, leave the build command empty and set deploy to `npm run deploy` (that script runs build + deploy).
+
+Set runtime secrets in the Worker (or via Wrangler) if using email delivery (below).
 
 ## Configuration placeholders
 
