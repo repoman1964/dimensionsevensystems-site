@@ -1,5 +1,6 @@
 ---
 import Button from "./Button.astro";
+import { site } from "../data/site";
 
 interface Props {
   compact?: boolean;
@@ -17,42 +18,42 @@ const { compact = false } = Astro.props;
     <div class="cr-cta__copy">
       <p class="cr-cta__eyebrow">
         <span class="dot" aria-hidden="true"></span>
-        Conversion Review
+        Free conversation
       </p>
       <h2 id="cr-cta-heading" class="cr-cta__heading">
-        [PLACEHOLDER] See where opportunities are leaking, then fix the system
+        Tell us how your day runs. We'll show you what technology can take off your plate.
       </h2>
       <p class="cr-cta__desc">
-        [PLACEHOLDER] A focused review of how leads and pipeline opportunities
-        move through your business, where they stall, and what a practical
-        conversion system would include.
+        A short, no-pressure conversation about how you handle calls,
+        scheduling, customers, and paperwork today, and which tools would
+        save you the most time.
       </p>
       <div class="cr-cta__lists">
         <div>
-          <h3 class="cr-cta__list-title">What D7 reviews</h3>
+          <h3 class="cr-cta__list-title">What we'll talk about</h3>
           <ul>
-            <li>[PLACEHOLDER] Lead capture and first response</li>
-            <li>[PLACEHOLDER] Follow-up and booking paths</li>
-            <li>[PLACEHOLDER] Pipeline visibility and handoffs</li>
-            <li>[PLACEHOLDER] Tools currently in use</li>
+            <li>How customers find and contact you</li>
+            <li>How you schedule and remind</li>
+            <li>Where your customer info lives</li>
+            <li>The tasks you repeat every day</li>
           </ul>
         </div>
         <div>
-          <h3 class="cr-cta__list-title">What you receive</h3>
+          <h3 class="cr-cta__list-title">What you get</h3>
           <ul>
-            <li>[PLACEHOLDER] Map of conversion leaks</li>
-            <li>[PLACEHOLDER] Priority fixes</li>
-            <li>[PLACEHOLDER] System outline</li>
-            <li>[PLACEHOLDER] Clear next steps</li>
+            <li>A short list of practical fixes</li>
+            <li>What each one costs</li>
+            <li>What to do first</li>
+            <li>No obligation</li>
           </ul>
         </div>
       </div>
       <div class="cr-cta__actions">
-        <Button href="/conversion-review" event="conversion_review_started">
-          Talk to D7
+        <Button href="/contact" event="contact_cta_clicked">
+          Get in touch
         </Button>
-        <Button href="mailto:hello@dimensionsevensystems.com" variant="secondary">
-          Email us first
+        <Button href={site.phone.href} variant="secondary">
+          Call {site.phone.display}
         </Button>
       </div>
     </div>
@@ -64,19 +65,19 @@ const { compact = false } = Astro.props;
               <span />
               <span />
               <span />
-              <em>review · report preview</em>
+              <em>example · your plan</em>
             </div>
             <div class="cr-cta__report-body">
-              <p class="mono">SYSTEM HEALTH</p>
+              <p class="mono">SETUP PROGRESS</p>
               <div class="bar"><i style="width: 62%" /></div>
-              <p class="mono warn">LEAK DETECTED · follow-up stage</p>
+              <p class="mono warn">NEXT UP · online booking</p>
               <div class="rows">
-                <div class="row ok">Capture · stable</div>
-                <div class="row warn">Contact · delayed</div>
-                <div class="row err">Follow-up · missing</div>
-                <div class="row ok">Booking · partial</div>
+                <div class="row ok">Website · live</div>
+                <div class="row ok">Missed-call reply · on</div>
+                <div class="row warn">Online booking · in setup</div>
+                <div class="row err">Invoicing · not started</div>
               </div>
-              <p class="mono accent">RECOVERABLE · opportunities in queue</p>
+              <p class="mono accent">TIME SAVED · adds up every week</p>
             </div>
           </div>
         </div>

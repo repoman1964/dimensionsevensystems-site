@@ -1,4 +1,4 @@
-export type ConversionSystem = {
+export type Service = {
   id: string;
   name: string;
   problem: string;
@@ -8,141 +8,147 @@ export type ConversionSystem = {
   href: string;
 };
 
-export const featuredSystems: ConversionSystem[] = [
+export const services: Service[] = [
   {
-    id: "lead-response",
-    name: "Lead Response System",
-    problem: "[PLACEHOLDER] New leads wait too long for a human response.",
-    input: "Inbound lead",
-    output: "First contact + next step",
+    id: "websites",
+    name: "Websites",
+    problem:
+      "A clean, fast website that tells customers what you do, where you work, and how to reach you, built to get them to call or book.",
+    input: "Little or no online presence",
+    output: "A site that brings in calls",
     components: [
-      "Capture routing",
-      "Speed-to-lead alerts",
-      "Response scripts",
-      "CRM logging",
+      "Mobile-friendly design",
+      "Click-to-call",
+      "Contact and quote forms",
+      "Map listing alignment",
     ],
-    href: "/conversion-systems#lead-response",
+    href: "/services#websites",
   },
   {
-    id: "missed-call",
-    name: "Missed-Call Recovery System",
-    problem: "[PLACEHOLDER] Missed calls never get a structured callback.",
-    input: "Missed call event",
-    output: "Recovered conversation",
+    id: "calls",
+    name: "Call handling",
+    problem:
+      "When you can't pick up, the caller gets a quick reply and you get a clear list of who to call back.",
+    input: "Missed call",
+    output: "Customer gets a reply",
     components: [
-      "Missed-call capture",
-      "Auto SMS/email",
-      "Callback queue",
-      "Outcome tracking",
+      "Missed-call text back",
+      "Call forwarding",
+      "Voicemail to text",
+      "Callback list",
     ],
-    href: "/conversion-systems#missed-call",
+    href: "/services#calls",
   },
   {
-    id: "appointment",
-    name: "Appointment Conversion System",
-    problem: "[PLACEHOLDER] Interest does not turn into booked time.",
-    input: "Qualified interest",
-    output: "Confirmed appointment",
+    id: "scheduling",
+    name: "Scheduling & reminders",
+    problem:
+      "Customers book open times online, and reminders go out automatically so fewer appointments are missed.",
+    input: "Phone tag",
+    output: "Booked appointment",
     components: [
-      "Booking flow",
+      "Online booking",
       "Calendar sync",
-      "Reminders",
-      "Confirmation path",
+      "Appointment reminders",
+      "Easy rescheduling",
     ],
-    href: "/conversion-systems#appointment",
-  },
-  {
-    id: "reactivation",
-    name: "Old-Lead Reactivation System",
-    problem: "[PLACEHOLDER] Past leads sit unused in the CRM.",
-    input: "Dormant lead list",
-    output: "Reopened opportunities",
-    components: [
-      "List hygiene",
-      "Reactivation sequence",
-      "Offer framing",
-      "Reply handling",
-    ],
-    href: "/conversion-systems#reactivation",
+    href: "/services#scheduling",
   },
   {
     id: "follow-up",
-    name: "Sales Follow-Up System",
-    problem: "[PLACEHOLDER] Open deals die from inconsistent follow-up.",
-    input: "Open opportunity",
-    output: "Sustained sales motion",
+    name: "Customer follow-up",
+    problem:
+      "Quotes get a check-in, finished jobs get a thank-you and a review request, and nothing depends on remembering.",
+    input: "Quote sent or job done",
+    output: "Next step happens",
     components: [
-      "Sequence engine",
-      "Task ownership",
-      "Stage rules",
-      "Pipeline view",
+      "Quote follow-up",
+      "Review requests",
+      "Thank-you messages",
+      "Seasonal check-ins",
     ],
-    href: "/conversion-systems#follow-up",
+    href: "/services#follow-up",
+  },
+  {
+    id: "records",
+    name: "Customer records",
+    problem:
+      "One place for customer names, numbers, job history, and notes that you can pull up from your phone.",
+    input: "Scattered contacts",
+    output: "One organized list",
+    components: [
+      "Simple CRM setup",
+      "Contact import",
+      "Job history",
+      "Mobile access",
+    ],
+    href: "/services#records",
   },
   {
     id: "custom",
-    name: "Custom Conversion System",
-    problem: "[PLACEHOLDER] Unique leak that off-the-shelf tools miss.",
-    input: "Diagnosed bottleneck",
-    output: "Purpose-built fix",
+    name: "Custom tools",
+    problem:
+      "When an off-the-shelf app doesn't fit how you work, we build a small tool that does.",
+    input: "A task nothing handles",
+    output: "A tool that fits",
     components: [
-      "Discovery",
-      "Custom tooling",
-      "Integrations",
-      "Measurement",
+      "Discovery call",
+      "Custom build",
+      "Connections to your apps",
+      "Training",
     ],
-    href: "/conversion-systems#custom",
+    href: "/services#custom",
   },
 ];
 
 export const systemComponents = [
-  { id: "pages", label: "Conversion pages", description: "Pages built around one job: getting the prospect to take the next step." },
-  { id: "capture", label: "Lead capture", description: "Forms, calls, and opt-ins that make sure an interested prospect actually enters the system." },
-  { id: "calls", label: "Call handling", description: "Answer incoming calls, recover missed ones, and make sure high-intent prospects don't disappear." },
-  { id: "sequences", label: "Follow-up sequences", description: "Calls, texts, and emails that keep working the lead until there's a clear outcome." },
-  { id: "booking", label: "Appointment booking", description: "Make it easy for interested prospects to book, and harder for the appointment to fall apart afterward." },
-  { id: "reactivation", label: "Lead reactivation", description: "Put old leads and forgotten opportunities back into active conversations." },
-  { id: "pipelines", label: "Sales pipelines", description: "Keep every opportunity visible, assigned, and moving toward a clear next step." },
-  { id: "tracking", label: "Conversion tracking", description: "See where opportunities are dropping out, where they're getting stuck, and what needs fixing." },
-  { id: "tools", label: "Custom sales tools", description: "When off-the-shelf tools don't solve the problem, we build the tool that does." },
+  { id: "website", label: "Website", description: "A clear, mobile-friendly site that turns searches into calls." },
+  { id: "phone", label: "Phone & calls", description: "Forwarding, voicemail to text, and quick replies when you miss a call." },
+  { id: "booking", label: "Online booking", description: "Let customers pick an open time without a phone call." },
+  { id: "reminders", label: "Reminders", description: "Automatic appointment reminders by text or email." },
+  { id: "crm", label: "Customer records", description: "One list of customers, contact info, and job history." },
+  { id: "invoicing", label: "Quotes & invoices", description: "Send quotes and invoices and take payment online." },
+  { id: "reviews", label: "Reviews", description: "Ask happy customers for a review at the right moment." },
+  { id: "automation", label: "Automation", description: "Connect your apps so information moves without re-typing." },
+  { id: "tools", label: "Custom tools", description: "Small, purpose-built tools when nothing off the shelf fits." },
 ] as const;
 
 export const journeyStages = [
-  { id: "generated", label: "Lead Generated" },
-  { id: "captured", label: "Captured" },
-  { id: "contacted", label: "Contacted" },
-  { id: "followed-up", label: "Followed Up" },
-  { id: "booked", label: "Booked" },
-  { id: "conversation", label: "Sales Conversation" },
-  { id: "closed", label: "Closed" },
+  { id: "search", label: "Customer searches" },
+  { id: "call", label: "Calls or messages" },
+  { id: "reply", label: "Gets a reply" },
+  { id: "booked", label: "Books a time" },
+  { id: "job", label: "Job done" },
+  { id: "paid", label: "Paid" },
+  { id: "review", label: "Leaves a review" },
 ] as const;
 
 export const journeyLeaks = [
-  { between: ["generated", "captured"], label: "Missed call / form", type: "leak" as const },
-  { between: ["captured", "contacted"], label: "Slow response", type: "leak" as const },
-  { between: ["contacted", "followed-up"], label: "No follow-up", type: "leak" as const },
-  { between: ["followed-up", "booked"], label: "Booking friction", type: "leak" as const },
-  { between: ["booked", "conversation"], label: "No-show", type: "leak" as const },
-  { between: ["conversation", "closed"], label: "Deal lost", type: "leak" as const },
+  { between: ["search", "call"], label: "No website", type: "leak" as const },
+  { between: ["call", "reply"], label: "Missed call", type: "leak" as const },
+  { between: ["reply", "booked"], label: "Phone tag", type: "leak" as const },
+  { between: ["booked", "job"], label: "No-show", type: "leak" as const },
+  { between: ["job", "paid"], label: "Slow invoice", type: "leak" as const },
+  { between: ["paid", "review"], label: "Never asked", type: "leak" as const },
 ];
 
 export const processSteps = [
   {
     number: "01",
-    title: "Find the leaks",
+    title: "Listen",
     description:
-      "We follow what happens from the moment a lead comes in and identify where prospects stall, disappear, or get ignored.",
+      "We talk through how your day actually runs, from the first call to getting paid, and find where time and customers slip away.",
   },
   {
     number: "02",
-    title: "Build what's missing.",
+    title: "Set it up",
     description:
-      "We build the pages, follow-up, booking flows, pipelines, or tools needed to close the gaps.",
+      "We build or configure the tools you need, connect them to what you already use, and keep it as simple as possible.",
   },
   {
     number: "03",
-    title: "Connect the system.",
+    title: "Show you how",
     description:
-      "We tie the pieces into your existing sales process so opportunities keep moving instead of falling through the cracks.",
+      "We walk you through everything, stay available for questions, and adjust as your business changes.",
   },
 ] as const;

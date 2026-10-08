@@ -4,53 +4,53 @@ import SectionHeading from "../components/SectionHeading.astro";
 import FormField from "../components/FormField.astro";
 import Button from "../components/Button.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
-import { conversionReviewFaqs } from "../data/faqs";
-import { site } from "../data/site";
+import { contactFaqs } from "../data/faqs";
+import { site, addressLine } from "../data/site";
 
-/** Set ?campaign=1 or use /conversion-review with minimal chrome via prop if needed later */
+/** Set ?campaign=1 to render with a minimal header */
 const campaign = Astro.url.searchParams.get("campaign") === "1";
 ---
 
 <BaseLayout
-  title="Conversion Review"
-  description="[PLACEHOLDER] Book a Conversion Review with Dimension Seven Systems, diagnose leaks and outline a practical system."
+  title="Contact"
+  description="Contact Dimension Seven Systems for help with websites, call handling, online booking, reminders, and other technology for your small business."
   minimalHeader={campaign}
 >
   <section class="section review-hero">
     <div class="section-inner review-hero__grid">
       <div>
         <SectionHeading
-          eyebrow="Conversion Review"
-          title="[PLACEHOLDER] A focused look at where your opportunities leak"
-          description="[PLACEHOLDER] We examine how leads and pipeline opportunities move today, identify high-cost stalls, and outline what a practical conversion system would include."
+          eyebrow="Contact"
+          title="Let's talk about your business"
+          description="Tell us a little about how you work today and what's slowing you down. We'll get back to you within one business day."
         />
         <ul class="review-points">
           <li>
-            <strong>Who it is for</strong>
-            <span>[PLACEHOLDER] Businesses already generating some leads, calls, or pipeline activity.</span>
+            <strong>Phone</strong>
+            <span><a href={site.phone.href}>{site.phone.display}</a></span>
           </li>
           <li>
-            <strong>What D7 examines</strong>
-            <span>[PLACEHOLDER] Capture, response speed, follow-up, booking, handoffs, and tooling.</span>
+            <strong>Email</strong>
+            <span><a href={`mailto:${site.email}`}>{site.email}</a></span>
           </li>
           <li>
-            <strong>What you receive</strong>
-            <span>[PLACEHOLDER] Leak map, priorities, system outline, and clear next steps.</span>
+            <strong>Address</strong>
+            <span>{addressLine}</span>
           </li>
         </ul>
       </div>
 
-      <div class="review-form-card" id="qualify">
-        <h2 class="review-form-card__title">Request a Conversion Review</h2>
+      <div class="review-form-card" id="contact-form">
+        <h2 class="review-form-card__title">Send us a message</h2>
         <p class="review-form-card__sub">
-          [PLACEHOLDER] Short qualification form. Submissions are emailed to the D7 inbox.
+          Fields marked with * are required.
         </p>
         <form
           class="review-form"
           method="POST"
-          action="/api/conversion-review"
-          data-review-form
-          data-analytics-form="conversion_review"
+          action="/api/contact"
+          data-contact-form
+          data-analytics-form="contact"
           novalidate
         >
           <FormField
@@ -61,59 +61,73 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
             placeholder="Your name"
           />
           <FormField
-            label="Work email"
+            label="Email"
             name="email"
             type="email"
             required
             autocomplete="email"
-            placeholder="you@company.com"
+            placeholder="you@yourbusiness.com"
           />
           <FormField
-            label="Company"
+            label="Business name"
             name="company"
             required
             autocomplete="organization"
-            placeholder="Company name"
+            placeholder="Business name"
           />
           <FormField
-            label="Website or primary lead source"
-            name="source"
-            placeholder="URL or description"
-          />
-          <FormField
-            label="Rough monthly lead / opportunity volume"
-            name="volume"
-            type="select"
-            required
-            options={[
-              { value: "under-20", label: "Under 20" },
-              { value: "20-100", label: "20–100" },
-              { value: "100-500", label: "100–500" },
-              { value: "500-plus", label: "500+" },
-              { value: "unsure", label: "Not sure" },
-            ]}
-          />
-          <FormField
-            label="Where do you suspect the biggest leak?"
-            name="leak"
-            type="textarea"
-            rows={3}
-            placeholder="[PLACEHOLDER] Optional context, response time, no-shows, old CRM leads, etc."
-          />
-          <FormField
-            label="Phone (optional)"
+            label="Phone"
             name="phone"
             type="tel"
             autocomplete="tel"
-            placeholder="+1 …"
+            placeholder="(555) 555-5555"
           />
+          <FormField
+            label="What would you like help with?"
+            name="topic"
+            type="select"
+            required
+            options={[
+              { value: "website", label: "A website" },
+              { value: "calls", label: "Calls and missed calls" },
+              { value: "scheduling", label: "Scheduling and reminders" },
+              { value: "follow-up", label: "Customer follow-up" },
+              { value: "records", label: "Organizing customer info" },
+              { value: "other", label: "Something else / not sure" },
+            ]}
+          />
+          <FormField
+            label="Anything else we should know?"
+            name="message"
+            type="textarea"
+            rows={3}
+            placeholder="Optional"
+          />
+          <div class="sms-consent">
+            <input
+              type="checkbox"
+              id="field-sms_consent"
+              name="sms_consent"
+              value="yes"
+            />
+            <label for="field-sms_consent">
+              Optional: By checking this box, I agree to receive text messages
+              from {site.name} at the phone number provided about my inquiry,
+              including replies, appointment scheduling, and links to
+              information I request. Message frequency varies. Message and data
+              rates may apply. Reply STOP to opt out or HELP for help. Consent
+              is not a condition of purchase. See our{" "}
+              <a href="/sms">SMS Terms</a> and <a href="/privacy">Privacy Policy</a>.
+            </label>
+          </div>
+          <p class="form-field__error" data-error-for="sms_consent" hidden></p>
           <p class="review-form__privacy">
-            By submitting, you agree we may contact you about this request.
-            See our <a href="/privacy">Privacy Policy</a>.
+            By submitting, you agree we may contact you by email or phone about
+            this request. See our <a href="/privacy">Privacy Policy</a>.
           </p>
           <div class="review-form__status" data-form-status role="status" aria-live="polite" hidden></div>
-          <Button type="submit" fullWidth event="conversion_review_submitted">
-            Submit request
+          <Button type="submit" fullWidth event="contact_submitted">
+            Send message
           </Button>
         </form>
       </div>
@@ -121,64 +135,37 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
   </section>
 
   <section class="section section--alt">
-    <div class="section-inner calendar-block">
-      <SectionHeading
-        eyebrow="Calendar"
-        title="Prefer to pick a time?"
-        description="[PLACEHOLDER] Calendly embed. Replace the URL in site config when your booking link is ready."
-      />
-      <div class="calendar-embed">
-        <div class="calendar-embed__ph">
-          <p>Calendly embed placeholder</p>
-          <p class="mono">{site.calendlyUrl}</p>
-          <a
-            class="calendar-link"
-            href={site.calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-analytics="calendar_booking_started"
-          >
-            Open scheduling page ↗
-          </a>
-        </div>
-        <!--
-          When ready, replace placeholder with:
-          <iframe src={site.calendlyUrl} title="Schedule Conversion Review" ...></iframe>
-        -->
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
     <div class="section-inner expectations">
-      <SectionHeading eyebrow="Expectations" title="What happens next" />
+      <SectionHeading eyebrow="What happens next" title="What to expect" />
       <ol>
-        <li>[PLACEHOLDER] We review your form (or calendar booking).</li>
-        <li>[PLACEHOLDER] If it is a fit, we confirm a review session.</li>
-        <li>[PLACEHOLDER] You leave with a clear map of leaks and options, not a high-pressure pitch.</li>
+        <li>We read your message and reply within one business day.</li>
+        <li>We set up a short call to learn how your business runs.</li>
+        <li>You get a simple plan and a clear price, with no pressure and no obligation.</li>
       </ol>
     </div>
   </section>
 
-  <section class="section section--alt">
+  <section class="section">
     <div class="section-inner faq-narrow">
-      <SectionHeading eyebrow="FAQ" title="Review questions" />
-      <FaqAccordion items={conversionReviewFaqs} id="review-faq" />
+      <SectionHeading eyebrow="FAQ" title="Common questions" />
+      <FaqAccordion items={contactFaqs} id="contact-faq" />
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--alt">
     <div class="section-inner privacy-note">
       <p>
-        <strong>Privacy</strong>
-        [PLACEHOLDER] We use your details only to respond to this request and related conversion-system conversations. No sold lists. No spam sequences from this form.
+        <strong>Privacy</strong>{" "}
+        We use your details only to respond to your request. We never sell or
+        share your information, including your phone number and text messaging
+        consent, with third parties for their marketing.
       </p>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>("[data-review-form]");
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -195,7 +182,9 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
       const name = String(data.get("name") || "").trim();
       const email = String(data.get("email") || "").trim();
       const company = String(data.get("company") || "").trim();
-      const volume = String(data.get("volume") || "").trim();
+      const topic = String(data.get("topic") || "").trim();
+      const phone = String(data.get("phone") || "").trim();
+      const smsConsent = data.get("sms_consent") === "yes";
 
       let valid = true;
       const setError = (field: string, msg: string) => {
@@ -209,10 +198,13 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
 
       if (!name) setError("name", "Name is required.");
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setError("email", "A valid work email is required.");
+        setError("email", "A valid email is required.");
       }
-      if (!company) setError("company", "Company is required.");
-      if (!volume) setError("volume", "Please select a volume range.");
+      if (!company) setError("company", "Business name is required.");
+      if (!topic) setError("topic", "Please choose an option.");
+      if (smsConsent && !phone) {
+        setError("sms_consent", "Enter a phone number to receive text messages.");
+      }
 
       if (!valid) return;
 
@@ -240,21 +232,20 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
 
         if (status) {
           status.textContent =
-            json.message ||
-            "Request received. We will follow up by email shortly.";
+            json.message || "Message received. We'll be in touch within one business day.";
           status.className = "review-form__status is-success";
         }
         form.reset();
 
         const w = window as Window & { d7Analytics?: unknown[] };
         w.d7Analytics = w.d7Analytics || [];
-        w.d7Analytics.push({ event: "conversion_review_submitted" });
+        w.d7Analytics.push({ event: "contact_submitted" });
       } catch (err) {
         if (status) {
           status.textContent =
             err instanceof Error
               ? err.message
-              : `Could not send. Email ${"hello@dimensionsevensystems.com"} instead.`;
+              : "Could not send. Please email hello@dimensionsevensystems.com instead.";
           status.className = "review-form__status is-error";
         }
       } finally {
@@ -349,6 +340,38 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
     line-height: 1.5;
   }
 
+  .sms-consent {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+  }
+
+  .sms-consent input {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.15rem;
+    accent-color: var(--color-primary);
+  }
+
+  .sms-consent label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .review-form > .form-field__error {
+    margin: 0;
+    font-size: var(--text-xs);
+    color: var(--color-error);
+  }
+
+  .sms-consent a,
+  .review-points a {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+
   .review-form__privacy a {
     color: var(--color-primary-hover);
     text-decoration: underline;
@@ -375,45 +398,6 @@ const campaign = Astro.url.searchParams.get("campaign") === "1";
     color: var(--color-error);
   }
 
-  .calendar-block {
-    max-width: 800px;
-  }
-
-  .calendar-embed {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    background: var(--color-bg-elevated);
-  }
-
-  .calendar-embed__ph {
-    min-height: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 2rem;
-    text-align: center;
-    color: var(--color-text-muted);
-  }
-
-  .calendar-embed__ph .mono {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-text-faint);
-    word-break: break-all;
-  }
-
-  .calendar-link {
-    color: var(--color-primary-hover);
-    font-weight: 600;
-    font-size: var(--text-sm);
-  }
-
-  .calendar-link:hover {
-    color: var(--color-accent);
-  }
 
   .expectations {
     max-width: 640px;

@@ -5,29 +5,28 @@ import GapDiagram from "../components/GapDiagram.astro";
 import ModuleBuilder from "../components/ModuleBuilder.astro";
 import SystemCard from "../components/SystemCard.astro";
 import ProblemCard from "../components/ProblemCard.astro";
-import VideoPanel from "../components/VideoPanel.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
-import ConversionReviewCta from "../components/ConversionReviewCta.astro";
+import ContactCta from "../components/ContactCta.astro";
 import Button from "../components/Button.astro";
-import { featuredSystems, processSteps } from "../data/systems";
+import { services, processSteps } from "../data/systems";
 import { problems } from "../data/problems";
 import { faqs } from "../data/faqs";
 ---
 
 <BaseLayout
-  title="Conversion Systems"
-  description="[PLACEHOLDER] How Dimension Seven Systems defines, designs, and connects conversion systems, from lead response to custom pipeline infrastructure."
+  title="Services"
+  description="Websites, call handling, online booking, reminders, customer records, follow-up, and custom tools for small businesses, set up by Dimension Seven Systems."
 >
   <section class="section page-hero">
     <div class="section-inner page-hero__inner">
       <SectionHeading
-        eyebrow="Conversion systems"
-        title="The system between demand and the sale"
-        description="[PLACEHOLDER] A conversion system is the connected path that moves opportunities from first signal to a real sales conversation, without the leaks that waste acquisition spend."
+        eyebrow="Services"
+        title="Practical technology for the way you work"
+        description="We set up the tools small businesses need to run day to day, connect them to what you already use, and show you how to use them."
       />
       <div class="page-hero__actions">
-        <Button href="/conversion-review">Talk to D7</Button>
-        <Button href="#architectures" variant="secondary">See architectures</Button>
+        <Button href="/contact">Get in touch</Button>
+        <Button href="#services" variant="secondary">See services</Button>
       </div>
     </div>
   </section>
@@ -35,28 +34,28 @@ import { faqs } from "../data/faqs";
   <section class="section section--alt">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Definition"
-        title="What counts as a conversion system"
-        description="[PLACEHOLDER] Not a website alone. Not a CRM alone. Not a sequence alone. The system is how those pieces connect under real operational load."
+        eyebrow="Our approach"
+        title="Simple tools, set up right"
+        description="Technology should save you time, not create another job. Here's what that means in practice."
       />
       <div class="def-grid">
         <article class="def-card">
-          <h3>Includes</h3>
+          <h3>What we do</h3>
           <ul>
-            <li>[PLACEHOLDER] Capture that routes</li>
-            <li>[PLACEHOLDER] Response that happens on time</li>
-            <li>[PLACEHOLDER] Follow-up that does not forget</li>
-            <li>[PLACEHOLDER] Booking that sticks</li>
-            <li>[PLACEHOLDER] Visibility into stalls</li>
+            <li>Build websites that bring in calls</li>
+            <li>Make sure every caller gets a response</li>
+            <li>Let customers book and get reminders automatically</li>
+            <li>Keep customer info in one place</li>
+            <li>Automate the tasks you repeat every day</li>
           </ul>
         </article>
         <article class="def-card def-card--muted">
-          <h3>Is not</h3>
+          <h3>What we avoid</h3>
           <ul>
-            <li>[PLACEHOLDER] Lead generation</li>
-            <li>[PLACEHOLDER] Generic automation packages</li>
-            <li>[PLACEHOLDER] Software for its own sake</li>
-            <li>[PLACEHOLDER] A redesign without process change</li>
+            <li>Software you'll never use</li>
+            <li>Long contracts</li>
+            <li>Replacing tools that already work for you</li>
+            <li>Tech jargon</li>
           </ul>
         </article>
       </div>
@@ -66,8 +65,8 @@ import { faqs } from "../data/faqs";
   <section class="section">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Journey"
-        title="Where opportunities move, and leak"
+        eyebrow="The customer journey"
+        title="Where things usually slip"
       />
       <GapDiagram />
     </div>
@@ -76,9 +75,9 @@ import { faqs } from "../data/faqs";
   <section class="section section--alt">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Components"
-        title="Available building blocks"
-        description="[PLACEHOLDER] Selected and connected to the leaks that matter."
+        eyebrow="Building blocks"
+        title="What we can set up"
+        description="Chosen to fit your business, not sold as a bundle."
       />
       <ModuleBuilder />
     </div>
@@ -87,8 +86,8 @@ import { faqs } from "../data/faqs";
   <section class="section">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Problems addressed"
-        title="Leaks we typically repair"
+        eyebrow="Problems we solve"
+        title="Common problems we fix"
       />
       <div class="problems-compact">
         {problems.map((p) => <ProblemCard problem={{ ...p, size: "compact" }} />)}
@@ -96,22 +95,22 @@ import { faqs } from "../data/faqs";
     </div>
   </section>
 
-  <section class="section section--alt" id="architectures">
+  <section class="section section--alt" id="services">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Example architectures"
-        title="Starting systems"
-        description="[PLACEHOLDER] Each engagement is scoped after diagnosis. These are common patterns, not fixed packages."
+        eyebrow="Services"
+        title="Where most businesses start"
+        description="Each setup is tailored after a short conversation. These are common starting points, not fixed packages."
       />
       <div class="arch-grid">
-        {featuredSystems.map((s) => <SystemCard system={s} />)}
+        {services.map((s) => <SystemCard system={s} />)}
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="section-inner">
-      <SectionHeading eyebrow="Process" title="How engagement works" />
+      <SectionHeading eyebrow="Process" title="How working with us goes" />
       <ol class="engage">
         {
           processSteps.map((step) => (
@@ -126,32 +125,26 @@ import { faqs } from "../data/faqs";
         }
       </ol>
       <div class="engage-options">
-        <h3>Engagement options</h3>
+        <h3>Ways to work with us</h3>
         <ul>
-          <li>[PLACEHOLDER] Project-based system build</li>
-          <li>[PLACEHOLDER] Focused component delivery</li>
-          <li>[PLACEHOLDER] Ongoing system support</li>
+          <li>One-time setup of a single tool</li>
+          <li>A complete setup across several tools</li>
+          <li>Ongoing support and updates</li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="section section--alt">
-    <div class="section-inner">
-      <VideoPanel />
+    <div class="section-inner faq-narrow">
+      <SectionHeading eyebrow="FAQ" title="Common questions" />
+      <FaqAccordion items={faqs} id="services-faq" />
     </div>
   </section>
 
   <section class="section">
-    <div class="section-inner faq-narrow">
-      <SectionHeading eyebrow="FAQ" title="Common questions" />
-      <FaqAccordion items={faqs} id="systems-faq" />
-    </div>
-  </section>
-
-  <section class="section section--alt">
     <div class="section-inner">
-      <ConversionReviewCta compact />
+      <ContactCta compact />
     </div>
   </section>
 </BaseLayout>

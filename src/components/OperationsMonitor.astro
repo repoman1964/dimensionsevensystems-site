@@ -1,98 +1,98 @@
 ---
-/** Hero visual: believable Conversion System Monitor interface */
+/** Hero visual: an illustrative (not live) view of a small business's day */
 ---
 
-<div class="monitor" role="img" aria-label="Conversion System Monitor interface showing lead stages, a leak warning, and recovered opportunities">
+<div class="monitor" role="img" aria-label="Example dashboard showing a small business's day: calls, replies, bookings, reminders, and invoices">
   <div class="monitor__window">
     <div class="monitor__titlebar">
       <div class="monitor__lights" aria-hidden="true">
         <span></span><span></span><span></span>
       </div>
-      <span class="monitor__title">d7 · conversion system monitor</span>
+      <span class="monitor__title">today · example business</span>
       <span class="monitor__live">
         <span class="monitor__live-dot" aria-hidden="true"></span>
-        live
+        example
       </span>
     </div>
     <div class="monitor__body">
       <div class="monitor__header-row">
         <div>
-          <p class="monitor__label">SYSTEM HEALTH</p>
+          <p class="monitor__label">CALLS ANSWERED OR RETURNED</p>
           <p class="monitor__metric">
-            <span data-count-up data-target="74">74</span><span class="unit">%</span>
+            <span data-count-up data-target="100">100</span><span class="unit">%</span>
           </p>
         </div>
         <div class="monitor__pills">
-          <span class="pill pill--ok">capture</span>
-          <span class="pill pill--warn">response</span>
-          <span class="pill pill--err">follow-up</span>
+          <span class="pill pill--ok">website</span>
+          <span class="pill pill--ok">calls</span>
           <span class="pill pill--ok">booking</span>
+          <span class="pill pill--warn">invoices</span>
         </div>
       </div>
 
       <div class="monitor__stages">
         <div class="stage">
           <span class="stage__dot stage__dot--ok"></span>
-          <span class="stage__name">Leads in</span>
-          <span class="stage__val">128</span>
+          <span class="stage__name">Calls</span>
+          <span class="stage__val">14</span>
         </div>
         <div class="stage-line" aria-hidden="true"></div>
         <div class="stage">
           <span class="stage__dot stage__dot--ok"></span>
-          <span class="stage__name">Captured</span>
-          <span class="stage__val">112</span>
+          <span class="stage__name">Answered</span>
+          <span class="stage__val">10</span>
         </div>
         <div class="stage-line" aria-hidden="true"></div>
         <div class="stage">
-          <span class="stage__dot stage__dot--warn"></span>
-          <span class="stage__name">Contacted</span>
-          <span class="stage__val">67</span>
-        </div>
-        <div class="stage-line stage-line--leak" aria-hidden="true"></div>
-        <div class="stage stage--leak">
-          <span class="stage__dot stage__dot--err pulse"></span>
-          <span class="stage__name">Follow-up</span>
-          <span class="stage__val">21</span>
+          <span class="stage__dot stage__dot--accent"></span>
+          <span class="stage__name">Texted back</span>
+          <span class="stage__val">4</span>
         </div>
         <div class="stage-line" aria-hidden="true"></div>
         <div class="stage">
           <span class="stage__dot stage__dot--ok"></span>
           <span class="stage__name">Booked</span>
-          <span class="stage__val">14</span>
+          <span class="stage__val">8</span>
         </div>
         <div class="stage-line" aria-hidden="true"></div>
         <div class="stage">
-          <span class="stage__dot stage__dot--accent"></span>
-          <span class="stage__name">Conversations</span>
-          <span class="stage__val">11</span>
+          <span class="stage__dot stage__dot--ok"></span>
+          <span class="stage__name">Reminded</span>
+          <span class="stage__val">8</span>
+        </div>
+        <div class="stage-line stage-line--leak" aria-hidden="true"></div>
+        <div class="stage stage--leak">
+          <span class="stage__dot stage__dot--warn"></span>
+          <span class="stage__name">Unpaid</span>
+          <span class="stage__val">2</span>
         </div>
       </div>
 
       <div class="monitor__alerts">
-        <div class="alert alert--err">
-          <span class="alert__tag">LEAK</span>
-          <span>Missed follow-up · 18 opportunities idle</span>
-        </div>
         <div class="alert alert--ok">
-          <span class="alert__tag">RECOVERED</span>
-          <span>Callback sequence restored · 6 re-engaged</span>
+          <span class="alert__tag">MISSED CALL</span>
+          <span>Caller got an automatic reply · added to callback list</span>
+        </div>
+        <div class="alert alert--err">
+          <span class="alert__tag">TO DO</span>
+          <span>2 invoices unpaid after 7 days · reminder ready</span>
         </div>
       </div>
 
       <div class="monitor__footer">
         <div class="feed">
-          <p class="monitor__label">LIVE FEED</p>
+          <p class="monitor__label">TODAY</p>
           <ul>
-            <li><span class="t">00:12</span> Lead captured · web form</li>
-            <li><span class="t">00:09</span> Contact attempt · SMS</li>
-            <li class="dim"><span class="t">00:04</span> No follow-up scheduled</li>
-            <li><span class="t">00:01</span> Booking confirmed · calendar</li>
+            <li><span class="t">8:05</span> Booking request · website</li>
+            <li><span class="t">9:40</span> Missed call · reply sent</li>
+            <li class="dim"><span class="t">11:15</span> Quote not followed up</li>
+            <li><span class="t">2:30</span> Review request · sent</li>
           </ul>
         </div>
         <div class="lost">
-          <p class="monitor__label">AT RISK</p>
-          <p class="lost__num">18</p>
-          <p class="lost__sub">lost if unrepaired</p>
+          <p class="monitor__label">SAVED</p>
+          <p class="lost__num">6 hrs</p>
+          <p class="lost__sub">admin this week</p>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { env as cfEnv } from "cloudflare:workers";
 import { site } from "../../data/site";
 
 export const prerender = false;
@@ -7,10 +8,10 @@ type Body = {
   name?: string;
   email?: string;
   company?: string;
-  source?: string;
-  volume?: string;
-  leak?: string;
   phone?: string;
+  topic?: string;
+  message?: string;
+  sms_consent?: string;
 };
 
 function json(data: unknown, status = 200) {
@@ -25,14 +26,14 @@ function readFields(form: FormData): Body {
     name: String(form.get("name") || "").trim(),
     email: String(form.get("email") || "").trim(),
     company: String(form.get("company") || "").trim(),
-    source: String(form.get("source") || "").trim(),
-    volume: String(form.get("volume") || "").trim(),
-    leak: String(form.get("leak") || "").trim(),
     phone: String(form.get("phone") || "").trim(),
+    topic: String(form.get("topic") || "").trim(),
+    message: String(form.get("message") || "").trim(),
+    sms_consent: String(form.get("sms_consent") || "").trim(),
   };
 }
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   let fields: Body;
 
   const contentType = request.headers.get("content-type") || "";
@@ -49,11 +50,20 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const name = fields.name?.trim() || "";
   const email = fields.email?.trim() || "";
   const company = fields.company?.trim() || "";
-  const volume = fields.volume?.trim() || "";
+  const topic = fields.topic?.trim() || "";
+  const phone = fields.phone?.trim() || "";
+  const smsConsent = fields.sms_consent === "yes";
 
-  if (!name || !email || !company || !volume) {
+  if (!name || !email || !company || !topic) {
     return json(
-      { ok: false, message: "Name, email, company, and volume are required." },
+      { ok: false, message: "Name, email, business name, and topic are required." },
+      400,
+    );
+  }
+
+  if (smsConsent && !phone) {
+    return json(
+      { ok: false, message: "Enter a phone number to receive text messages." },
       400,
     );
   }
@@ -63,19 +73,23 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   const to = site.email;
-  const subject = `Conversion Review request, ${company}`;
+  const subject = `Website inquiry, ${company}`;
+  // SMS consent is recorded with a timestamp so the opt-in can be shown later if asked.
+  const consentLine = smsConsent
+    ? `YES, checked on web form at ${new Date().toISOString()} for ${phone}`
+    : "No";
   const text = [
-    `New Conversion Review request`,
+    `New website inquiry`,
     ``,
     `Name: ${name}`,
     `Email: ${email}`,
-    `Company: ${company}`,
-    `Source: ${fields.source || "-"}`,
-    `Volume: ${volume}`,
-    `Phone: ${fields.phone || "-"}`,
+    `Business: ${company}`,
+    `Phone: ${phone || "-"}`,
+    `Help with: ${topic}`,
+    `SMS consent: ${consentLine}`,
     ``,
-    `Suspected leak:`,
-    fields.leak || "-",
+    `Message:`,
+    fields.message || "-",
   ].join("\n");
 
   /**
@@ -84,8 +98,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
    * - CONTACT_TO_EMAIL optional override for destination.
    * Without a provider key, we accept the lead and log it (dev / pre-wiring).
    */
-  const env = (locals as { runtime?: { env?: Record<string, string> } })?.runtime
-    ?.env;
+  const env = cfEnv as unknown as Record<string, string | undefined>;
   const apiKey = env?.RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
   const toEmail =
     env?.CONTACT_TO_EMAIL || import.meta.env.CONTACT_TO_EMAIL || to;
@@ -132,15 +145,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
   } else {
     // No provider configured yet, accept submission so UX works in v1
-    console.info("[conversion-review]", { to: toEmail, subject, text });
+    console.info("[contact]", { to: toEmail, subject, text });
   }
 
   return json({
     ok: true,
     message:
-      "Request received. We will follow up by email shortly." +
-      (!apiKey
-        ? " (Email provider not configured yet, submission logged.)"
-        : ""),
+      "Message received. We'll be in touch within one business day.",
   });
 };

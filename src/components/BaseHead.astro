@@ -60,10 +60,19 @@ const ogImageURL = new URL(ogImage, site.url);
 
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   name: site.name,
   url: site.url,
   email: site.email,
+  telephone: site.phone.href.replace("tel:", ""),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
   description: site.description,
   logo: new URL(site.logo.src, site.url).toString(),
 })} />

@@ -9,4 +9,9 @@ export default defineConfig({
   adapter: cloudflare(),
   integrations: [sitemap()],
   prefetch: true,
+  redirects: {
+    '/conversion-systems': '/services',
+    '/conversion-review': '/contact',
+    '/our-work': '/services',
+  },
 });

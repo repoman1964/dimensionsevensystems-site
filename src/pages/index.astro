@@ -3,30 +3,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Eyebrow from "../components/Eyebrow.astro";
 import SectionHeading from "../components/SectionHeading.astro";
-import ConversionSystemMonitor from "../components/ConversionSystemMonitor.astro";
+import OperationsMonitor from "../components/OperationsMonitor.astro";
 import GapDiagram from "../components/GapDiagram.astro";
 import ProblemCard from "../components/ProblemCard.astro";
 import ModuleBuilder from "../components/ModuleBuilder.astro";
 import SystemCard from "../components/SystemCard.astro";
-import ProductCard from "../components/ProductCard.astro";
-import CaseStudyCard from "../components/CaseStudyCard.astro";
-import VideoPanel from "../components/VideoPanel.astro";
 import ComparisonTable from "../components/ComparisonTable.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
-import ConversionReviewCta from "../components/ConversionReviewCta.astro";
+import ContactCta from "../components/ContactCta.astro";
 import { problems } from "../data/problems";
-import { featuredSystems, processSteps } from "../data/systems";
-import { products } from "../data/products";
+import { services, processSteps } from "../data/systems";
 import { fitFor, notFitFor } from "../data/audiences";
-import { caseStudies } from "../data/case-studies";
 import { faqs } from "../data/faqs";
 import { site } from "../data/site";
 
 const largeProblem = problems.find((p) => p.size === "large")!;
 const mediumProblems = problems.filter((p) => p.size === "medium");
 const compactProblems = problems.filter((p) => p.size === "compact");
-const featuredStudy = caseStudies.find((c) => c.featured)!;
-const supportStudies = caseStudies.filter((c) => !c.featured);
 ---
 
 <BaseLayout
@@ -39,42 +32,44 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
       <div class="hero__copy">
         <Eyebrow>
           <span class="dot" aria-hidden="true"></span>
-          Conversion systems
+          Small business technology
         </Eyebrow>
         <h1 id="hero-heading" class="hero__title">
-          More leads aren't always the answer.
+          Technology that works as hard as you do.
         </h1>
         <div class="hero__sub">
           <p>
-            If you're already generating calls, inquiries, appointments, or sales
-            opportunities, the bigger problem may be what happens to them next.
+            You started a business to do the work, not to wrestle with
+            software, chase missed calls, or re-type the same information
+            every night.
           </p>
           <p>
-            Dimension Seven Systems finds the gaps between the lead and the sale,
-            then builds the pages, follow-up, booking flows, pipelines, outreach
-            tools, and custom systems needed to close them.
+            Dimension Seven Systems helps small businesses put practical
+            technology to work: websites, call handling, online booking,
+            reminders, customer records, and simple automation, set up around
+            how you already run your day.
           </p>
         </div>
         <div class="hero__actions">
-          <Button href="/conversion-review" event="hero_primary_cta_clicked">
-            Talk to D7
+          <Button href="/contact" event="hero_primary_cta_clicked">
+            Get in touch
           </Button>
           <Button
-            href="/conversion-systems"
+            href="/services"
             variant="secondary"
             event="hero_secondary_cta_clicked"
           >
-            See What We Build
+            See our services
           </Button>
         </div>
         <ul class="hero__trust">
-          <li>Built around your existing process</li>
-          <li>Works with the tools you already use</li>
-          <li>Focused on better conversion not just more traffic</li>
+          <li>Built around how you already work</li>
+          <li>Connects to the tools you already use</li>
+          <li>A real person to call when you need help</li>
         </ul>
       </div>
       <div class="hero__visual">
-        <ConversionSystemMonitor />
+        <OperationsMonitor />
       </div>
     </div>
   </section>
@@ -84,19 +79,18 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     <div class="section-inner">
       <SectionHeading
         eyebrow="The gap"
-        title="You paid for the lead. Then you lost the sale."
+        title="Small gaps cost you customers and time."
       >
         <div class="gap-desc">
-          <p>Getting the lead is only the first step.</p>
+          <p>Every job follows the same path, from the first search to the final review.</p>
           <p>
-            After that, every handoff creates another place for the opportunity to
-            die: a missed call, a slow response, weak follow-up, booking friction,
-            a no-show, or a deal that simply goes cold.
+            Each step is a place where things slip: a missed call, a game of
+            phone tag, a forgotten appointment, an invoice that goes out late,
+            or a happy customer who was never asked for a review.
           </p>
           <p>
             <strong>
-              D7 finds those gaps and fixes the parts of the process that are costing
-              you sales.
+              The right tools close those gaps without adding more work to your day.
             </strong>
           </p>
         </div>
@@ -105,13 +99,13 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     </div>
   </section>
 
-  <!-- Section 3: What D7 Fixes -->
+  <!-- Section 3: Common problems -->
   <section class="section" aria-labelledby="fixes-heading">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="What D7 fixes"
-        title="How many of these are costing you sales?"
-        description="If any of these sound familiar, the problem may not be lead generation. It may be what happens after the lead comes in."
+        eyebrow="Sound familiar?"
+        title="Everyday problems technology can fix"
+        description="Most small businesses don't need more software. They need the right few tools, set up properly."
       />
       <div class="problems-grid">
         <div class="problems-grid__featured">
@@ -127,25 +121,25 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     </div>
   </section>
 
-  <!-- Section 4: System components -->
+  <!-- Section 4: Building blocks -->
   <section class="section section--alt" aria-labelledby="components-heading">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="System components"
-        title="What goes into a conversion system"
-        description="A conversion system isn't one piece of software. It's the intentional combination of pages, processes, tools, and follow-up required to fix the gaps in your sales process."
+        eyebrow="Building blocks"
+        title="What we can set up for you"
+        description="Pick what you need. Each piece works on its own, and they work better together."
       />
       <ModuleBuilder />
     </div>
   </section>
 
-  <!-- Section 5: How D7 Works -->
+  <!-- Section 5: How it works -->
   <section class="section" aria-labelledby="process-heading">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="How D7 works"
-        title="Find. Build. Connect."
-        description="We start with the sales process you already have, find where opportunities are getting lost, and fix only what needs fixing."
+        eyebrow="How it works"
+        title="Listen. Set it up. Show you how."
+        description="We start with how your business runs today and change only what will make a real difference."
       />
       <ol class="process">
         {
@@ -162,31 +156,24 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
         }
       </ol>
       <p class="process__note">
-        No fixed stack. No unnecessary rebuild. Just what the process needs.
+        No long contracts. No tech jargon. Just tools that make your day easier.
       </p>
     </div>
   </section>
 
-  <!-- Section 6: Founder video -->
-  <section class="section section--alt" aria-labelledby="founder-video-heading">
-    <div class="section-inner">
-      <VideoPanel />
-    </div>
-  </section>
-
-  <!-- Section 7: Featured systems -->
-  <section class="section" aria-labelledby="systems-heading" id="systems">
+  <!-- Section 6: Services -->
+  <section class="section section--alt" aria-labelledby="systems-heading" id="services">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Featured conversion systems"
-        title="Practical systems for common leaks"
-        description="[PLACEHOLDER] Starting architectures. Each is tailored after the Conversion Review."
+        eyebrow="Services"
+        title="Where most businesses start"
+        description="Common starting points. Every setup is tailored to your business."
       />
       <div class="systems-bento">
         {
-          featuredSystems.map((system, i) => (
+          services.map((service, i) => (
             <div class:list={["systems-bento__item", i === 0 && "systems-bento__item--wide"]}>
-              <SystemCard system={system} featured={i === 0} />
+              <SystemCard system={service} featured={i === 0} />
             </div>
           ))
         }
@@ -194,27 +181,13 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     </div>
   </section>
 
-  <!-- Section 8: D7 Products -->
-  <section class="section section--alt" aria-labelledby="products-heading" id="products">
-    <div class="section-inner">
-      <SectionHeading
-        eyebrow="D7 products"
-        title="Tools we own, not the whole service"
-        description="[PLACEHOLDER] Purpose-built products that can sit inside a conversion system. They are components, not a substitute for diagnosing your leaks."
-      />
-      <div class="products-list">
-        {products.map((product) => <ProductCard product={product} />)}
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 9: Who D7 is for -->
+  <!-- Section 7: Who it's for -->
   <section class="section" aria-labelledby="audience-heading">
     <div class="section-inner">
       <SectionHeading
-        eyebrow="Who D7 is for"
-        title="Built for operators who already have demand"
-        description="[PLACEHOLDER] If opportunities are entering your world, we help more of them become conversations and closes."
+        eyebrow="Who we help"
+        title="Built for small, hands-on businesses"
+        description="If you're the one doing the work, answering the phone, and handling the paperwork, we can help."
       />
       <div class="audience">
         <div class="audience__fit">
@@ -247,51 +220,31 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     </div>
   </section>
 
-  <!-- Section 10: Proof -->
-  <section class="section section--alt" aria-labelledby="proof-heading">
-    <div class="section-inner">
-      <SectionHeading
-        eyebrow="Proof & examples"
-        title="System examples, real case studies coming"
-        description="[PLACEHOLDER] We are pre-revenue. No invented testimonials or metrics. Structure is ready for real work."
-      />
-      <div class="proof-grid">
-        <div class="proof-grid__featured">
-          <CaseStudyCard study={featuredStudy} />
-        </div>
-        <div class="proof-grid__side">
-          {supportStudies.map((s) => <CaseStudyCard study={s} />)}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 11: Why D7 -->
-  <section class="section" aria-labelledby="why-heading">
+  <!-- Section 8: Why D7 -->
+  <section class="section section--alt" aria-labelledby="why-heading">
     <div class="section-inner">
       <SectionHeading
         eyebrow="Why D7"
-        title="Not another agency with a different label"
-        description="[PLACEHOLDER] Different primary focus. Different job to be done."
+        title="Your options, side by side"
+        description="Small businesses usually choose between these. Here's how we compare."
       />
       <ComparisonTable />
     </div>
   </section>
 
-  <!-- Section 12: Conversion Review CTA -->
+  <!-- Section 9: Contact CTA -->
   <section class="section">
     <div class="section-inner">
-      <ConversionReviewCta />
+      <ContactCta />
     </div>
   </section>
 
-  <!-- Section 13: FAQ -->
+  <!-- Section 10: FAQ -->
   <section class="section section--alt" aria-labelledby="faq-heading">
     <div class="section-inner faq-layout">
       <SectionHeading
         eyebrow="FAQ"
         title="Straight answers"
-        description="[PLACEHOLDER] Replace with final copy when ready."
       />
       <FaqAccordion items={faqs} />
     </div>
@@ -557,11 +510,6 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     }
   }
 
-  .products-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
 
   /* Audience */
   .audience {
@@ -652,24 +600,6 @@ const supportStudies = caseStudies.filter((c) => !c.featured);
     line-height: 1.5;
   }
 
-  /* Proof */
-  .proof-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 900px) {
-    .proof-grid {
-      grid-template-columns: 1.4fr 1fr;
-      align-items: stretch;
-    }
-
-    .proof-grid__side {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-  }
 
   .faq-layout {
     max-width: 800px;

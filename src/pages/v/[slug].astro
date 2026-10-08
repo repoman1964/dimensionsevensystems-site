@@ -1,0 +1,271 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import { walkthroughs, type Walkthrough } from "../../data/walkthroughs";
+import { site } from "../../data/site";
+
+export function getStaticPaths() {
+  return walkthroughs.map((w) => ({ params: { slug: w.slug }, props: { w } }));
+}
+
+interface Props {
+  w: Walkthrough;
+}
+
+const { w } = Astro.props;
+---
+
+<BaseLayout
+  title={`Website walkthrough for ${w.businessName}`}
+  description={`A short video walkthrough of the website ${site.name} prepared for ${w.businessName}.`}
+  noindex
+>
+  <section class="section walk">
+    <div class="section-inner">
+      {
+        w.sample && (
+          <p class="walk__sample" role="note">
+            <strong>Sample page.</strong> {w.businessName} is a fictional
+            business. This page shows what a walkthrough link from {site.name}{" "}
+            looks like when a business owner asks us to text one to them.
+          </p>
+        )
+      }
+
+      <header class="walk__head">
+        <p class="walk__eyebrow">
+          <span class="dot" aria-hidden="true"></span>
+          Website walkthrough
+        </p>
+        <h1 class="walk__title">
+          Hi {w.firstName}, here's the website we built for {w.businessName}
+        </h1>
+        <p class="walk__sub">
+          As promised on our call, here's a short video tour of the site
+          ({w.durationLabel}). Watch it whenever it suits you. There's no
+          obligation.
+        </p>
+      </header>
+
+      <div class="walk__grid">
+        <div class="walk__video">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            poster={w.poster}
+            data-analytics="walkthrough_video_played"
+          >
+            <source src={w.videoSrc} type="video/mp4" />
+            Your browser can't play this video.
+            <a href={w.videoSrc}>Download it instead</a>.
+          </video>
+        </div>
+
+        <aside class="walk__panel">
+          <h2 class="walk__panel-title">Questions or ready to talk?</h2>
+          <p>
+            Call or email {site.founder.name} at {site.name}. You can also just
+            reply to our text.
+          </p>
+          <div class="walk__actions">
+            <Button href={site.phone.href} fullWidth event="walkthrough_call_clicked">
+              Call {site.phone.display}
+            </Button>
+            <Button href={`mailto:${site.email}?subject=${encodeURIComponent(`Website for ${w.businessName}`)}`} variant="secondary" fullWidth>
+              Email us
+            </Button>
+            {
+              w.previewUrl && (
+                <Button href={w.previewUrl} variant="secondary" fullWidth event="walkthrough_preview_opened">
+                  Open the live preview
+                </Button>
+              )
+            }
+          </div>
+        </aside>
+      </div>
+
+      <div class="walk__info">
+        <section aria-labelledby="chapters-heading">
+          <h2 id="chapters-heading">What's in the video</h2>
+          <ol>
+            {w.chapters.map((c) => <li>{c}</li>)}
+          </ol>
+        </section>
+
+        <section class="walk__why" aria-labelledby="why-heading">
+          <h2 id="why-heading">Why you received this link</h2>
+          <p>
+            You asked us to text you this walkthrough during a phone call with
+            {" "}{site.name}. We only text people who ask. Message frequency
+            varies, and message and data rates may apply. Reply
+            <strong> STOP</strong> to our text at any time to opt out, or
+            <strong> HELP</strong> for help.
+          </p>
+          <p>
+            <a href="/sms">SMS Terms</a> · <a href="/privacy">Privacy Policy</a> ·
+            {" "}<a href="/terms">Terms and Conditions</a>
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .walk {
+    padding-top: 2.5rem;
+  }
+
+  .walk__sample {
+    margin: 0 0 2rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(242, 185, 59, 0.35);
+    border-left: 3px solid var(--color-warning);
+    border-radius: 10px;
+    background: rgba(242, 185, 59, 0.06);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  .walk__sample strong {
+    color: var(--color-warning);
+  }
+
+  .walk__head {
+    max-width: 46rem;
+    margin-bottom: 2rem;
+  }
+
+  .walk__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.85rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+  }
+
+  .walk__title {
+    font-size: var(--text-4xl);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .walk__sub {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .walk__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .walk__grid {
+      grid-template-columns: 1fr 300px;
+    }
+  }
+
+  .walk__video {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .walk__video video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+
+  .walk__panel {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-bg-elevated);
+  }
+
+  .walk__panel-title {
+    font-size: var(--text-xl);
+    margin-bottom: 0.6rem;
+  }
+
+  .walk__panel p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
+  }
+
+  .walk__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .walk__info {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .walk__info {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .walk__info h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .walk__info ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: decimal;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .walk__why {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 10px;
+    background: var(--color-bg-elevated);
+  }
+
+  .walk__why p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .walk__why p + p {
+    margin-top: 0.75rem;
+  }
+
+  .walk__why strong {
+    color: var(--color-text);
+  }
+
+  .walk__why a {
+    color: var(--color-primary-hover);
+  }
+</style>

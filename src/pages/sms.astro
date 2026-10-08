@@ -1,0 +1,318 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, addressLine } from "../data/site";
+
+const toc = [
+  { id: "program", label: "Program description" },
+  { id: "opt-in", label: "How you opt in" },
+  { id: "frequency", label: "Frequency and cost" },
+  { id: "opt-out", label: "How to opt out" },
+  { id: "help", label: "Help" },
+  { id: "examples", label: "Example messages" },
+  { id: "carriers", label: "Carrier disclaimer" },
+  { id: "privacy", label: "Privacy" },
+  { id: "contact", label: "Contact" },
+];
+---
+
+<BaseLayout
+  title="SMS Terms"
+  description={`SMS Terms for ${site.name}: how to opt in, message frequency, rates, and how to opt out with STOP or get help with HELP.`}
+>
+  <div class="legal">
+    <aside class="legal__toc" aria-label="Table of contents">
+      <p class="legal__toc-title">On this page</p>
+      <nav>
+        <ul>
+          {
+            toc.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
+    <article class="legal__content">
+      <p class="legal__eyebrow">Legal</p>
+      <h1>SMS Terms</h1>
+      <p class="legal__updated">Last updated: {site.legal.smsUpdated}</p>
+
+      <section id="program">
+        <h2>Program description</h2>
+        <p>
+          {site.name} ({site.legalName}, sole proprietor) sends text messages
+          to people who have asked to receive them. Messages may include:
+        </p>
+        <ul>
+          <li>
+            Links to a short video walkthrough of a website we have prepared
+            for your business, when you ask us to send one
+          </li>
+          <li>Replies to questions and inquiries you send us</li>
+          <li>Scheduling and appointment messages</li>
+          <li>A limited number of follow-up messages about information you requested</li>
+        </ul>
+        <p>
+          We do not send messages to anyone who has not opted in, and we do not
+          buy, sell, or rent phone number lists.
+        </p>
+      </section>
+
+      <section id="opt-in">
+        <h2>How you opt in</h2>
+        <h3>By phone</h3>
+        <p>
+          During a phone call with {site.name}, a business owner may ask to
+          receive a text message with a link to a video walkthrough of a
+          website we've prepared for their business. Our representative uses
+          this script:
+        </p>
+        <blockquote>
+          “Would you like me to text you a link to a five-minute video
+          walkthrough of the site?” <em>(If yes:)</em> “What's the best mobile
+          number to text it to? You'll get a text from Dimension Seven Systems
+          to confirm, then the video once it's ready. Message and data rates
+          may apply, and you can reply STOP at any time to opt out.”
+        </blockquote>
+        <p>
+          We text only people who say yes and give us a mobile number. We
+          record the date, time, and number of each verbal opt-in, and we send
+          a confirmation text right after the call.
+        </p>
+        <h3>On our website</h3>
+        <p>
+          You can also opt in by checking the optional, unchecked-by-default
+          text message consent box on our <a href="/contact">contact form</a>{" "}
+          and providing your phone number. Checking the box is not required to
+          submit the form.
+        </p>
+        <p class="legal__notice">
+          Consent to receive text messages is not a condition of any purchase.
+        </p>
+      </section>
+
+      <section id="frequency">
+        <h2>Message frequency and cost</h2>
+        <p>
+          Message frequency varies depending on your request, and is typically
+          a few messages per inquiry. Message and data rates may apply,
+          depending on your mobile carrier plan.
+        </p>
+      </section>
+
+      <section id="opt-out">
+        <h2>How to opt out</h2>
+        <p>
+          Reply <strong>STOP</strong> to any message at any time to stop
+          receiving texts. You will receive one final message confirming that
+          you have been unsubscribed, and no further messages will be sent. You
+          can also opt out by calling or emailing us. To opt back in, reply{" "}
+          <strong>START</strong>.
+        </p>
+      </section>
+
+      <section id="help">
+        <h2>Help</h2>
+        <p>
+          Reply <strong>HELP</strong> to any message for help, or contact us at{" "}
+          <a href={site.phone.href}>{site.phone.display}</a> or{" "}
+          <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      </section>
+
+      <section id="examples">
+        <h2>Example messages</h2>
+        <blockquote>
+          Dimension Seven Systems: Thanks for chatting, Alex! We'll text your
+          website walkthrough video here once it's ready. Msg &amp; data rates
+          may apply. Reply HELP for help, STOP to opt out.
+        </blockquote>
+        <blockquote>
+          Dimension Seven Systems: Hi Alex, here's the walkthrough of the new
+          site for Sweet Tea Cleaning Co. we talked about:
+          https://dimensionsevensystems.com/v/sample Reply STOP to opt out.
+        </blockquote>
+        <p>
+          Walkthrough links always point to a page on dimensionsevensystems.com.
+          See a <a href="/v/sample">sample walkthrough page</a> (fictional
+          business).
+        </p>
+      </section>
+
+      <section id="carriers">
+        <h2>Carrier disclaimer</h2>
+        <p>
+          Mobile carriers are not liable for delayed or undelivered messages.
+        </p>
+      </section>
+
+      <section id="privacy">
+        <h2>Privacy</h2>
+        <p class="legal__notice">
+          No mobile information will be shared with third parties or
+          affiliates for marketing or promotional purposes. Text messaging
+          originator opt-in data and consent will not be shared with any third
+          parties.
+        </p>
+        <p>
+          See our <a href="/privacy">Privacy Policy</a> for how we handle your
+          information, and our <a href="/terms">Terms and Conditions</a>.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          {site.name}<br />
+          {site.legalName}, sole proprietor<br />
+          {addressLine}<br />
+          Phone: <a href={site.phone.href}>{site.phone.display}</a><br />
+          Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal {
+    display: grid;
+    gap: 2rem;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding: 3rem 24px 5rem;
+  }
+
+  @media (min-width: 900px) {
+    .legal {
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .legal__toc {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .legal__toc {
+      display: block;
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+    }
+  }
+
+  .legal__toc-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__toc ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .legal__toc a {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .legal__toc a:hover {
+    color: var(--color-text);
+  }
+
+  .legal__content {
+    max-width: 42rem;
+  }
+
+  .legal__eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__content h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__updated {
+    font-size: var(--text-sm);
+    color: var(--color-text-faint);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal__notice {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border-light);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 10px;
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .legal__content section {
+    margin-bottom: 2rem;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+
+  .legal__content h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__content p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .legal__content p + p {
+    margin-top: 0.75rem;
+  }
+
+  .legal__content ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .legal__content li + li {
+    margin-top: 0.35rem;
+  }
+
+  .legal__content h3 {
+    font-size: var(--text-base);
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .legal__content blockquote {
+    margin: 0.75rem 0 0;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--color-accent);
+    border-radius: 6px;
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  .legal__content a {
+    color: var(--color-primary-hover);
+  }
+</style>

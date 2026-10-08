@@ -1,59 +1,53 @@
 export const fitFor = [
   {
-    id: "local-service",
-    title: "Local service businesses",
+    id: "trades",
+    title: "Trades and home services",
     description:
-      "[PLACEHOLDER] Trades, clinics, and home services already buying ads or generating calls.",
+      "Plumbers, electricians, HVAC, roofers, landscapers, and cleaners who are on a job when the phone rings.",
   },
   {
-    id: "real-estate",
-    title: "Real estate professionals",
+    id: "appointments",
+    title: "Appointment-based businesses",
     description:
-      "[PLACEHOLDER] Agents and teams with inbound demand that needs faster, cleaner conversion.",
+      "Salons, clinics, studios, and shops that live and die by a full, reliable calendar.",
   },
   {
-    id: "sales-smb",
-    title: "Sales-driven small businesses",
+    id: "no-website",
+    title: "Businesses without a website",
     description:
-      "[PLACEHOLDER] Companies where revenue depends on conversations, not just traffic.",
+      "If customers can only find you on a map listing or by word of mouth, a simple site is the first step.",
   },
   {
-    id: "founder-led",
-    title: "Founder-led companies",
+    id: "owner-operated",
+    title: "Owner-operated businesses",
     description:
-      "[PLACEHOLDER] Operators who want a working system, not a slide deck of tactics.",
+      "Owners who do the work, answer the phone, and handle the paperwork, and want some of that time back.",
   },
   {
-    id: "paying-for-leads",
-    title: "Businesses already paying for leads or traffic",
+    id: "paper-and-spreadsheets",
+    title: "Businesses running on paper",
     description:
-      "[PLACEHOLDER] If acquisition spend is real, conversion leaks are expensive.",
+      "Notebooks, sticky notes, and spreadsheets that worked fine when you were smaller and don't anymore.",
   },
 ] as const;
 
 export const notFitFor = [
   {
-    id: "no-opportunities",
-    title: "No opportunities yet",
+    id: "enterprise",
+    title: "Large companies with an IT department",
     description:
-      "[PLACEHOLDER] If nothing is entering the pipeline, start with demand generation first.",
+      "We work with small teams. Enterprise rollouts are better served by larger firms.",
   },
   {
-    id: "instant-results",
-    title: "Want instant results without process change",
+    id: "lead-lists",
+    title: "Looking to buy lead lists",
     description:
-      "[PLACEHOLDER] Systems require ownership, follow-through, and operational honesty.",
+      "We don't sell contact lists or run bulk messaging campaigns.",
   },
   {
-    id: "cheap-website",
-    title: "Only want a cheap website",
+    id: "set-and-forget",
+    title: "Want software with no change at all",
     description:
-      "[PLACEHOLDER] D7 builds conversion infrastructure, not low-cost brochure pages.",
-  },
-  {
-    id: "mass-lists",
-    title: "Looking for mass lead lists",
-    description:
-      "[PLACEHOLDER] We convert existing opportunities. We do not sell spray-and-pray lists.",
+      "Every tool needs a little adoption. We keep it simple, but you have to use it.",
   },
 ] as const;

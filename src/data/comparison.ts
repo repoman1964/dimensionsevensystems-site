@@ -1,27 +1,27 @@
 export const comparisonRows = [
   {
-    provider: "Marketing agency",
-    focus: "Generate attention and leads",
+    provider: "Doing it yourself",
+    focus: "Hours of trial and error with software built for someone else",
     highlight: false,
   },
   {
-    provider: "Website agency",
-    focus: "Build a website",
+    provider: "Big agency",
+    focus: "Long contracts and packages sized for bigger companies",
     highlight: false,
   },
   {
-    provider: "Automation agency",
-    focus: "Automate tasks",
+    provider: "Software subscription alone",
+    focus: "A login and a help center, but nobody sets it up for you",
     highlight: false,
   },
   {
-    provider: "CRM consultant",
-    focus: "Configure software",
+    provider: "IT repair shop",
+    focus: "Fixes computers, not how your business runs",
     highlight: false,
   },
   {
     provider: "Dimension Seven Systems",
-    focus: "Convert existing opportunities",
+    focus: "Practical tools set up around how you already work, with a real person to call",
     highlight: true,
   },
 ] as const;

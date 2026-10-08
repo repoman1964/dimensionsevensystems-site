@@ -1,54 +1,72 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
-import VideoPanel from "../components/VideoPanel.astro";
-import ConversionReviewCta from "../components/ConversionReviewCta.astro";
+import ContactCta from "../components/ContactCta.astro";
 import Button from "../components/Button.astro";
-import { site } from "../data/site";
+import { site, addressLine } from "../data/site";
 ---
 
 <BaseLayout
   title="About"
-  description="[PLACEHOLDER] About Dimension Seven Systems, conversion philosophy, what we do, and what we do not do."
+  description="About Dimension Seven Systems, a small business technology provider in Acworth, Georgia: who we are, how we work, and what we do."
 >
   <section class="section page-hero">
     <div class="section-inner about-hero">
       <div class="about-hero__copy">
         <SectionHeading
           eyebrow="About D7"
-          title="Founder-led. Systems-first."
-          description="[PLACEHOLDER] Dimension Seven Systems exists to close the gap between generating attention and converting it into real sales opportunities."
+          title="Owner-operated, like you."
+          description="Dimension Seven Systems helps small businesses use technology to save time, keep customers from slipping away, and run their day with less hassle."
         />
         <p class="about-hero__founder">
-          <span class="ph-avatar" aria-hidden="true">[Photo]</span>
+          <span class="avatar" aria-hidden="true">JM</span>
           <span>
             <strong>{site.founder.name}</strong>
             <span class="role">{site.founder.role}</span>
           </span>
         </p>
-        <Button href="/conversion-review">Talk to D7</Button>
+        <Button href="/contact">Get in touch</Button>
       </div>
-      <div class="about-hero__panel" aria-hidden="true">
-        <div class="about-hero__frame">
-          <span>[Founder portrait placeholder]</span>
-        </div>
+      <div class="about-hero__panel">
+        <dl class="about-card">
+          <div>
+            <dt>Business</dt>
+            <dd>{site.name}</dd>
+          </div>
+          <div>
+            <dt>Owner</dt>
+            <dd>{site.legalName} (sole proprietor)</dd>
+          </div>
+          <div>
+            <dt>Address</dt>
+            <dd>{addressLine}</dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd><a href={site.phone.href}>{site.phone.display}</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+          </div>
+        </dl>
       </div>
     </div>
   </section>
 
   <section class="section section--alt">
     <div class="section-inner prose-block">
-      <SectionHeading eyebrow="Origin" title="Why Dimension Seven exists" />
+      <SectionHeading eyebrow="Why we exist" title="Good businesses shouldn't lose customers to busywork" />
       <div class="prose">
         <p>
-          [PLACEHOLDER] Origin story, the practical frustration of watching
-          businesses pay for leads and traffic while conversations, follow-up,
-          and booking quietly fail.
+          Most small business owners are excellent at their trade. They're
+          busy doing the work, which means calls get missed, scheduling turns
+          into phone tag, and paperwork piles up at night.
         </p>
         <p>
-          [PLACEHOLDER] D7 was built to operate in that middle layer: diagnose
-          the leaks, build the missing pieces, connect them into a system that
-          actually runs day to day.
+          The technology to fix this exists, and much of it is affordable. But
+          picking the right tools, setting them up, and getting them to work
+          together takes time most owners don't have. That's what we do.
         </p>
       </div>
     </div>
@@ -57,32 +75,31 @@ import { site } from "../data/site";
   <section class="section">
     <div class="section-inner prose-block">
       <SectionHeading
-        eyebrow="Philosophy"
-        title="Find a real problem. Build the simplest system that solves it."
+        eyebrow="How we think"
+        title="Find the real problem. Use the simplest tool that solves it."
       />
       <div class="prose">
         <p>
-          [PLACEHOLDER] No bloated tech. No automation theater. Tools and
-          workflows only earn a place when they create more conversations,
-          appointments, or closes.
+          A tool only earns a place in your business if it saves you time or
+          keeps a customer from slipping away. If it doesn't, we leave it out.
         </p>
       </div>
       <ul class="principles">
         <li>
-          <strong>Leak first</strong>
-          <span>[PLACEHOLDER] Start from where value is lost, not from a preferred tool.</span>
+          <strong>Start with your day</strong>
+          <span>We look at how you actually work before recommending anything.</span>
         </li>
         <li>
-          <strong>Minimum viable system</strong>
-          <span>[PLACEHOLDER] Ship the smallest connected set that changes outcomes.</span>
+          <strong>Keep it simple</strong>
+          <span>The fewest tools that get the job done, usable from your phone.</span>
         </li>
         <li>
-          <strong>Operational honesty</strong>
-          <span>[PLACEHOLDER] Systems fail without ownership and daily execution.</span>
+          <strong>Use what works</strong>
+          <span>If a tool you already have does the job, we connect to it.</span>
         </li>
         <li>
-          <strong>Components, not brands</strong>
-          <span>[PLACEHOLDER] Websites, AI, and automation are pieces, conversion is the product.</span>
+          <strong>Stay reachable</strong>
+          <span>When you have a question, you talk to a real person.</span>
         </li>
       </ul>
     </div>
@@ -92,23 +109,22 @@ import { site } from "../data/site";
     <div class="section-inner">
       <div class="does-grid">
         <div>
-          <SectionHeading eyebrow="Scope" title="What D7 does" />
+          <SectionHeading eyebrow="What we do" title="What D7 does" />
           <ul class="check-list">
-            <li>[PLACEHOLDER] Diagnose conversion leaks</li>
-            <li>[PLACEHOLDER] Build conversion pages and capture</li>
-            <li>[PLACEHOLDER] Design follow-up and booking systems</li>
-            <li>[PLACEHOLDER] Connect CRM and pipeline infrastructure</li>
-            <li>[PLACEHOLDER] Ship custom tools when needed (e.g. DailyDialz, JobbPulse)</li>
+            <li>Build websites for small businesses</li>
+            <li>Set up call handling and missed-call replies</li>
+            <li>Set up online booking and reminders</li>
+            <li>Organize customer records and follow-up</li>
+            <li>Connect apps and automate repetitive tasks</li>
           </ul>
         </div>
         <div>
-          <SectionHeading eyebrow="Boundaries" title="What D7 does not do" />
+          <SectionHeading eyebrow="What we don't" title="What D7 doesn't do" />
           <ul class="check-list check-list--not">
-            <li>[PLACEHOLDER] Sell mass lead lists</li>
-            <li>[PLACEHOLDER] Run generic ad-only retainers as the core offer</li>
-            <li>[PLACEHOLDER] Promise results without process change</li>
-            <li>[PLACEHOLDER] Install software without a conversion purpose</li>
-            <li>[PLACEHOLDER] Compete as a cheap brochure-site shop</li>
+            <li>Sell contact or lead lists</li>
+            <li>Send bulk or unsolicited marketing messages</li>
+            <li>Lock you into long contracts</li>
+            <li>Sell software you don't need</li>
           </ul>
         </div>
       </div>
@@ -117,16 +133,7 @@ import { site } from "../data/site";
 
   <section class="section">
     <div class="section-inner">
-      <VideoPanel
-        heading="[PLACEHOLDER] A direct note from the founder"
-        description={site.founder.bio}
-      />
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="section-inner">
-      <ConversionReviewCta compact />
+      <ContactCta compact />
     </div>
   </section>
 </BaseLayout>
@@ -170,16 +177,17 @@ import { site } from "../data/site";
     margin: 0;
   }
 
-  .ph-avatar {
+  .avatar {
     display: grid;
     place-items: center;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px dashed var(--color-border);
+    border: 1px solid var(--color-border-light);
+    background: var(--color-bg-elevated);
     font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--color-text-faint);
+    font-size: var(--text-sm);
+    color: var(--color-primary);
   }
 
   .about-hero__founder strong {
@@ -192,22 +200,37 @@ import { site } from "../data/site";
     color: var(--color-text-faint);
   }
 
-  .about-hero__frame {
-    aspect-ratio: 4 / 5;
-    max-width: 360px;
-    margin-inline: auto;
-    display: grid;
-    place-items: center;
+  .about-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 1.5rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-card);
     background:
       radial-gradient(ellipse at 40% 30%, rgba(73, 119, 247, 0.12), transparent 60%),
       var(--color-bg-elevated);
+  }
+
+  .about-card dt {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--color-text-faint);
-    text-align: center;
-    padding: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .about-card dd {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+
+  .about-card a {
+    color: var(--color-primary-hover);
   }
 
   .prose-block {

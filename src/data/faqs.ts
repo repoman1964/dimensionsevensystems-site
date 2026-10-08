@@ -6,72 +6,66 @@ export type FaqItem = {
 
 export const faqs: FaqItem[] = [
   {
-    id: "what-is-conversion-system",
-    question: "What is a conversion system?",
+    id: "what-we-do",
+    question: "What does Dimension Seven Systems do?",
     answer:
-      "[PLACEHOLDER] A conversion system is the connected set of pages, capture points, follow-up, booking, and sales tooling that moves a lead from first signal to a real sales conversation, and keeps opportunities from leaking out along the way.",
+      "We help small businesses use technology in their daily operations: websites, call handling, online booking, reminders, customer records, follow-up, and simple automation. We set it up, connect it to what you already use, and show you how it works.",
   },
   {
-    id: "generate-leads",
-    question: "Does D7 generate leads?",
+    id: "tech-skills",
+    question: "Do I need to be good with technology?",
     answer:
-      "[PLACEHOLDER] No. Dimension Seven Systems sits after lead generation. We help you convert more of the traffic, calls, and opportunities you already have, or will have once acquisition is working.",
+      "No. That's the point. We handle the setup and keep things simple enough to use from your phone.",
   },
   {
-    id: "existing-crm",
-    question: "Can D7 work with an existing CRM?",
+    id: "existing-tools",
+    question: "Can you work with the tools I already use?",
     answer:
-      "[PLACEHOLDER] Yes. We connect to tools you already use when they fit. If the stack is the bottleneck, we fix the workflow, not force a wholesale platform swap for its own sake.",
+      "Usually, yes. If your calendar, invoicing app, or phone system works for you, we connect to it instead of replacing it.",
   },
   {
     id: "build-websites",
-    question: "Does D7 build websites?",
+    question: "Do you build websites?",
     answer:
-      "[PLACEHOLDER] When a conversion page or site is a missing component, yes. Websites are a piece of the system, not the product we sell.",
+      "Yes. Many of the businesses we work with start with a website, especially if they don't have one yet.",
   },
   {
     id: "timeline",
-    question: "How long does a project take?",
+    question: "How long does setup take?",
     answer:
-      "[PLACEHOLDER] Timeline depends on the leaks we find and the components required. A focused system can ship in weeks; broader pipeline rebuilds take longer. The Conversion Review sets expectations before work starts.",
+      "A website or a single tool can often be ready in days. Larger projects that connect several tools take longer, and we'll give you a timeline up front.",
   },
   {
     id: "pricing",
     question: "How is pricing structured?",
     answer:
-      "[PLACEHOLDER] Pricing is scoped to the system being built, diagnosis, components, and ongoing support if needed. Details are shared after the Conversion Review so quotes match real gaps, not generic packages.",
+      "Pricing depends on what you need. After a short conversation, we give you a clear quote before any work starts.",
   },
   {
     id: "support",
-    question: "Does D7 provide ongoing support?",
+    question: "What if something stops working?",
     answer:
-      "[PLACEHOLDER] Yes, when the system benefits from monitoring, iteration, or operational support. Engagement options are discussed after scope is clear.",
-  },
-  {
-    id: "conversion-review",
-    question: "What happens during a Conversion Review?",
-    answer:
-      "[PLACEHOLDER] We examine how opportunities currently move (or stall), identify the highest-cost leaks, and outline what a practical system would include. You leave with clarity, not a pressure pitch.",
+      "Call, text, or email us. We support what we set up.",
   },
 ];
 
-export const conversionReviewFaqs: FaqItem[] = [
+export const contactFaqs: FaqItem[] = [
   {
-    id: "review-who",
-    question: "Who is the Conversion Review for?",
+    id: "contact-who",
+    question: "Who do you work with?",
     answer:
-      "[PLACEHOLDER] Businesses already generating some form of leads, calls, or pipeline activity who suspect they are losing opportunities between first contact and the sale.",
+      "Small, owner-operated businesses, especially trades, home services, and appointment-based businesses, that want technology to save them time.",
   },
   {
-    id: "review-prep",
-    question: "What should I prepare?",
+    id: "contact-prep",
+    question: "What should I have ready?",
     answer:
-      "[PLACEHOLDER] A rough sense of where leads come from, how your team responds today, and any tools already in use. Screenshots and sample call/lead flows help, perfection is not required.",
+      "Nothing special. A rough idea of how you handle calls, scheduling, and customers today is enough to start.",
   },
   {
-    id: "review-cost",
-    question: "Is the Conversion Review free?",
+    id: "contact-cost",
+    question: "Does the first conversation cost anything?",
     answer:
-      "[PLACEHOLDER] [PLACEHOLDER pricing / availability for the review.]",
+      "No. The first conversation is free, and there's no obligation.",
   },
 ];

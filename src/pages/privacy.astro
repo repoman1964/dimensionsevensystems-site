@@ -1,21 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { site } from "../data/site";
+import { site, addressLine } from "../data/site";
 
 const toc = [
   { id: "overview", label: "Overview" },
   { id: "collect", label: "Information we collect" },
   { id: "use", label: "How we use information" },
+  { id: "sms", label: "Text messaging" },
   { id: "share", label: "Sharing" },
   { id: "retention", label: "Retention" },
-  { id: "rights", label: "Your rights" },
+  { id: "security", label: "Security" },
+  { id: "rights", label: "Your choices" },
+  { id: "children", label: "Children" },
+  { id: "changes", label: "Changes" },
   { id: "contact", label: "Contact" },
 ];
 ---
 
 <BaseLayout
   title="Privacy Policy"
-  description={`Privacy Policy for ${site.name}. Placeholder legal content, replace before production launch.`}
+  description={`Privacy Policy for ${site.name}, including how we handle phone numbers and text messaging consent.`}
 >
   <div class="legal">
     <aside class="legal__toc" aria-label="Table of contents">
@@ -36,68 +40,136 @@ const toc = [
       <p class="legal__eyebrow">Legal</p>
       <h1>Privacy Policy</h1>
       <p class="legal__updated">Last updated: {site.legal.privacyUpdated}</p>
-      <p class="legal__banner">
-        [PLACEHOLDER] This is scaffold legal copy for layout only. Have counsel
-        review and replace before launch.
-      </p>
 
       <section id="overview">
         <h2>Overview</h2>
         <p>
-          [PLACEHOLDER] {site.name} (“D7”, “we”, “us”) respects your privacy.
-          This policy describes how we handle information when you use
-          {site.url} and related services, including the Conversion Review form.
+          This Privacy Policy explains how {site.legalEntity} (“{site.name}”,
+          “D7”, “we”, “us”) collects, uses, and protects information when you
+          visit {site.url}, contact us, receive text messages from us, or use
+          our services.
         </p>
       </section>
 
       <section id="collect">
         <h2>Information we collect</h2>
-        <p>
-          [PLACEHOLDER] We may collect information you submit (name, email,
-          company, phone, and messages), technical data such as browser type and
-          approximate location, and analytics events if you enable a provider later.
-        </p>
+        <ul>
+          <li>
+            <strong>Information you give us:</strong> your name, business name,
+            email address, phone number, and anything you include in a message
+            through our contact form, by phone, by email, or by text.
+          </li>
+          <li>
+            <strong>Text messaging information:</strong> your mobile number,
+            the date, time, and method of your opt-in, and your opt-out
+            requests.
+          </li>
+          <li>
+            <strong>Technical information:</strong> basic data your browser
+            sends automatically, such as browser type, device type, and pages
+            visited, collected by our hosting provider to keep the site running
+            and secure.
+          </li>
+        </ul>
       </section>
 
       <section id="use">
         <h2>How we use information</h2>
+        <ul>
+          <li>To respond to your inquiries and requests</li>
+          <li>To schedule calls and appointments with you</li>
+          <li>To send text messages you have agreed to receive</li>
+          <li>To provide, support, and improve our services</li>
+          <li>To keep records of consent and opt-out requests</li>
+          <li>To meet legal obligations</li>
+        </ul>
+      </section>
+
+      <section id="sms">
+        <h2>Text messaging (SMS)</h2>
         <p>
-          [PLACEHOLDER] To respond to inquiries, schedule reviews, deliver
-          services, improve the website, and meet legal obligations.
+          If you agree to receive text messages from {site.name}, we use your
+          mobile number only to send the messages you agreed to receive, such
+          as replies to your inquiry, scheduling messages, and links to
+          information you requested. Message frequency varies. Message and data
+          rates may apply. You can reply STOP at any time to opt out or HELP
+          for help. See our <a href="/sms">SMS Terms</a> for full details.
+        </p>
+        <p class="legal__notice">
+          No mobile information will be shared with third parties or
+          affiliates for marketing or promotional purposes. All the categories
+          above exclude text messaging originator opt-in data and consent; this
+          information will not be shared with any third parties.
         </p>
       </section>
 
       <section id="share">
         <h2>Sharing</h2>
         <p>
-          [PLACEHOLDER] We do not sell personal information. We may use
-          processors (hosting, email delivery, scheduling) under appropriate
-          agreements.
+          We do not sell, rent, or trade your personal information. We share
+          information only with service providers that help us run our business
+          (for example, website hosting, email delivery, and text message
+          delivery), and only as needed for them to provide those services to
+          us. These providers may not use your information for their own
+          purposes. We may also disclose information if required by law.
+        </p>
+        <p>
+          Phone numbers and text messaging opt-in data and consent are never
+          shared with third parties for marketing purposes.
         </p>
       </section>
 
       <section id="retention">
         <h2>Retention</h2>
         <p>
-          [PLACEHOLDER] We retain information only as long as needed for the
-          purposes above or as required by law.
+          We keep information only as long as needed for the purposes above or
+          as required by law. We keep records of text messaging consent and
+          opt-out requests so we can honor them.
+        </p>
+      </section>
+
+      <section id="security">
+        <h2>Security</h2>
+        <p>
+          We use reasonable measures to protect your information, including
+          encrypted (HTTPS) connections to this website. No method of
+          transmission or storage is completely secure.
         </p>
       </section>
 
       <section id="rights">
-        <h2>Your rights</h2>
+        <h2>Your choices and rights</h2>
         <p>
-          [PLACEHOLDER] Depending on your location, you may have rights to
-          access, correct, delete, or restrict processing of your personal
-          information. Contact us to exercise these rights.
+          You can ask us to access, correct, or delete your personal
+          information, or stop contacting you, by emailing or calling us using
+          the details below. To stop text messages, reply STOP to any message.
+        </p>
+      </section>
+
+      <section id="children">
+        <h2>Children</h2>
+        <p>
+          Our website and services are intended for adults and businesses. We
+          do not knowingly collect information from children under 13.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this policy from time to time. The “Last updated” date
+          at the top shows when it was last changed.
         </p>
       </section>
 
       <section id="contact">
         <h2>Contact</h2>
         <p>
-          [PLACEHOLDER] Questions about this policy:
-          <a href={`mailto:${site.email}`}>{site.email}</a>
+          {site.name}<br />
+          {site.legalName}, sole proprietor<br />
+          {addressLine}<br />
+          Phone: <a href={site.phone.href}>{site.phone.display}</a><br />
+          Email: <a href={`mailto:${site.email}`}>{site.email}</a>
         </p>
       </section>
     </article>
@@ -181,15 +253,16 @@ const toc = [
     margin-bottom: 1.25rem;
   }
 
-  .legal__banner {
+  .legal__notice {
     padding: 0.85rem 1rem;
-    border: 1px dashed var(--color-warning);
+    border: 1px solid var(--color-border-light);
+    border-left: 3px solid var(--color-primary);
     border-radius: 10px;
-    background: rgba(242, 185, 59, 0.08);
-    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
     font-size: var(--text-sm);
-    margin-bottom: 2rem;
-    line-height: 1.55;
+    margin-bottom: 1rem;
+    line-height: 1.6;
   }
 
   .legal__content section {
@@ -205,6 +278,38 @@ const toc = [
   .legal__content p {
     color: var(--color-text-muted);
     line-height: 1.7;
+  }
+
+  .legal__content p + p {
+    margin-top: 0.75rem;
+  }
+
+  .legal__content ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .legal__content li + li {
+    margin-top: 0.35rem;
+  }
+
+  .legal__content h3 {
+    font-size: var(--text-base);
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .legal__content blockquote {
+    margin: 0.75rem 0 0;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--color-accent);
+    border-radius: 6px;
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: 1.6;
   }
 
   .legal__content a {

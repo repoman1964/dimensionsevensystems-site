@@ -1,6 +1,6 @@
 ---
 import { footerNav } from "../data/navigation";
-import { site } from "../data/site";
+import { site, addressLine } from "../data/site";
 import Logo from "./Logo.astro";
 ---
 
@@ -12,10 +12,11 @@ import Logo from "./Logo.astro";
           <Logo variant="footer" />
         </a>
         <p class="site-footer__tagline">{site.tagline}</p>
-        <p class="site-footer__contact">
+        <address class="site-footer__contact">
+          <a href={site.phone.href}>{site.phone.display}</a>
           <a href={`mailto:${site.email}`}>{site.email}</a>
-          <span class="placeholder-tag">placeholder inbox</span>
-        </p>
+          <span>{addressLine}</span>
+        </address>
       </div>
 
       <div class="site-footer__cols">
@@ -32,10 +33,10 @@ import Logo from "./Logo.astro";
           </ul>
         </div>
         <div class="site-footer__col">
-          <h2 class="site-footer__heading">Conversion systems</h2>
+          <h2 class="site-footer__heading">Services</h2>
           <ul>
             {
-              footerNav.systems.map((item) => (
+              footerNav.services.map((item) => (
                 <li>
                   <a href={item.href}>{item.label}</a>
                 </li>
@@ -44,17 +45,7 @@ import Logo from "./Logo.astro";
           </ul>
         </div>
         <div class="site-footer__col">
-          <h2 class="site-footer__heading">D7 products</h2>
-          <ul>
-            {
-              footerNav.products.map((item) => (
-                <li>
-                  <a href={item.href}>{item.label}</a>
-                </li>
-              ))
-            }
-          </ul>
-          <h2 class="site-footer__heading site-footer__heading--spaced">Legal</h2>
+          <h2 class="site-footer__heading">Legal</h2>
           <ul>
             {
               footerNav.legal.map((item) => (
@@ -72,17 +63,7 @@ import Logo from "./Logo.astro";
       <p>
         © {new Date().getFullYear()} {site.name}. All rights reserved.
       </p>
-      <div class="site-footer__social">
-        {
-          site.social.linkedin ? (
-            <a href={site.social.linkedin} rel="noopener noreferrer" target="_blank">
-              LinkedIn
-            </a>
-          ) : (
-            <span class="site-footer__social-ph">[Social links placeholder]</span>
-          )
-        }
-      </div>
+      <p>{site.name} is a business name of {site.legalName}, sole proprietor.</p>
     </div>
   </div>
 </footer>
@@ -123,10 +104,11 @@ import Logo from "./Logo.astro";
 
   .site-footer__contact {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 0.4rem;
     font-size: var(--text-sm);
+    font-style: normal;
+    color: var(--color-text-muted);
   }
 
   .site-footer__contact a {
@@ -153,9 +135,6 @@ import Logo from "./Logo.astro";
     margin-bottom: 1rem;
   }
 
-  .site-footer__heading--spaced {
-    margin-top: 1.75rem;
-  }
 
   .site-footer__col ul {
     display: flex;
@@ -185,8 +164,4 @@ import Logo from "./Logo.astro";
     color: var(--color-text-faint);
   }
 
-  .site-footer__social-ph {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-  }
 </style>
