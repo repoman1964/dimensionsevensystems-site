@@ -1,7 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
-import { walkthroughs, type Walkthrough } from "../../data/walkthroughs";
+import {
+  walkthroughs,
+  galleryVideos,
+  type Walkthrough,
+} from "../../data/walkthroughs";
 import { site } from "../../data/site";
 
 export function getStaticPaths() {
@@ -13,6 +17,7 @@ interface Props {
 }
 
 const { w } = Astro.props;
+const mainTitle = `Hi ${w.firstName}, here's the website we built for ${w.businessName}`;
 ---
 
 <BaseLayout
@@ -32,86 +37,168 @@ const { w } = Astro.props;
         )
       }
 
-      <header class="walk__head">
-        <p class="walk__eyebrow">
-          <span class="dot" aria-hidden="true"></span>
-          Website walkthrough
-        </p>
-        <h1 class="walk__title">
-          Hi {w.firstName}, here's the website we built for {w.businessName}
-        </h1>
-        <p class="walk__sub">
-          As promised on our call, here's a short video tour of the site
-          ({w.durationLabel}). Watch it whenever it suits you. There's no
-          obligation.
-        </p>
-      </header>
+      <div class="walk__layout">
+        <div class="walk__primary">
+          <div class="walk__video">
+            <video
+              id="walk-player"
+              controls
+              playsinline
+              preload="metadata"
+              poster={w.poster}
+              src={w.videoSrc}
+              data-analytics="walkthrough_video_played"
+            >
+              Your browser can't play this video.
+              <a href={w.videoSrc}>Download it instead</a>.
+            </video>
+          </div>
 
-      <div class="walk__grid">
-        <div class="walk__video">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            poster={w.poster}
-            data-analytics="walkthrough_video_played"
+          <button
+            type="button"
+            class="walk__back"
+            id="walk-back"
+            data-src={w.videoSrc}
+            data-poster={w.poster}
+            data-title={mainTitle}
+            hidden
           >
-            <source src={w.videoSrc} type="video/mp4" />
-            Your browser can't play this video.
-            <a href={w.videoSrc}>Download it instead</a>.
-          </video>
+            ← Back to your walkthrough
+          </button>
+
+          <h1 class="walk__title" id="walk-title">{mainTitle}</h1>
+
+          <div class="walk__channel">
+            <div class="walk__by">
+              <img
+                class="walk__avatar"
+                src="/brand/favicon-mark.png"
+                alt=""
+                width="44"
+                height="44"
+              />
+              <div>
+                <p class="walk__by-name">{site.name}</p>
+                <p class="walk__by-meta">Prepared for {w.businessName} · {w.city}</p>
+              </div>
+            </div>
+            <div class="walk__actions">
+              <Button href={site.phone.href} event="walkthrough_call_clicked">
+                Call {site.phone.display}
+              </Button>
+              <Button
+                href={`mailto:${site.email}?subject=${encodeURIComponent(`Website for ${w.businessName}`)}`}
+                variant="secondary"
+              >
+                Email us
+              </Button>
+              {
+                w.previewUrl && (
+                  <Button href={w.previewUrl} variant="secondary" event="walkthrough_preview_opened">
+                    Open the live preview
+                  </Button>
+                )
+              }
+            </div>
+          </div>
+
+          <div class="walk__desc">
+            <p class="walk__desc-meta">Website walkthrough · {w.durationLabel}</p>
+            <p>
+              As promised on our call, here's a short video tour of the site.
+              Watch it whenever it suits you. There's no obligation. Questions?
+              Call or email {site.founder.name}, or just reply to our text.
+            </p>
+            <h2 id="chapters-heading">What's in the video</h2>
+            <ol aria-labelledby="chapters-heading">
+              {w.chapters.map((c) => <li>{c}</li>)}
+            </ol>
+          </div>
+
+          <section class="walk__why" aria-labelledby="why-heading">
+            <h2 id="why-heading">Why you received this link</h2>
+            <p>
+              You asked us to text you this walkthrough during a phone call with
+              {" "}{site.name}. We only text people who ask. Message frequency
+              varies, and message and data rates may apply. Reply
+              <strong> STOP</strong> to our text at any time to opt out, or
+              <strong> HELP</strong> for help.
+            </p>
+            <p>
+              <a href="/sms">SMS Terms</a> · <a href="/privacy">Privacy Policy</a> ·
+              {" "}<a href="/terms">Terms and Conditions</a>
+            </p>
+          </section>
         </div>
 
-        <aside class="walk__panel">
-          <h2 class="walk__panel-title">Questions or ready to talk?</h2>
-          <p>
-            Call or email {site.founder.name} at {site.name}. You can also just
-            reply to our text.
-          </p>
-          <div class="walk__actions">
-            <Button href={site.phone.href} fullWidth event="walkthrough_call_clicked">
-              Call {site.phone.display}
-            </Button>
-            <Button href={`mailto:${site.email}?subject=${encodeURIComponent(`Website for ${w.businessName}`)}`} variant="secondary" fullWidth>
-              Email us
-            </Button>
+        <aside class="walk__gallery" aria-labelledby="gallery-heading">
+          <h2 class="walk__gallery-title" id="gallery-heading">
+            What makes a website bring in customers
+          </h2>
+          <ul class="walk__list">
             {
-              w.previewUrl && (
-                <Button href={w.previewUrl} variant="secondary" fullWidth event="walkthrough_preview_opened">
-                  Open the live preview
-                </Button>
-              )
+              galleryVideos.map((g, i) => (
+                <li>
+                  <button
+                    type="button"
+                    class="walk__item"
+                    data-src={g.videoSrc}
+                    data-poster={g.poster}
+                    data-title={g.title}
+                    data-analytics={g.videoSrc ? "walkthrough_gallery_played" : undefined}
+                    disabled={!g.videoSrc}
+                  >
+                    <span class="walk__thumb" aria-hidden="true">
+                      {g.poster ? (
+                        <img src={g.poster} alt="" loading="lazy" />
+                      ) : (
+                        <span class="walk__thumb-ph">
+                          <span class="walk__thumb-num">{String(i + 1).padStart(2, "0")}</span>
+                          <span class="walk__play" />
+                        </span>
+                      )}
+                      <span class="walk__badge">
+                        {g.videoSrc ? (g.durationLabel ?? "Video") : "Coming soon"}
+                      </span>
+                    </span>
+                    <span class="walk__item-text">
+                      <span class="walk__item-title">{g.title}</span>
+                      <span class="walk__item-meta">{g.summary}</span>
+                      <span class="walk__item-meta walk__item-meta--by">{site.name}</span>
+                    </span>
+                  </button>
+                </li>
+              ))
             }
-          </div>
+          </ul>
         </aside>
-      </div>
-
-      <div class="walk__info">
-        <section aria-labelledby="chapters-heading">
-          <h2 id="chapters-heading">What's in the video</h2>
-          <ol>
-            {w.chapters.map((c) => <li>{c}</li>)}
-          </ol>
-        </section>
-
-        <section class="walk__why" aria-labelledby="why-heading">
-          <h2 id="why-heading">Why you received this link</h2>
-          <p>
-            You asked us to text you this walkthrough during a phone call with
-            {" "}{site.name}. We only text people who ask. Message frequency
-            varies, and message and data rates may apply. Reply
-            <strong> STOP</strong> to our text at any time to opt out, or
-            <strong> HELP</strong> for help.
-          </p>
-          <p>
-            <a href="/sms">SMS Terms</a> · <a href="/privacy">Privacy Policy</a> ·
-            {" "}<a href="/terms">Terms and Conditions</a>
-          </p>
-        </section>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const player = document.getElementById("walk-player") as HTMLVideoElement | null;
+  const title = document.getElementById("walk-title");
+  const back = document.getElementById("walk-back") as HTMLButtonElement | null;
+  const items = document.querySelectorAll<HTMLButtonElement>(".walk__item");
+
+  function load(btn: HTMLButtonElement, isMain: boolean) {
+    const { src, poster, title: t } = btn.dataset;
+    if (!player || !src) return;
+    player.poster = poster ?? "";
+    player.src = src;
+    if (title && t) title.textContent = t;
+    items.forEach((i) => i.removeAttribute("aria-current"));
+    if (!isMain) btn.setAttribute("aria-current", "true");
+    if (back) back.hidden = isMain;
+    player.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    void player.play().catch(() => {});
+  }
+
+  items.forEach((btn) => btn.addEventListener("click", () => load(btn, false)));
+  back?.addEventListener("click", () => load(back, true));
+</script>
 
 <style>
   .walk {
@@ -119,7 +206,7 @@ const { w } = Astro.props;
   }
 
   .walk__sample {
-    margin: 0 0 2rem;
+    margin: 0 0 1.5rem;
     padding: 0.85rem 1rem;
     border: 1px solid rgba(242, 185, 59, 0.35);
     border-left: 3px solid var(--color-warning);
@@ -134,52 +221,25 @@ const { w } = Astro.props;
     color: var(--color-warning);
   }
 
-  .walk__head {
-    max-width: 46rem;
-    margin-bottom: 2rem;
-  }
-
-  .walk__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 0.85rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-text-faint);
-  }
-
-  .walk__title {
-    font-size: var(--text-4xl);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
-  }
-
-  .walk__sub {
-    color: var(--color-text-muted);
-    font-size: var(--text-lg);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .walk__grid {
+  .walk__layout {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
     align-items: start;
   }
 
-  @media (min-width: 960px) {
-    .walk__grid {
-      grid-template-columns: 1fr 300px;
+  @media (min-width: 1000px) {
+    .walk__layout {
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 1.5rem;
     }
   }
 
+  .walk__primary {
+    min-width: 0;
+  }
+
   .walk__video {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
+    border-radius: 12px;
     overflow: hidden;
     background: #000;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
@@ -192,62 +252,115 @@ const { w } = Astro.props;
     background: #000;
   }
 
-  .walk__panel {
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    background: var(--color-bg-elevated);
-  }
-
-  .walk__panel-title {
-    font-size: var(--text-xl);
-    margin-bottom: 0.6rem;
-  }
-
-  .walk__panel p {
-    color: var(--color-text-muted);
+  .walk__back {
+    margin-top: 0.85rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-primary-hover);
+    font: inherit;
     font-size: var(--text-sm);
-    line-height: 1.6;
-    margin: 0 0 1.25rem;
+    cursor: pointer;
+  }
+
+  .walk__back[hidden] {
+    display: none;
+  }
+
+  .walk__title {
+    margin: 0.9rem 0 0;
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .walk__channel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .walk__by {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .walk__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    object-fit: cover;
+  }
+
+  .walk__by-name {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .walk__by-meta {
+    margin: 0.1rem 0 0;
+    color: var(--color-text-faint);
+    font-size: var(--text-sm);
   }
 
   .walk__actions {
     display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
 
-  .walk__info {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 2.5rem;
+  .walk__desc {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem 1.25rem;
+    border-radius: 12px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
   }
 
-  @media (min-width: 900px) {
-    .walk__info {
-      grid-template-columns: 1fr 1fr;
-    }
+  .walk__desc p {
+    margin: 0 0 0.75rem;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.65;
   }
 
-  .walk__info h2 {
-    font-size: var(--text-xl);
-    margin-bottom: 0.75rem;
+  .walk__desc .walk__desc-meta {
+    margin-bottom: 0.4rem;
+    color: var(--color-text);
+    font-weight: 600;
   }
 
-  .walk__info ol {
+  .walk__desc h2,
+  .walk__why h2 {
+    font-size: var(--text-base);
+    margin: 1rem 0 0.5rem;
+  }
+
+  .walk__desc ol {
     margin: 0;
     padding-left: 1.25rem;
     list-style: decimal;
     color: var(--color-text-muted);
+    font-size: var(--text-sm);
     line-height: 1.7;
   }
 
   .walk__why {
-    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem 1.25rem;
     border: 1px solid var(--color-border);
     border-left: 3px solid var(--color-primary);
     border-radius: 10px;
     background: var(--color-bg-elevated);
+  }
+
+  .walk__why h2 {
+    margin-top: 0;
   }
 
   .walk__why p {
@@ -267,5 +380,147 @@ const { w } = Astro.props;
 
   .walk__why a {
     color: var(--color-primary-hover);
+  }
+
+  /* Sidebar gallery */
+  .walk__gallery-title {
+    margin: 0 0 0.85rem;
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  .walk__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .walk__item {
+    display: grid;
+    grid-template-columns: 168px minmax(0, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.35rem;
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+
+  .walk__item:hover:not(:disabled),
+  .walk__item[aria-current="true"] {
+    background: var(--color-bg-elevated);
+  }
+
+  .walk__item:disabled {
+    cursor: default;
+  }
+
+  .walk__item:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .walk__thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .walk__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .walk__thumb-ph {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 25% 20%, rgba(73, 119, 247, 0.45), transparent 60%),
+      radial-gradient(circle at 80% 85%, rgba(49, 206, 211, 0.3), transparent 55%),
+      var(--color-surface);
+  }
+
+  .walk__thumb-num {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .walk__play {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(10, 14, 18, 0.6);
+    position: relative;
+  }
+
+  .walk__play::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 7px 0 7px 11px;
+    border-color: transparent transparent transparent var(--color-text);
+  }
+
+  .walk__badge {
+    position: absolute;
+    right: 0.35rem;
+    bottom: 0.35rem;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 600;
+  }
+
+  .walk__item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .walk__item-title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-text);
+  }
+
+  .walk__item-meta {
+    font-size: var(--text-xs);
+    line-height: 1.4;
+    color: var(--color-text-faint);
+  }
+
+  .walk__item-meta--by {
+    margin-top: auto;
+  }
+
+  @media (max-width: 420px) {
+    .walk__item {
+      grid-template-columns: 136px minmax(0, 1fr);
+    }
   }
 </style>
