@@ -1,0 +1,223 @@
+---
+/**
+ * "Build mine free" form. Posts to /api/lead. The SMS box is optional and
+ * unchecked by default: it is the website opt-in described on /sms.
+ */
+import { site, trades } from "../data/site";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "lead" } = Astro.props;
+---
+
+<form class="lead" id={id} action="/api/lead" method="post" novalidate data-lead-form>
+  <div class="lead__row">
+    <label class="lead__field">
+      <span>Business name *</span>
+      <input name="business" required autocomplete="organization" placeholder="Sweet Tea Cleaning Co." />
+    </label>
+  </div>
+  <div class="lead__row lead__row--2">
+    <label class="lead__field">
+      <span>First name *</span>
+      <input name="name" required autocomplete="given-name" placeholder="Jane" />
+    </label>
+    <label class="lead__field">
+      <span>Mobile number *</span>
+      <input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(404) 555-0142" />
+    </label>
+  </div>
+  <div class="lead__row lead__row--2">
+    <label class="lead__field">
+      <span>Your trade *</span>
+      <select name="trade" required>
+        <option value="" disabled selected>Pick one</option>
+        {trades.map((t) => <option>{t}</option>)}
+        <option>Other</option>
+      </select>
+    </label>
+    <label class="lead__field">
+      <span>City you work in *</span>
+      <input name="city" required autocomplete="address-level2" placeholder="Atlanta, GA" />
+    </label>
+  </div>
+  <div class="lead__row">
+    <label class="lead__field">
+      <span>Email <em>(optional)</em></span>
+      <input name="email" type="email" autocomplete="email" placeholder="jane@example.com" />
+    </label>
+  </div>
+
+  <label class="lead__consent">
+    <input type="checkbox" name="sms_consent" value="yes" />
+    <span>
+      Text me the link to my site and updates about it from {site.name}. Message frequency varies.
+      Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of
+      purchase. See our <a href="/sms">SMS Terms</a> and <a href="/privacy">Privacy Policy</a>.
+    </span>
+  </label>
+
+  <div class="visually-hidden" aria-hidden="true">
+    <input tabindex="-1" autocomplete="off" name="website" />
+  </div>
+
+  <button class="btn btn--primary btn--lg lead__submit" type="submit">Build my site free</button>
+  <p class="lead__fine">No credit card. You see the finished site before you pay anything.</p>
+  <p class="lead__status" role="status" aria-live="polite"></p>
+</form>
+
+<div class="lead__done" hidden data-lead-done>
+  <p class="lead__done-title">Got it. We're on it.</p>
+  <p>
+    We'll build your site and send you the link, usually within a couple of business days. Questions before then?
+    Call or text <a href={site.phone.href}>{site.phone.display}</a>.
+  </p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-lead-form]").forEach((form) => {
+    const status = form.querySelector<HTMLElement>(".lead__status")!;
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+    const done = form.nextElementSibling as HTMLElement;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "";
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      button.disabled = true;
+      button.textContent = "Sending…";
+      try {
+        const res = await fetch(form.action, { method: "POST", body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) throw new Error(data.message || "Something went wrong.");
+        form.hidden = true;
+        done.hidden = false;
+      } catch (err) {
+        status.textContent = `${(err as Error).message} You can also call or text us.`;
+        button.disabled = false;
+        button.textContent = "Build my site free";
+      }
+    });
+  });
+</script>
+
+<style>
+  .lead {
+    display: grid;
+    gap: 14px;
+  }
+
+  .lead__row {
+    display: grid;
+    gap: 14px;
+  }
+
+  @media (min-width: 560px) {
+    .lead__row--2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .lead__field {
+    display: grid;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .lead__field em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--ink-faint);
+  }
+
+  .lead input:not([type="checkbox"]),
+  .lead select {
+    width: 100%;
+    min-height: 50px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 10px;
+    background: #fff;
+    font: inherit;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .lead input:focus,
+  .lead select:focus {
+    outline: none;
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px var(--orange-soft);
+  }
+
+  .lead input:user-invalid,
+  .lead select:user-invalid {
+    border-color: #c53030;
+  }
+
+  .lead__consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--ink-muted);
+  }
+
+  .lead__consent input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--orange);
+  }
+
+  .lead__submit {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .lead__submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+
+  .lead__fine {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--ink-faint);
+  }
+
+  .lead__status {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #c53030;
+  }
+
+  .lead__status:empty {
+    display: none;
+  }
+
+  .lead__done {
+    padding: 28px;
+    border-radius: var(--radius);
+    background: var(--green-soft);
+    color: var(--ink);
+  }
+
+  .lead__done-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+</style>

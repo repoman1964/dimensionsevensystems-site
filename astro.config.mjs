@@ -7,11 +7,14 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://dimensionsevensystems.com',
   adapter: cloudflare(),
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
   prefetch: true,
+  // Pages from the previous site.
   redirects: {
-    '/conversion-systems': '/services',
+    '/services': '/',
+    '/about': '/',
+    '/conversion-systems': '/',
     '/conversion-review': '/contact',
-    '/our-work': '/services',
+    '/our-work': '/',
   },
 });

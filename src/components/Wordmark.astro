@@ -1,0 +1,75 @@
+---
+interface Props {
+  dark?: boolean;
+}
+
+const { dark = false } = Astro.props;
+---
+
+<a href="/" class:list={["wordmark", { "wordmark--dark": dark }]} aria-label="CallCatcher Sites by Dimension Seven Systems, home">
+  <span class="wordmark__badge" aria-hidden="true">D7</span>
+  <span class="wordmark__text">
+    <span class="wordmark__name">CallCatcher<span> Sites</span></span>
+    <span class="wordmark__by">by Dimension Seven Systems</span>
+  </span>
+</a>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .wordmark__badge {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: inset 0 -3px 0 var(--orange);
+  }
+
+  .wordmark__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .wordmark__name {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+
+  .wordmark__name span {
+    color: var(--orange);
+  }
+
+  .wordmark__by {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    margin-top: 3px;
+  }
+
+  .wordmark--dark {
+    color: var(--on-dark);
+  }
+
+  .wordmark--dark .wordmark__badge {
+    background: var(--on-dark);
+    color: var(--navy);
+  }
+
+  .wordmark--dark .wordmark__by {
+    color: var(--on-dark-muted);
+  }
+</style>

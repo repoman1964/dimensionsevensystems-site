@@ -1,13 +1,15 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { site, addressLine } from "../data/site";
+import Legal from "../layouts/Legal.astro";
+import { site } from "../data/site";
 
 const toc = [
   { id: "agreement", label: "Agreement" },
   { id: "services", label: "Services" },
+  { id: "preview", label: "Preview sites" },
+  { id: "payment", label: "Price and payment" },
   { id: "sms", label: "Text messaging" },
   { id: "use", label: "Website use" },
-  { id: "ip", label: "Intellectual property" },
+  { id: "ip", label: "Ownership" },
   { id: "disclaimers", label: "Disclaimers" },
   { id: "liability", label: "Limitation of liability" },
   { id: "law", label: "Governing law" },
@@ -16,267 +18,101 @@ const toc = [
 ];
 ---
 
-<BaseLayout
+<Legal
   title="Terms and Conditions"
-  description={`Terms and Conditions for ${site.name}.`}
+  description={`Terms and Conditions for ${site.name} and CallCatcher Sites.`}
+  updated={site.legal.termsUpdated}
+  toc={toc}
 >
-  <div class="legal">
-    <aside class="legal__toc" aria-label="Table of contents">
-      <p class="legal__toc-title">On this page</p>
-      <nav>
-        <ul>
-          {
-            toc.map((item) => (
-              <li>
-                <a href={`#${item.id}`}>{item.label}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </aside>
-    <article class="legal__content">
-      <p class="legal__eyebrow">Legal</p>
-      <h1>Terms and Conditions</h1>
-      <p class="legal__updated">Last updated: {site.legal.termsUpdated}</p>
+  <section id="agreement">
+    <h2>Agreement</h2>
+    <p>
+      These Terms and Conditions apply to your use of {site.url} and to services provided by {site.legalEntity}
+      (“{site.name}”, “D7”, “we”, “us”). By using this website or our services, you agree to these terms. If you do not
+      agree, please do not use the site or services.
+    </p>
+  </section>
 
-      <section id="agreement">
-        <h2>Agreement</h2>
-        <p>
-          These Terms and Conditions apply to your use of {site.url} and to
-          services provided by {site.legalEntity} (“{site.name}”, “D7”, “we”,
-          “us”). By using this website or our services, you agree to these
-          terms. If you do not agree, please do not use the site or services.
-        </p>
-      </section>
+  <section id="services">
+    <h2>Services</h2>
+    <p>
+      {site.name} builds websites for home-service businesses, sold as the “{site.product}.” Descriptions on this
+      website are informational and are not a binding offer. What a site includes is described on our homepage at the
+      time you buy.
+    </p>
+  </section>
 
-      <section id="services">
-        <h2>Services</h2>
-        <p>
-          {site.name} helps small businesses set up and use technology,
-          including websites, call handling, scheduling, reminders, customer
-          records, follow-up, and automation. The scope, price, and timeline of
-          any project are agreed in writing before work begins. Descriptions on
-          this website are informational and are not a binding offer.
-        </p>
-      </section>
+  <section id="preview">
+    <h2>Preview sites</h2>
+    <p>
+      When you ask us to, we build a preview of a website for your business from information your business has made
+      public, such as your Google Business Profile and customer reviews. A preview is free, carries a preview banner,
+      and you are under no obligation to buy it. If you don't want it, tell us and we will take it down.
+    </p>
+  </section>
 
-      <section id="sms">
-        <h2>Text messaging</h2>
-        <p>
-          If you agree to receive text messages from {site.name}, our{" "}
-          <a href="/sms">SMS Terms</a> apply and are part of these terms. In
-          short: message frequency varies; message and data rates may apply;
-          reply STOP to opt out and HELP for help; carriers are not liable for
-          delayed or undelivered messages; and agreeing to receive texts is
-          never a condition of purchase.
-        </p>
-      </section>
+  <section id="payment">
+    <h2>Price and payment</h2>
+    <p>
+      The {site.product} is a one-time payment of {site.price}, paid through Stripe after you have seen your preview.
+      There is no monthly fee for hosting the site. A domain name, if you need one, is bought from a domain registrar
+      in your name and paid to them directly. After payment we remove the preview banner, connect your domain, and make
+      the changes you list in your welcome form before the site goes live as yours. Later changes are handled on
+      request.
+    </p>
+  </section>
 
-      <section id="use">
-        <h2>Website use</h2>
-        <p>
-          You agree not to misuse the website, attempt unauthorized access, or
-          use it for any unlawful purpose. We may update or discontinue parts
-          of the website at any time.
-        </p>
-      </section>
+  <section id="sms">
+    <h2>Text messaging</h2>
+    <p>
+      If you agree to receive text messages from {site.name}, our <a href="/sms">SMS Terms</a> apply and are part of
+      these terms. In short: message frequency varies; message and data rates may apply; reply STOP to opt out and HELP
+      for help; carriers are not liable for delayed or undelivered messages; and agreeing to receive texts is never a
+      condition of purchase.
+    </p>
+  </section>
 
-      <section id="ip">
-        <h2>Intellectual property</h2>
-        <p>
-          The content and branding on this website belong to {site.name} unless
-          otherwise noted. Ownership of work we create for clients is set out
-          in each client's written agreement.
-        </p>
-      </section>
+  <section id="use">
+    <h2>Website use</h2>
+    <p>
+      You agree not to misuse the website, attempt unauthorized access, or use it for any unlawful purpose. We may
+      update or discontinue parts of the website at any time.
+    </p>
+  </section>
 
-      <section id="disclaimers">
-        <h2>Disclaimers</h2>
-        <p>
-          This website is provided “as is.” We do not guarantee any specific
-          business results. Example dashboards and figures shown on this
-          website are illustrations, not results from real clients.
-        </p>
-      </section>
+  <section id="ip">
+    <h2>Ownership</h2>
+    <p>
+      The content and branding on this website belong to {site.name} unless otherwise noted. Your business name, logo,
+      photos, reviews, and the words written about your business on a site you buy are yours. Your domain stays
+      registered in your name.
+    </p>
+  </section>
 
-      <section id="liability">
-        <h2>Limitation of liability</h2>
-        <p>
-          To the fullest extent permitted by law, {site.name} is not liable for
-          indirect, incidental, or consequential damages arising from your use
-          of this website. Liability for client services is governed by the
-          applicable written agreement.
-        </p>
-      </section>
+  <section id="disclaimers">
+    <h2>Disclaimers</h2>
+    <p>
+      This website and our services are provided “as is.” We do not guarantee any specific business results, search
+      rankings, number of calls, or revenue. The example site shown on this website is for a fictional business.
+    </p>
+  </section>
 
-      <section id="law">
-        <h2>Governing law</h2>
-        <p>
-          These terms are governed by the laws of the State of Georgia, United
-          States.
-        </p>
-      </section>
+  <section id="liability">
+    <h2>Limitation of liability</h2>
+    <p>
+      To the fullest extent permitted by law, {site.name} is not liable for indirect, incidental, or consequential
+      damages arising from your use of this website or our services, and our total liability for any claim is limited
+      to the amount you paid us.
+    </p>
+  </section>
 
-      <section id="changes">
-        <h2>Changes</h2>
-        <p>
-          We may update these terms from time to time. The “Last updated” date
-          at the top shows when they were last changed.
-        </p>
-      </section>
+  <section id="law">
+    <h2>Governing law</h2>
+    <p>These terms are governed by the laws of the State of Georgia, United States.</p>
+  </section>
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>
-          {site.name}<br />
-          {site.legalName}, sole proprietor<br />
-          {addressLine}<br />
-          Phone: <a href={site.phone.href}>{site.phone.display}</a><br />
-          Email: <a href={`mailto:${site.email}`}>{site.email}</a>
-        </p>
-      </section>
-    </article>
-  </div>
-</BaseLayout>
-
-<style>
-  .legal {
-    display: grid;
-    gap: 2rem;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding: 3rem 24px 5rem;
-  }
-
-  @media (min-width: 900px) {
-    .legal {
-      grid-template-columns: 200px 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-  }
-
-  .legal__toc {
-    display: none;
-  }
-
-  @media (min-width: 900px) {
-    .legal__toc {
-      display: block;
-      position: sticky;
-      top: calc(var(--header-h) + 1.5rem);
-    }
-  }
-
-  .legal__toc-title {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-faint);
-    margin-bottom: 0.75rem;
-  }
-
-  .legal__toc ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  .legal__toc a {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-  }
-
-  .legal__toc a:hover {
-    color: var(--color-text);
-  }
-
-  .legal__content {
-    max-width: 42rem;
-  }
-
-  .legal__eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-faint);
-    margin-bottom: 0.5rem;
-  }
-
-  .legal__content h1 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 0.5rem;
-  }
-
-  .legal__updated {
-    font-size: var(--text-sm);
-    color: var(--color-text-faint);
-    margin-bottom: 1.25rem;
-  }
-
-  .legal__notice {
-    padding: 0.85rem 1rem;
-    border: 1px solid var(--color-border-light);
-    border-left: 3px solid var(--color-primary);
-    border-radius: 10px;
-    background: var(--color-bg-elevated);
-    color: var(--color-text);
-    font-size: var(--text-sm);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-  }
-
-  .legal__content section {
-    margin-bottom: 2rem;
-    scroll-margin-top: calc(var(--header-h) + 1rem);
-  }
-
-  .legal__content h2 {
-    font-size: var(--text-xl);
-    margin-bottom: 0.75rem;
-  }
-
-  .legal__content p {
-    color: var(--color-text-muted);
-    line-height: 1.7;
-  }
-
-  .legal__content p + p {
-    margin-top: 0.75rem;
-  }
-
-  .legal__content ul {
-    margin: 0.75rem 0 0;
-    padding-left: 1.25rem;
-    list-style: disc;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-  }
-
-  .legal__content li + li {
-    margin-top: 0.35rem;
-  }
-
-  .legal__content h3 {
-    font-size: var(--text-base);
-    margin: 1.25rem 0 0.5rem;
-  }
-
-  .legal__content blockquote {
-    margin: 0.75rem 0 0;
-    padding: 0.85rem 1rem;
-    border-left: 3px solid var(--color-accent);
-    border-radius: 6px;
-    background: var(--color-bg-elevated);
-    color: var(--color-text);
-    font-size: var(--text-sm);
-    line-height: 1.6;
-  }
-
-  .legal__content a {
-    color: var(--color-primary-hover);
-  }
-</style>
+  <section id="changes">
+    <h2>Changes</h2>
+    <p>We may update these terms from time to time. The “Last updated” date at the top shows when they were last changed.</p>
+  </section>
+</Legal>

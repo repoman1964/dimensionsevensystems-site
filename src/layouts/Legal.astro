@@ -1,0 +1,166 @@
+---
+import Base from "./Base.astro";
+import { site, addressLine } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  updated: string;
+  toc: { id: string; label: string }[];
+}
+
+const { title, description, updated, toc } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <div class="container legal">
+    <aside class="legal__toc" aria-label="Table of contents">
+      <p class="legal__toc-title">On this page</p>
+      <nav>
+        <ul>
+          {toc.map((item) => <li><a href={`#${item.id}`}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+    </aside>
+    <article class="legal__content">
+      <p class="eyebrow">Legal</p>
+      <h1>{title}</h1>
+      <p class="legal__updated">Last updated: {updated}</p>
+      <slot />
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          {site.name}<br />
+          {site.legalName}, sole proprietor<br />
+          {addressLine}<br />
+          Phone: <a href={site.phone.href}>{site.phone.display}</a><br />
+          Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </section>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .legal {
+    display: grid;
+    gap: 2rem;
+    padding-block: 3rem 5rem;
+  }
+
+  @media (min-width: 900px) {
+    .legal {
+      grid-template-columns: 210px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+
+  .legal__toc {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .legal__toc {
+      display: block;
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+    }
+  }
+
+  .legal__toc-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__toc ul {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .legal__toc a {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+
+  .legal__toc a:hover {
+    color: var(--ink);
+  }
+
+  .legal__content {
+    max-width: 44rem;
+  }
+
+  .legal__content h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__updated {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .legal__content :global(section) {
+    margin-bottom: 2rem;
+  }
+
+  .legal__content :global(h2) {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__content :global(h3) {
+    font-size: 1.05rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .legal__content :global(p),
+  .legal__content :global(ul) {
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  .legal__content :global(p + p) {
+    margin-top: 0.75rem;
+  }
+
+  .legal__content :global(ul) {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .legal__content :global(li + li) {
+    margin-top: 0.35rem;
+  }
+
+  .legal__content :global(a) {
+    color: var(--orange-hover);
+  }
+
+  .legal__content :global(.notice),
+  .legal__content :global(blockquote) {
+    margin: 0.75rem 0 0;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--orange);
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .legal__content :global(blockquote) {
+    border-left-color: var(--green);
+  }
+</style>

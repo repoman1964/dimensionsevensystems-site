@@ -1,293 +1,122 @@
 ---
-import { mainNav, primaryCta } from "../data/navigation";
+import Wordmark from "./Wordmark.astro";
+import Icon from "./Icon.astro";
 import { site } from "../data/site";
-import Button from "./Button.astro";
-import Logo from "./Logo.astro";
 
-interface Props {
-  minimal?: boolean;
-}
-
-const { minimal = false } = Astro.props;
-const pathname = Astro.url.pathname;
+const links = [
+  { href: "/#whats-included", label: "What's included" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#faq", label: "FAQ" },
+];
 ---
 
-<header class:list={["site-header", minimal && "site-header--minimal"]} data-header>
-  <div class="site-header__inner container">
-    <a href="/" class="site-header__brand" aria-label={`${site.name} home`}>
-      <Logo variant="header" />
-    </a>
-
-    {
-      !minimal && (
-        <nav class="site-header__nav" aria-label="Primary">
-          <ul class="site-header__links">
-            {mainNav.map((item) => {
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
-              return (
-                <li>
-                  <a
-                    href={item.href}
-                    class:list={["site-header__link", active && "is-active"]}
-                    aria-current={active ? "page" : undefined}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      )
-    }
-
-    <div class="site-header__actions">
-      {
-        !minimal && (
-          <Button
-            href={primaryCta.href}
-            event={primaryCta.event}
-            class="site-header__cta"
-          >
-            {primaryCta.label}
-          </Button>
-        )
-      }
-      {
-        !minimal && (
-          <button
-            type="button"
-            class="site-header__menu-btn"
-            data-menu-toggle
-            aria-expanded="false"
-            aria-controls="mobile-nav"
-            aria-label="Open menu"
-          >
-            <span class="site-header__menu-icon" aria-hidden="true" />
-          </button>
-        )
-      }
+<header class="header">
+  <div class="container header__inner">
+    <Wordmark />
+    <nav class="header__nav" aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="header__actions">
+      <a class="header__phone" href={site.phone.href}>
+        <Icon name="phone" />
+        <span>{site.phone.display}</span>
+      </a>
+      <a class="btn btn--primary header__cta" href="/#start">Build mine free</a>
     </div>
   </div>
-
-  {
-    !minimal && (
-      <div
-        id="mobile-nav"
-        class="mobile-nav"
-        data-mobile-nav
-        hidden
-      >
-        <nav aria-label="Mobile">
-          <ul class="mobile-nav__links">
-            {mainNav.map((item) => (
-              <li>
-                <a href={item.href} class="mobile-nav__link" data-menu-close>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <Button href={primaryCta.href} event={primaryCta.event} fullWidth>
-                {primaryCta.label}
-              </Button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    )
-  }
 </header>
 
 <style>
-  .site-header {
+  .header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    height: var(--header-h);
-    display: flex;
-    align-items: center;
-    background: rgba(15, 20, 25, 0.82);
-    border-bottom: 1px solid transparent;
-    transition:
-      background var(--transition),
-      border-color var(--transition),
-      backdrop-filter var(--transition);
+    z-index: 50;
+    background: rgb(251 248 243 / 92%);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line);
   }
 
-  .site-header.is-scrolled {
-    background: rgba(15, 20, 25, 0.92);
-    border-bottom-color: var(--color-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .site-header--minimal {
-    border-bottom-color: var(--color-border);
-  }
-
-  .site-header__inner {
+  .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    width: 100%;
-    height: 100%;
+    gap: 16px;
+    min-height: var(--header-h);
   }
 
-  .site-header__brand {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    flex-shrink: 0;
-    line-height: 0;
-  }
-
-  .site-header__nav {
+  .header__nav {
     display: none;
-    flex: 1;
-    justify-content: center;
+    gap: 28px;
   }
 
-  @media (min-width: 1024px) {
-    .site-header__nav {
-      display: flex;
-    }
-  }
-
-  .site-header__links {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .site-header__link {
-    padding: 0.5rem 0.85rem;
-    font-size: var(--text-sm);
+  .header__nav a {
     font-weight: 500;
-    color: var(--color-text-muted);
-    border-radius: 8px;
-    transition: color var(--transition), background var(--transition);
+    font-size: 0.975rem;
+    color: var(--ink-muted);
+    text-decoration: none;
   }
 
-  .site-header__link:hover,
-  .site-header__link.is-active {
-    color: var(--color-text);
+  .header__nav a:hover {
+    color: var(--ink);
   }
 
-  .site-header__actions {
+  .header__actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 14px;
   }
 
-  .site-header__cta {
-    display: none;
-  }
-
-  .site-header__menu-btn {
-    display: grid;
-    place-items: center;
+  .header__phone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     width: 44px;
     height: 44px;
-    border-radius: 10px;
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-elevated);
+    border-radius: 999px;
+    border: 2px solid var(--line-strong);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
   }
 
-  @media (min-width: 1024px) {
-    .site-header__cta {
-      display: inline-flex;
-    }
-
-    .site-header__menu-btn {
-      display: none;
-    }
-  }
-
-  .site-header__menu-icon,
-  .site-header__menu-icon::before,
-  .site-header__menu-icon::after {
-    display: block;
+  .header__phone :global(svg) {
     width: 18px;
-    height: 2px;
-    background: var(--color-text);
-    border-radius: 1px;
-    position: relative;
-    transition: transform var(--transition), opacity var(--transition);
+    height: 18px;
+    color: var(--green);
   }
 
-  .site-header__menu-icon::before,
-  .site-header__menu-icon::after {
-    content: "";
-    position: absolute;
-    left: 0;
-  }
-
-  .site-header__menu-icon::before {
-    top: -6px;
-  }
-
-  .site-header__menu-icon::after {
-    top: 6px;
-  }
-
-  .site-header.is-menu-open .site-header__menu-icon {
-    background: transparent;
-  }
-
-  .site-header.is-menu-open .site-header__menu-icon::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-
-  .site-header.is-menu-open .site-header__menu-icon::after {
-    top: 0;
-    transform: rotate(-45deg);
-  }
-
-  .mobile-nav {
-    position: absolute;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    background: rgba(15, 20, 25, 0.98);
-    border-bottom: 1px solid var(--color-border);
-    padding: 1rem 1.5rem 1.5rem;
-    backdrop-filter: blur(12px);
-  }
-
-  .mobile-nav[hidden] {
+  .header__phone span {
     display: none;
   }
 
-  .mobile-nav__links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    max-width: var(--container);
-    margin-inline: auto;
-  }
-
-  .mobile-nav__link {
-    display: block;
-    padding: 0.9rem 0.5rem;
-    font-size: var(--text-base);
-    font-weight: 500;
-    color: var(--color-text-muted);
-    border-bottom: 1px solid var(--color-border);
+  .header__cta {
+    display: none;
     min-height: 44px;
+    padding: 0 20px;
+    font-size: 0.975rem;
   }
 
-  .mobile-nav__link:hover {
-    color: var(--color-text);
+  @media (min-width: 640px) {
+    .header__cta {
+      display: inline-flex;
+    }
   }
 
-  .mobile-nav__links li:last-child {
-    margin-top: 0.75rem;
-    border: none;
+  @media (min-width: 1100px) {
+    .header__nav {
+      display: flex;
+    }
+
+    .header__phone {
+      width: auto;
+      height: auto;
+      border: 0;
+    }
+
+    .header__phone span {
+      display: inline;
+    }
   }
 </style>
