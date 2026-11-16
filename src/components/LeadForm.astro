@@ -63,16 +63,16 @@ const { id = "lead" } = Astro.props;
     <input tabindex="-1" autocomplete="off" name="website" />
   </div>
 
-  <button class="btn btn--primary btn--lg lead__submit" type="submit">Build my site free</button>
+  <button class="btn btn--primary btn--lg lead__submit" type="submit">Show me my site</button>
   <p class="lead__fine">No credit card. You see the finished site before you pay anything.</p>
   <p class="lead__status" role="status" aria-live="polite"></p>
 </form>
 
 <div class="lead__done" hidden data-lead-done>
-  <p class="lead__done-title">Got it. We're on it.</p>
+  <p class="lead__done-title">Got it. I'm on it.</p>
   <p>
-    We'll build your site and send you the link, usually within a couple of business days. Questions before then?
-    Call or text <a href={site.phone.href}>{site.phone.display}</a>.
+    I'll build your site and send you the link, usually within 24 hours. Questions before then?
+    Call or text me <a href={site.phone.href}>{site.phone.display}</a>.
   </p>
 </div>
 
@@ -98,9 +98,9 @@ const { id = "lead" } = Astro.props;
         form.hidden = true;
         done.hidden = false;
       } catch (err) {
-        status.textContent = `${(err as Error).message} You can also call or text us.`;
+        status.textContent = `${(err as Error).message} You can also call or text me.`;
         button.disabled = false;
-        button.textContent = "Build my site free";
+        button.textContent = "Show me my site";
       }
     });
   });

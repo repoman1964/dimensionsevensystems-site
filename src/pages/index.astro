@@ -6,23 +6,28 @@ import { site, trades } from "../data/site";
 
 const pains = [
   {
-    icon: "missed",
-    title: "Missed calls go to the next company",
-    body: "You're on a roof, under a sink, or behind a mower. They don't leave a voicemail. They call the next name on Google.",
+    icon: "calendar",
+    title: "It never changes after launch",
+    body: "Months go by and your site looks exactly the same. Customers can't tell if you're still busy, or even still in business.",
   },
   {
-    icon: "thumb",
-    title: "A Facebook page isn't a website",
-    body: "Facebook works for people who already know you. Strangers searching Google want a real site that shows what you do and where.",
+    icon: "camera",
+    title: "Your best jobs never make it online",
+    body: "You do great work, but updating a website is a chore that never gets done. The photos stay in your phone, and customers never see them.",
   },
   {
-    icon: "receipt",
-    title: "Monthly fees that never end",
-    body: "$100, $200, $300 a month for a website, forever. Stop paying and it disappears. That's renting, not owning.",
+    icon: "star",
+    title: "Nothing shows you're active",
+    body: "Customers are comparing a few names on Google. With no fresh work on your site, the competitor who looks busier gets the call.",
   },
 ] as const;
 
 const features = [
+  {
+    icon: "camera",
+    title: "Recent Jobs, posted from your phone",
+    body: "Snap a few photos when a job's done and tap Post. We write the title and description, and it goes live on your site. Your site keeps getting fresher after every job.",
+  },
   {
     icon: "phone",
     title: "Tap-to-call on every page",
@@ -63,11 +68,6 @@ const features = [
     title: "Privacy and terms pages",
     body: "Nobody clicks them, but people notice when they're missing. Yours are included.",
   },
-  {
-    icon: "mobile",
-    title: "Built for phones first",
-    body: "Most of your customers find you on a phone. Your site is designed for that screen first.",
-  },
 ] as const;
 
 const steps = [
@@ -77,7 +77,7 @@ const steps = [
   },
   {
     title: "We build your site first",
-    body: "Built from your Google listing and real reviews: your services, your areas, your number. We send you the link and a short video walking you through it.",
+    body: "Built from your Google listing and real reviews: your services, your areas, your number. Within 24 hours, we send you the link and a short video walking you through it.",
   },
   {
     title: "Love it? It's yours for $500",
@@ -86,11 +86,11 @@ const steps = [
 ] as const;
 
 const included = [
+  "Recent Jobs, posted from your phone, with the words written for you",
   "Complete multi-page website, built for your trade",
   "Tap-to-call, quote form and message bubble",
   "A page for every service and service area",
   "Your Google reviews on the site",
-  "Recent Jobs, posted from your phone",
   "Pick-your-day quote requests",
   "Quote requests sent straight to your email",
   "Mobile-first design, privacy and terms pages",
@@ -100,12 +100,12 @@ const included = [
 ];
 
 const compare = [
+  { row: "Post jobs from your phone, words written for you", us: true, monthly: false, diy: false },
   { row: "Upfront price", us: "$500 once", monthly: "Often $0 to sign up", diy: "Free to start" },
   { row: "Monthly fee", us: "None", monthly: "Every month, for as long as you have it", diy: "Every month, plus your time" },
   { row: "See it finished before you pay", us: true, monthly: false, diy: false },
   { row: "Who builds it", us: "We do", monthly: "They do", diy: "You do, at night" },
   { row: "Page for every service and area", us: true, monthly: "Sometimes", diy: "If you write them" },
-  { row: "Post jobs from your phone, words written for you", us: true, monthly: false, diy: false },
   { row: "Stop paying and it disappears", us: false, monthly: true, diy: true },
 ] as const;
 
@@ -124,11 +124,11 @@ const faqs = [
   },
   {
     q: "Do I own it?",
-    a: "Your domain stays registered in your name, and your words, photos and reviews are yours. Nothing locks you in: no contract, no cancellation fee.",
+    a: "Yes. The site is yours, hosted in your own Cloudflare account, and your domain stays registered in your name. Your words, photos and reviews are yours too. Nothing locks you in: no contract, no cancellation fee.",
   },
   {
     q: "Can I update it myself?",
-    a: "Your Recent Jobs, yes: take photos on your phone, tap Post, and the job goes up with the description written for you. For anything else, like new services, prices or hours, just call or text us.",
+    a: "Your Recent Jobs, yes: take photos on your phone, tap Post, and the job goes up with the description written for you. For anything else, like new services, prices or hours, just call or text me.",
   },
   {
     q: "Will it get me to #1 on Google?",
@@ -140,15 +140,15 @@ const faqs = [
   },
   {
     q: "What if I don't have a Google Business Profile?",
-    a: "Send the form anyway, or give us a call. We'll talk through what we can build from and help you set up a profile. It's free, and you need one either way.",
+    a: "Send the form anyway, or give me a call. I'll talk through what we can build from and help you set up a profile. Setting one up costs nothing, and you need one either way.",
   },
   {
     q: "How long does it take?",
-    a: "Your site is usually ready to look at within a couple of business days of your request. Once you buy, your changes go in and it goes live on your domain, usually the same week.",
+    a: "Your site is usually ready to look at within 24 hours of your request. Once you buy, your changes go in and it goes live on your domain, usually the same week.",
   },
   {
     q: "Who am I dealing with?",
-    a: `${site.founder.name}, the founder of ${site.name}, based in ${site.address.city}, Georgia. Call or text ${site.phone.display} and you'll reach a real person, not a ticket system.`,
+    a: `I'm ${site.founder.name}, the founder of ${site.name}, based in ${site.founder.location}. Call or text me at ${site.phone.display} and you'll reach a real person, not a ticket system.`,
   },
 ];
 ---
@@ -159,36 +159,27 @@ const faqs = [
     <div class="container hero__grid">
       <div class="hero__copy">
         <p class="hero__kicker">
-          <span class="dot" aria-hidden="true"></span> For cleaners, landscapers, roofers and every home-service pro
+          <span class="dot" aria-hidden="true"></span> For cleaners, landscapers, roofers and other home-service pros
         </p>
-        <h1>A $500 website that catches every call. <span>Built before you pay a dime.</span></h1>
+        <h1>A website that gets better <span>after every job.</span></h1>
         <p class="hero__sub">
-          No monthly fees. We build your site from your Google listing and real reviews, send you the link, and you only
-          pay if you want it.
+          $500 one time. No monthly fees. Own it forever.
         </p>
-        <ul class="hero__badges">
-          <li><Icon name="check" /> $500, one time</li>
-          <li><Icon name="check" /> No monthly fees</li>
-          <li><Icon name="check" /> See it before you pay</li>
-        </ul>
         <div class="hero__ctas">
-          <a class="btn btn--primary btn--lg" href="#start">Build my site free <Icon name="arrow" /></a>
-          <a class="btn btn--ghost btn--lg" href={site.demoUrl} target="_blank" rel="noopener">
-            See a live example <Icon name="external" />
-          </a>
+          <a class="btn btn--primary btn--lg" href="#start">Show me my site <Icon name="arrow" /></a>
         </div>
       </div>
-      <div class="hero__visual" aria-label="A real CallCatcher Site on desktop and phone">
+      <div class="hero__visual" aria-label="A Recent Jobs page on a CallCatcher Site, on desktop and phone">
         <div class="browser">
           <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>sweet-tea-demo.callcatcher.site</span></div>
-          <img src="/demo/desktop.webp" alt="CallCatcher Site homepage for Sweet Tea Cleaning Co., with a free quote form" width="1440" height="900" fetchpriority="high" />
+          <img src="/demo/hero-desktop.webp" alt="Recent Jobs page on a CallCatcher Site, with a new Deep Cleaning job posted Tuesday" width="1440" height="900" fetchpriority="high" />
         </div>
         <div class="phone">
-          <img src="/demo/mobile.webp" alt="The same site on a phone, with a tap-to-call button in the header" width="780" height="1688" fetchpriority="high" />
+          <img src="/demo/hero-mobile.webp" alt="The same Recent Jobs page on a phone, with a tap-to-call button in the header" width="780" height="1688" fetchpriority="high" />
         </div>
         <div class="hero__tag">
-          <Icon name="phone" />
-          <div><strong>Every call and lead, caught</strong><span>Call, quote, or message, from any page</span></div>
+          <Icon name="camera" />
+          <div><strong>Every job, on your site</strong><span>Snap photos, tap Post, it's live</span></div>
         </div>
       </div>
     </div>
@@ -206,10 +197,10 @@ const faqs = [
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">The problem</span>
-        <h2>Every call you miss is a job for the next company on Google.</h2>
+        <h2>Most contractor websites are stale from the day they launch.</h2>
         <p>
-          Customers search, tap the first decent-looking site, and call. If you're hard to reach, or don't have a real
-          site at all, they're gone in seconds.
+          Built once, never touched again. Customers searching Google want proof you're busy and good at what you do,
+          and an old, empty site doesn't give them any.
         </p>
       </div>
       <div class="pains">
@@ -249,14 +240,14 @@ const faqs = [
   </section>
 
   <!-- RECENT JOBS -->
-  <section class="section">
+  <section class="section" id="recent-jobs">
     <div class="container spotlight">
       <div class="spotlight__copy">
         <span class="eyebrow">Recent Jobs</span>
-        <h2>A website that gets better after every job.</h2>
+        <h2>Jobs get posted before you even leave the customer's driveway.</h2>
         <p class="spotlight__lead">
-          Most contractor websites never change after launch. Yours updates every time you finish a job, and you never
-          write a word.
+          Recent Jobs keeps your site fresh without any extra work. Take the photos you already take, and the job goes
+          up on your site. You never write a word.
         </p>
         <ol class="spotlight__steps">
           <li><span>1</span><div><strong>Snap a few photos</strong> on your phone when the job's done.</div></li>
@@ -282,7 +273,7 @@ const faqs = [
     <div class="container">
       <div class="section-head section-head--center">
         <span class="eyebrow">How it works</span>
-        <h2>You see the finished site before you spend a dollar.</h2>
+        <h2>See your finished site before you spend a dime.</h2>
         <p>Other companies ask you to pay first and hope it turns out. We do it the other way around.</p>
       </div>
       <ol class="steps">
@@ -307,11 +298,17 @@ const faqs = [
     <div class="container pricing">
       <div class="pricing__copy">
         <span class="eyebrow">Pricing</span>
-        <h2>One price. One time. That's it.</h2>
+        <h2>Pay once, yours forever.</h2>
         <p>
           No setup fees, no "pro plan," no hosting bill every month. You pay once, after you've seen it, and the site is
           yours.
         </p>
+        <div class="math">
+          <p class="math__title">Monthly fees, and you never own it.</p>
+          <p>
+            $100, $200, $300 a month for a website, forever. Stop paying and it disappears. That's renting, not owning.
+          </p>
+        </div>
         <div class="math">
           <p class="math__title">One job pays for it.</p>
           <p>
@@ -328,7 +325,7 @@ const faqs = [
         <ul>
           {included.map((item) => <li><Icon name="check" />{item}</li>)}
         </ul>
-        <a class="btn btn--primary btn--lg" href="#start">Build mine free first</a>
+        <a class="btn btn--primary btn--lg" href="#start">Show me my site first</a>
         <p class="price-card__fine">You only pay if you want it, after you've seen it.</p>
       </div>
     </div>
@@ -339,7 +336,8 @@ const faqs = [
     <div class="container">
       <div class="section-head section-head--center">
         <span class="eyebrow">Compare</span>
-        <h2>Rent a website forever, build one yourself, or own one for $500.</h2>
+        <h2>Rent it. Build it. Or own it today.</h2>
+        <p>Rent somebody else's website forever, build one yourself someday, or own your own today for just $500, one time.</p>
       </div>
       <div class="compare-wrap">
         <table class="compare">
@@ -386,16 +384,17 @@ const faqs = [
           <h2>Open a live CallCatcher Site on your phone.</h2>
           <p>
             Sweet Tea Cleaning Co. is a sample business, but the site is the real thing: tap-to-call, the quote form,
-            service and area pages, reviews and Recent Jobs. Yours looks like this, with your name on it.
+            service and area pages, reviews and Recent Jobs. Yours is built around your business, with your services,
+            your service areas, your reviews and your jobs.
           </p>
-          <a class="btn btn--ghost" href={site.demoUrl} target="_blank" rel="noopener">Open the example <Icon name="external" /></a>
+          <a class="btn btn--ghost" href={site.demoUrl} target="_blank" rel="noopener">See a real CallCatcher Site <Icon name="external" /></a>
         </div>
       </article>
       <article class="founder">
         <span class="eyebrow">Who's behind it</span>
         <h2>A real person you can call.</h2>
         <p>
-          I'm {site.founder.name}. I run {site.name} out of {site.address.city}, Georgia, and I build websites for the
+          I'm {site.founder.name}. I run {site.name} out of {site.founder.location}, and I build websites for the
           people who keep homes running: cleaners, lawn crews, roofers, painters, plumbers.
         </p>
         <p>
@@ -403,8 +402,7 @@ const faqs = [
           right for your business, you don't pay. Simple as that.
         </p>
         <div class="founder__contact">
-          <a class="btn btn--ghost" href={site.phone.href}><Icon name="phone" /> Call {site.phone.display}</a>
-          <a class="btn btn--ghost" href={site.phone.sms}><Icon name="message" /> Text me</a>
+          <a class="btn btn--ghost" href={site.phone.href}><Icon name="phone" /> Call or text me: {site.phone.display}</a>
         </div>
       </article>
     </div>
@@ -416,7 +414,7 @@ const faqs = [
       <div class="section-head">
         <span class="eyebrow">FAQ</span>
         <h2>Straight answers.</h2>
-        <p>Still have a question? Call or text <a href={site.phone.href}>{site.phone.display}</a>.</p>
+        <p>Still have a question?<br />Call or text me <a href={site.phone.href}>{site.phone.display}</a>.</p>
       </div>
       <div class="faq__list">
         {
@@ -435,16 +433,16 @@ const faqs = [
   <section class="section start" id="start">
     <div class="container start__grid">
       <div class="start__copy">
-        <span class="eyebrow">Free, no strings</span>
-        <h2>Let's build your site. You decide after you see it.</h2>
+        <span class="eyebrow">See it before you pay</span>
+        <h2>We build your site first, at no cost. You decide only after you see it.</h2>
         <ul class="start__list">
           <li><Icon name="check" /> Built from your Google listing and reviews</li>
-          <li><Icon name="check" /> Link and walkthrough video sent to you</li>
+          <li><Icon name="check" /> Link and walkthrough video sent to you within 24 hours</li>
           <li><Icon name="check" /> $500 one time, only if you want it</li>
           <li><Icon name="check" /> No monthly fees, no contract</li>
         </ul>
         <p class="start__call">
-          Rather talk? Call or text <a href={site.phone.href}>{site.phone.display}</a>.
+          Rather talk? Call or text me <a href={site.phone.href}>{site.phone.display}</a>.
         </p>
       </div>
       <div class="start__card">
@@ -1167,6 +1165,7 @@ const faqs = [
   .founder__contact {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     margin-top: 20px;
   }

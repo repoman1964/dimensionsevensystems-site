@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { title, description = site.description, noindex = false } = Astro.props;
-const pageTitle = title ? `${title} | ${site.name}` : `$500 Websites for Home-Service Pros, No Monthly Fees | ${site.name}`;
+const pageTitle = title ? `${title} | ${site.name}` : `$500 Websites That Update After Every Job | ${site.name}`;
 const canonicalURL = new URL(Astro.url.pathname, site.url);
 const ogImage = new URL("/demo/desktop.webp", site.url);
 ---
@@ -57,10 +57,8 @@ const ogImage = new URL("/demo/desktop.webp", site.url);
         telephone: site.phone.href.replace("tel:", ""),
         address: {
           "@type": "PostalAddress",
-          streetAddress: site.address.street,
           addressLocality: site.address.city,
           addressRegion: site.address.region,
-          postalCode: site.address.postalCode,
           addressCountry: site.address.country,
         },
         description: site.description,

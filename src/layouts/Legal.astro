@@ -31,7 +31,6 @@ const { title, description, updated, toc } = Astro.props;
         <h2>Contact</h2>
         <p>
           {site.name}<br />
-          {site.legalName}, sole proprietor<br />
           {addressLine}<br />
           Phone: <a href={site.phone.href}>{site.phone.display}</a><br />
           Email: <a href={`mailto:${site.email}`}>{site.email}</a>

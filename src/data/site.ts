@@ -5,26 +5,25 @@ export const site = {
   product: "CallCatcher Site",
   tagline: "$500 websites for home-service pros. No monthly fees.",
   description:
-    "Get a $500 website built to catch every call and quote request, with no monthly fees. We build your CallCatcher Site from your Google listing and reviews first, and you only pay if you want it.",
+    "Get a $500 website that gets better after every job: post your work from your phone and it goes live on your site. No monthly fees, and you only pay if you want it after you've seen it.",
   url: "https://dimensionsevensystems.com",
   locale: "en_US",
   email: "hello@dimensionsevensystems.com",
   phone: {
-    display: "(678) 333-2628",
-    href: "tel:+16783332628",
-    sms: "sms:+16783332628",
+    display: "(706) 940-3720",
+    href: "tel:+17069403720",
+    sms: "sms:+17069403720",
   },
-  legalName: "Jose Marion Madarieta III",
-  legalEntity: "Jose Marion Madarieta III, a sole proprietor doing business as Dimension Seven Systems",
+  legalName: "Dimension Seven Systems",
+  legalEntity: "Dimension Seven Systems",
   address: {
-    street: "600 Ellen Way",
-    city: "Acworth",
+    city: "Atlanta",
     region: "GA",
-    postalCode: "30102",
     country: "US",
   },
   founder: {
-    name: "Jose Madarieta",
+    name: "Jose",
+    location: "Atlanta, Georgia",
     role: "Founder",
   },
   price: "$500",
@@ -40,7 +39,7 @@ export const site = {
   },
 } as const;
 
-export const addressLine = `${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.postalCode}`;
+export const addressLine = `${site.address.city}, ${site.address.region}`;
 
 export const trades = [
   "House Cleaning",
